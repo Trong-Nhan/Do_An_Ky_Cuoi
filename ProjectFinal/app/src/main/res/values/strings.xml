@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">ProjectFinal</string>
+    <string name="app_name">Ứng dụng bán sách</string>
+    <string name="app_link">Giờ tàu | Quy định | Khuyến mại | Hướng dẫn</string>
+    <string name="company_name">Tổng công ty đường sắt Việt Nam</string>
+    <string name="company_address">
+        Số 118 Lê Duẩn, Hoàn Kiếm, Hà Nội.\n
+        Email: <b>dsvn@vr.com.vn</b>.\n
+        Tổng đài hỗ trợ khách hàng\n
+        Khu vực miền Bắc: <i>1900 0109</i>\n
+        Khu vực miền Nam: <i>1900 1520</i>\n
+        Email:  <b>support1@dsvn.vn</b>\n
+                        support2@dsvn.vn\n
+        Giấy chứng nhận ĐKKD số 113642 theo QĐ thành lập số 973/QĐ-TTg ngày 25/06/2010 của Thủ tướng Chính phủ.\n
+        Mã số doanh nghiệp: 0100105052, đăng ký lần đầu ngày 26/07/2010, đăng ký thay đổi lần 4 ngày 27/06/2014 tại Sở KHĐT Thành phố Hà Nội.
+    </string>
+
+    <string name="content_temp">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio beatae dignissimos culpa fuga, provident expedita veniam incidunt aliquid animi labore fugiat vitae quod commodi enim, veritatis distinctio, officia nobis quia.
+	Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat nisi aspernatur harum molestiae minima unde laborum officiis ducimus, delectus eos quis voluptatum, accusamus incidunt expedita esse! Voluptatum saepe fugiat debitis!
+    </string>
 </resources>
