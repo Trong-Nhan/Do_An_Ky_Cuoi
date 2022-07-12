@@ -1,40 +1,96 @@
 package com.example.projectfinal;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.example.projectfinal.databinding.ActivityMainBinding;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+
+import com.example.projectfinal.adapter.ViewPagerAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding mBD;
+    private BottomNavigationView mNavigationView;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBD = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(mBD.getRoot());
+        setContentView(R.layout.activity_main);
 
+        mNavigationView = findViewById(R.id.bottomNav);
+        mViewPager = findViewById(R.id.viewPager);
 
-        mBD.header.btnBooking.setOnClickListener(new View.OnClickListener() {
+        setUpViewPager();
+        mNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                // Chuyển màn hình Activity
-                Intent intent = new Intent(MainActivity.this, BookingActivity.class);
-                startActivity(intent);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menuHome:
+                        mViewPager.setCurrentItem(0);
+                        break;
+                    case R.id.menuCategory:
+                        mViewPager.setCurrentItem(1);
+                        break;
+                    case R.id.menuNews:
+                        mViewPager.setCurrentItem(2);
+                        break;
+                    case R.id.menuAccount:
+                        mViewPager.setCurrentItem(3);
+                        break;
+                }
+                return true;
             }
         });
 
-        mBD.header.btnHome.setOnClickListener(new View.OnClickListener() {
+
+    }
+
+    //hàm thiết lập ViewPager
+    private void setUpViewPager(){
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        mViewPager.setAdapter(viewPagerAdapter);
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onClick(View view) {
-                // Chuyển màn hình List Ticket
-                Intent intent = new Intent(MainActivity.this, ListTicketActivity.class);
-                startActivity(intent);
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position){
+                    case 0:
+                        mNavigationView.getMenu().findItem(R.id.menuHome).setChecked(true);
+                        break;
+                    case 1:
+                        mNavigationView.getMenu().findItem(R.id.menuCategory).setChecked(true);
+                        break;
+                    case 2:
+                        mNavigationView.getMenu().findItem(R.id.menuNews).setChecked(true);
+                        break;
+                    case 3:
+                        mNavigationView.getMenu().findItem(R.id.menuAccount).setChecked(true);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.cart_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
