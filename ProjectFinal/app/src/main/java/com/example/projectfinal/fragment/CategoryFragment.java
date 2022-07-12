@@ -46,5 +46,6 @@ public class CategoryFragment extends Fragment {
         mLstCategory.add(new Category("Sách ngoại ngữ"));
         mLstCategory.add(new Category("Sách Khoa học - Công nghệ"));
         mLstCategory.add(new Category("Sách Văn học - Nghệ thuật"));
+        mLstCategory.add(new Category("Sách Khác"));
     }
 }
