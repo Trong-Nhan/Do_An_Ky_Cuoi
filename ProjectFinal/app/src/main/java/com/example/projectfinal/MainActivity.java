@@ -3,6 +3,7 @@ package com.example.projectfinal;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,12 +19,15 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mNavigationView;
     private ViewPager mViewPager;
+    private String mUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mUserName = getIntent().getExtras().get("userName").toString();
+        Toast.makeText(this, "" + mUserName, Toast.LENGTH_SHORT).show();
         mNavigationView = findViewById(R.id.bottomNav);
         mViewPager = findViewById(R.id.viewPager);
 
@@ -92,5 +96,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.cart_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public String getmUserName() {
+        return mUserName;
     }
 }
