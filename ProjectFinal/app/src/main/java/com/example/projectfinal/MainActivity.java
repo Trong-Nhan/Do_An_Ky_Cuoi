@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mUserName = getIntent().getExtras().get("userName").toString();
-        Toast.makeText(this, "" + mUserName, Toast.LENGTH_SHORT).show();
         mNavigationView = findViewById(R.id.bottomNav);
         mViewPager = findViewById(R.id.viewPager);
 
@@ -53,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        //lấy tên người dùng
+        mUserName = getIntent().getExtras().get("userName").toString();
+        Toast.makeText(this, "" + mUserName, Toast.LENGTH_SHORT).show();
     }
 
     //hàm thiết lập ViewPager

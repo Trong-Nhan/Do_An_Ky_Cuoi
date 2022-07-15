@@ -57,6 +57,32 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/chbRemember"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Ghi nhớ"
+            android:textSize="20sp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/formResetPassword"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Quên mật khẩu?"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"/>
+    </LinearLayout>
     <Button
         android:id="@+id/formBtnLogin"
         android:layout_width="wrap_content"
@@ -71,14 +97,8 @@
         android:text="Chưa có tài khoản? Đăng ký ngay"
         android:layout_marginTop="10dp"
         android:textColor="@color/primary_color"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:textSize="18sp"/>
 
-    <TextView
-        android:id="@+id/formResetPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Quên mật khẩu?"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/primary_color"
-        android:textStyle="italic"/>
+
 </LinearLayout>
