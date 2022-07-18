@@ -1,4 +1,4 @@
-package com.example.projectfinal;
+package com.example.projectfinal.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 
+import com.example.projectfinal.R;
 import com.example.projectfinal.adapter.ViewPagerAdapter;
 import com.example.projectfinal.api.UserAPI;
 import com.example.projectfinal.entity.User;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mNavigationView;
     private ViewPager mViewPager;
     private String mUserName;
-    private int mUserId;
+    private String mUserId;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -61,19 +62,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
         //lấy tên và id người dùng
 
-        if(sharedPreferences.getString("UserEmail", null) != null){
+        if (sharedPreferences.getString("UserEmail", null) != null) {
             String uEmail = sharedPreferences.getString("UserEmail", null);
             UserAPI.userApi.getUserByEmail(uEmail).enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
-                    if(response.isSuccessful()){
+                    if (response.isSuccessful()) {
                         User u = response.body();
                         mUserName = u.getName();
-                        mUserId = u.getId();
+                        mUserId = String.valueOf(u.getId());
                     }
                 }
 
@@ -82,17 +82,18 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
                 }
             });
-        }else{
+        } else if (!getIntent().getExtras().get("adminName").toString().isEmpty()) {
+            mUserName = getIntent().getExtras().get("adminName").toString();
+        } else {
             mUserName = getIntent().getExtras().get("userName").toString();
-            mUserId = Integer.parseInt(getIntent().getExtras().get("userId").toString());
+            mUserId = getIntent().getExtras().get("userId").toString();
         }
-
 
 
     }
 
     //hàm thiết lập ViewPager
-    private void setUpViewPager(){
+    private void setUpViewPager() {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mViewPager.setAdapter(viewPagerAdapter);
 
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                switch (position){
+                switch (position) {
                     case 0:
                         mNavigationView.getMenu().findItem(R.id.menuHome).setChecked(true);
                         break;
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         return mUserName;
     }
 
-    public int getmUserId() {
+    public String getmUserId() {
         return mUserId;
     }
 }
