@@ -5,13 +5,13 @@ public class Book {
     private int imgResouce;
     private String author;
     private float rating;
-    private int price;
-    private int salePrice;
+    private String price;
+    private String salePrice;
 
     public Book() {
     }
 
-    public Book(String name, int imgResouce, String author, float rating, int price, int salePrice) {
+    public Book(String name, int imgResouce, String author, float rating, String price, String salePrice) {
         this.name = name;
         this.imgResouce = imgResouce;
         this.author = author;
@@ -52,19 +52,19 @@ public class Book {
         this.rating = rating;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public int getSalePrice() {
+    public String getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(int salePrice) {
+    public void setSalePrice(String salePrice) {
         this.salePrice = salePrice;
     }
 }

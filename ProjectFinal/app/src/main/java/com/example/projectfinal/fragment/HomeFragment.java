@@ -59,10 +59,10 @@ public class HomeFragment extends Fragment {
     }
 
     private void getListBook(){
-        mLstBook.add(new Book("Harry Potter và Bảo Bối Tử Thần", R.drawable.book1, "Duy Duc", 4,8000,4000));
-        mLstBook.add(new Book("Cuộc sống của bạn đã tốt đẹp chưa", R.drawable.book2, "Duy Duc", 4,8000,4000));
-        mLstBook.add(new Book("11 bí quyết giao tiếp để thành công", R.drawable.book3, "Duy Duc", 4,8000,4000));
-        mLstBook.add(new Book("Tiếng gọi nơi hoang dã", R.drawable.book4, "Duy Duc", 4,8000,4000));
+        mLstBook.add(new Book("Harry Potter và Bảo Bối Tử Thần", R.drawable.book1, "Duy Duc", 4,"80000","40000"));
+        mLstBook.add(new Book("Cuộc sống của bạn đã tốt đẹp chưa", R.drawable.book2, "Duy Duc", 4,"80000","4000"));
+        mLstBook.add(new Book("11 bí quyết giao tiếp để thành công", R.drawable.book3, "Duy Duc", 4,"80000","40000"));
+        mLstBook.add(new Book("Tiếng gọi nơi hoang dã", R.drawable.book4, "Duy Duc", 4,"80000","40000"));
     }
 
     private void getListNews(){

@@ -44,9 +44,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.bookImg.setImageResource(b.getImgResouce());
         holder.bookName.setText(b.getName());
         holder.bookAuthor.setText(b.getAuthor());
-//        holder.price.setText(b.getPrice());
-//        holder.salePrice.setText(b.getSalePrice());
+        holder.price.setText(b.getPrice());
+        holder.salePrice.setText(b.getSalePrice());
         holder.ratingBar.setRating(b.getRating());
+    }
+
+    private int toString(int price) {
+        return toString(price);
     }
 
     @Override
