@@ -1,5 +1,6 @@
 package com.example.projectfinal;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,14 +13,22 @@ import androidx.viewpager.widget.ViewPager;
 
 
 import com.example.projectfinal.adapter.ViewPagerAdapter;
+import com.example.projectfinal.api.UserAPI;
+import com.example.projectfinal.entity.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mNavigationView;
     private ViewPager mViewPager;
     private String mUserName;
+    private int mUserId;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +60,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //lấy tên người dùng
-        mUserName = getIntent().getExtras().get("userName").toString();
-        Toast.makeText(this, "" + mUserName, Toast.LENGTH_SHORT).show();
+
+
+        sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        //lấy tên và id người dùng
+
+        if(sharedPreferences.getString("UserEmail", null) != null){
+            String uEmail = sharedPreferences.getString("UserEmail", null);
+            UserAPI.userApi.getUserByEmail(uEmail).enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    if(response.isSuccessful()){
+                        User u = response.body();
+                        mUserName = u.getName();
+                        mUserId = u.getId();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast.makeText(MainActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else{
+            mUserName = getIntent().getExtras().get("userName").toString();
+            mUserId = Integer.parseInt(getIntent().getExtras().get("userId").toString());
+        }
+
+
+
     }
 
     //hàm thiết lập ViewPager
@@ -100,5 +135,9 @@ public class MainActivity extends AppCompatActivity {
 
     public String getmUserName() {
         return mUserName;
+    }
+
+    public int getmUserId() {
+        return mUserId;
     }
 }
