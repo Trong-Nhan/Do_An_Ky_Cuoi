@@ -25,6 +25,7 @@ public class AccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         TextView txtUserName = view.findViewById(R.id.txtUserName);
         mMainActivity = (MainActivity) getActivity();
+        txtUserName.setText(mMainActivity.getmUserName());
 
         Button btnLogout = view.findViewById(R.id.btnLogout);
         Button btnUserDetail = view.findViewById(R.id.btnUserDetail);
