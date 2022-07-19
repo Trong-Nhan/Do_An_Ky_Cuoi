@@ -1,20 +1,20 @@
-package com.example.projectfinal;
+package com.example.projectfinal.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.projectfinal.R;
+import com.example.projectfinal.activity.admin.AdminActivity;
 import com.example.projectfinal.api.UserAPI;
 import com.example.projectfinal.entity.User;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +45,29 @@ public class LoginActivity extends AppCompatActivity {
         //nếu đã lưu dữ liệu trong SharedPreferences thì lập tức vào MainActivity
         String uEmail = sharedPreferences.getString("UserEmail", null);
         if(uEmail != null){
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+            UserAPI.userApi.getUserByEmail(uEmail).enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    if(response.isSuccessful()){
+                        User u = response.body();
+                        if(u.getRole().equals("admin")){
+                            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                            startActivity(intent);
+                        }else{
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast.makeText(LoginActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
+
 
         //Xử lý sự kiện đăng nhập
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
             if(user.getEmail().equals(loginEmail) || user.getPassword().equals(loginPassword)){
                 hasUser = true;
                 //nếu role là admin thì biến isRole là true
-                if(user.getRole() == "admin"){
+                if(user.getRole().equals("admin")){
                     isRole = true;
                 }
                 break;
@@ -99,7 +119,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         User u = response.body();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                        intent.putExtra("adminName", u.getName());
                         startActivity(intent);
                     }
 

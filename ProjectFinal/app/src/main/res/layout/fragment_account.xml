@@ -43,9 +43,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
+        android:gravity="left|center_horizontal"
         android:text="Trang của tôi"
-        android:textColor="@color/black"
-        android:gravity="left|center_horizontal"/>
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/btnUserHistoryOrder"
@@ -53,6 +53,16 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
         android:text="Đơn hàng của tôi"
+        android:textColor="@color/black"
+        android:gravity="left|center_horizontal"/>
+
+    <Button
+        android:id="@+id/btnToAdminPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="Về Trang Quản Trị"
+        android:visibility="gone"
         android:textColor="@color/black"
         android:gravity="left|center_horizontal"/>
 
