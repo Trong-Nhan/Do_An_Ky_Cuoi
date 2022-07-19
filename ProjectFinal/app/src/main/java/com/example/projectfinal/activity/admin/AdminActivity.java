@@ -52,12 +52,13 @@ public class AdminActivity extends AppCompatActivity {
                     Toast.makeText(AdminActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
                 }
             });
-        } else if (!getIntent().getExtras().get("adminPageName").toString().isEmpty()) {
+        } else if (getIntent().getExtras().get("adminPageName") != null) {
             mAdminName = getIntent().getExtras().get("adminPageName").toString();
             mTxtAdminName.setText(mAdminName);
         } else {
             mAdminName = getIntent().getExtras().get("adminName").toString();
             mTxtAdminName.setText(mAdminName);
+
         }
 
         Button btnLogout = findViewById(R.id.btnAdminLogout);
