@@ -37,7 +37,7 @@ public class AccountFragment extends Fragment {
         mTxtUserId = view.findViewById(R.id.txtUserId);
 
         mTxtUserName.setText(mMainActivity.getmUserName());
-        if(!mMainActivity.getmUserId().isEmpty()){
+        if(mMainActivity.getmUserId() != null){
             mTxtUserId.setText(mMainActivity.getmUserId());
         }
 
@@ -48,7 +48,7 @@ public class AccountFragment extends Fragment {
         Button btnLogout = view.findViewById(R.id.btnLogout);
 
         //nếu được chuyển từ AdminActivity qua
-        if(!getActivity().getIntent().getExtras().get("adminName").toString().isEmpty()){
+        if(getActivity().getIntent().getExtras().get("adminName") != null){
 
             btnUserDetail.setVisibility(View.GONE);
             btnHistoryOder.setVisibility(View.GONE);

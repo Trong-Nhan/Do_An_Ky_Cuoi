@@ -82,11 +82,11 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
                 }
             });
-        } else if (!getIntent().getExtras().get("adminName").toString().isEmpty()) {
-            mUserName = getIntent().getExtras().get("adminName").toString();
-        } else {
+        } else if (getIntent().getExtras().get("userName") != null && getIntent().getExtras().get("userId") != null) {
             mUserName = getIntent().getExtras().get("userName").toString();
             mUserId = getIntent().getExtras().get("userId").toString();
+        } else if(getIntent().getExtras().get("adminName") != null){
+            mUserName = getIntent().getExtras().get("adminName").toString();
         }
 
 
