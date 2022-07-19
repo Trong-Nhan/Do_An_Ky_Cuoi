@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ import com.example.projectfinal.entity.Book;
 
 import java.util.List;
 
-public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder>{
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
     private Context mCtx;
     private List<Book> mLst;
@@ -37,17 +38,25 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Book b = mLst.get(position);
-        if(b == null){
+        if (b == null) {
             return;
         }
-        holder.imgBook.setImageResource(b.getImg());
-        holder.txtBookName.setText(b.getName());
+        holder.bookImg.setImageResource(b.getImgResouce());
+        holder.bookName.setText(b.getName());
+        holder.bookAuthor.setText(b.getAuthor());
+        holder.price.setText(b.getPrice());
+        holder.salePrice.setText(b.getSalePrice());
+        holder.ratingBar.setRating(b.getRating());
+    }
+
+    private int toString(int price) {
+        return toString(price);
     }
 
     @Override
     public int getItemCount() {
-        if(mLst != null){
-            if(mLst.size() > 4){
+        if (mLst != null) {
+            if (mLst.size() > 4) {
                 return 4;
             }
             return mLst.size();
@@ -57,14 +66,22 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     public static class BookViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imgBook;
-        private TextView txtBookName;
+        private TextView bookName;
+        private ImageView bookImg;
+        private TextView bookAuthor;
+        private RatingBar ratingBar;
+        private TextView price;
+        private TextView salePrice;
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imgBook = itemView.findViewById(R.id.itemBookImg);
-            txtBookName = itemView.findViewById(R.id.itemBookName);
+            bookName = itemView.findViewById(R.id.book_name);
+            bookImg = itemView.findViewById(R.id.book_image);
+            bookAuthor = itemView.findViewById(R.id.book_author);
+            ratingBar = itemView.findViewById(R.id.rating_bar);
+            price = itemView.findViewById(R.id.book_price);
+            salePrice = itemView.findViewById(R.id.sale_price);
         }
     }
 }
