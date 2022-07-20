@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projectfinal.R;
@@ -85,6 +86,16 @@ public class LoginActivity extends AppCompatActivity {
                     login();
                 }
 
+            }
+        });
+
+        //Chuyển sang màn hình đăng ký
+        TextView txtRegistration = findViewById(R.id.formRegistator);
+        txtRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }

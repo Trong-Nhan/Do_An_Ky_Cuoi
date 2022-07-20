@@ -2,6 +2,7 @@ package com.example.projectfinal.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -37,6 +38,7 @@ public class HomeFragment extends Fragment {
         RecyclerView rcvNewBook = view.findViewById(R.id.rcvNewBook);
         rcvNewBook.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rcvNewBook.setAdapter(mBookAdapter);
+        
 
         //set dữ liệu lên RecycleView Popular Book
         RecyclerView rcvPopularBook = view.findViewById(R.id.rcvPopularBook);
