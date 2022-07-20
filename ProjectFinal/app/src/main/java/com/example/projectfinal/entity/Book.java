@@ -18,10 +18,6 @@ public class Book implements Serializable {
     private float rating;
     private boolean status;
 
-    public String toString(String s) {
-        return s.toString();
-    }
-
     public Book() {
     }
 
