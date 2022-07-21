@@ -16,6 +16,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".activity.RegisterActivity"
+            android:name=".activity.BookDetailActivity"
             android:exported="false" />
         <activity
             android:name=".activity.admin.AdminUserActivity"

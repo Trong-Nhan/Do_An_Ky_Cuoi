@@ -1,17 +1,22 @@
 package com.example.projectfinal.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectfinal.R;
+import com.example.projectfinal.activity.BookDetailActivity;
 import com.example.projectfinal.entity.Book;
 
 
@@ -37,20 +42,32 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
-        Book b = mLst.get(position);
+        final Book b = mLst.get(position);
         if (b == null) {
             return;
         }
-        holder.bookImg.setImageResource(b.getImgResouce());
+        holder.bookImg.setImageResource(b.getPicture());
         holder.bookName.setText(b.getName());
         holder.bookAuthor.setText(b.getAuthor());
         holder.price.setText(b.getPrice());
         holder.salePrice.setText(b.getSalePrice());
         holder.ratingBar.setRating(b.getRating());
+//        holder.category.setText(b.getCategoryId());
+//        holder.description.setText(b.getDescription());
+        holder.layoutDetailBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickGoToDetailBook(b);
+            }
+        });
     }
 
-    private int toString(int price) {
-        return toString(price);
+    private void onClickGoToDetailBook(Book b) {
+        Intent intent = new Intent(mCtx, BookDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("object_book", b);
+        intent.putExtras(bundle);
+        mCtx.startActivity(intent);
     }
 
     @Override
@@ -72,6 +89,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         private RatingBar ratingBar;
         private TextView price;
         private TextView salePrice;
+        private TextView category;
+        private TextView description;
+        private LinearLayout layoutDetailBook;
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,6 +102,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             ratingBar = itemView.findViewById(R.id.rating_bar);
             price = itemView.findViewById(R.id.book_price);
             salePrice = itemView.findViewById(R.id.sale_price);
+            category = itemView.findViewById(R.id.book_category);
+            description = itemView.findViewById(R.id.book_description);
+            layoutDetailBook = itemView.findViewById(R.id.layout_detail_book);
+
         }
     }
 }
