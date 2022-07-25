@@ -13,9 +13,12 @@
         <entry key="..\:/GITHUB/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/footer.xml" value="0.225" />
         <entry key="..\:/GITHUB/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/header.xml" value="0.225" />
         <entry key="..\:/GITHUB/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/item_ticket.xml" value="0.18" />
+        <entry key="..\:/Project/Sem_Iv/Android/Project/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Project/Sem_Iv/Android/Project/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/activity_main.xml" value="0.28456683878370626" />
+        <entry key="..\:/Project/Sem_Iv/Android/Project/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/activity_register.xml" value="0.22826086956521738" />
         <entry key="..\:/Project/Sem_Iv/Android/Project/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/demo_giaodien.xml" value="0.22826086956521738" />
         <entry key="..\:/Project/Sem_Iv/Android/Project/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/fragment_account.xml" value="0.22826086956521738" />
+        <entry key="..\:/Project/Sem_Iv/Android/Project/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/fragment_home.xml" value="0.22826086956521738" />
         <entry key="..\:/Project/Sem_Iv/Android/Project/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/header.xml" value="0.22826086956521738" />
         <entry key="..\:/Project/Sem_Iv/Android/Project/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/item_book.xml" value="0.22826086956521738" />
         <entry key="..\:/Project/Sem_Iv/Android/Project/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/menu/cart_menu.xml" value="0.25833333333333336" />
@@ -24,9 +27,11 @@
         <entry key="..\:/Study/Android/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/activity_login.xml" value="0.358695652173913" />
         <entry key="..\:/Study/Android/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/activity_main.xml" value="0.3625" />
         <entry key="..\:/Study/Android/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/fragment_account.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/acer/Desktop/GitHub/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/activity_admin.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/acer/Desktop/GitHub/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/activity_book_detail.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/acer/Desktop/GitHub/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/fragment_news.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/acer/Desktop/GitHub/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/layout/item_book.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/acer/Desktop/GitHub/Do_An_Ky_Cuoi/ProjectFinal/app/src/main/res/menu/menu_bottom_nav.xml" value="0.33" />
       </map>
     </option>
   </component>
