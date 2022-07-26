@@ -48,12 +48,17 @@ public class AccountFragment extends Fragment {
         Button btnLogout = view.findViewById(R.id.btnLogout);
 
         //nếu được chuyển từ AdminActivity qua
+        /*
         if(getActivity().getIntent().getExtras().get("adminName") != null){
 
             btnUserDetail.setVisibility(View.GONE);
             btnHistoryOder.setVisibility(View.GONE);
             btnToAdmin.setVisibility(View.VISIBLE);
+        }else{
+
         }
+        */
+
 
         btnLogout.setOnClickListener(listenerLogout);
         btnUserDetail.setOnClickListener(listenerUserDetail);

@@ -22,4 +22,6 @@ public interface CityAPI {
 
     @GET("city/getcity")
     Call<List<City>> getListCities();
+
+
 }

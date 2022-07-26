@@ -61,11 +61,13 @@ public class AdminActivity extends AppCompatActivity {
 
         }
 
+        Button btnAccount = findViewById(R.id.btnAdminAccount);
         Button btnLogout = findViewById(R.id.btnAdminLogout);
         Button btnToMain = findViewById(R.id.btnAdminToMainScreen);
 
         btnLogout.setOnClickListener(listenerLogout);
         btnToMain.setOnClickListener(listenerToMain);
+        btnAccount.setOnClickListener(listenerToAccount);
     }
 
     //Hành động nút đăng xuất
@@ -88,6 +90,15 @@ public class AdminActivity extends AppCompatActivity {
 
             Intent intent = new Intent(AdminActivity.this, MainActivity.class);
             intent.putExtra("adminName", mTxtAdminName.getText().toString());
+            startActivity(intent);
+        }
+    };
+
+    //Hành động vào trang quản lý tài khoản
+    private View.OnClickListener listenerToAccount = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(AdminActivity.this, AdminAccountActivity.class);
             startActivity(intent);
         }
     };
