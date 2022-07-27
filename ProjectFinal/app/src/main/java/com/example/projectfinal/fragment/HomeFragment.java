@@ -61,11 +61,12 @@ public class HomeFragment extends Fragment {
     }
 
     private void getListBook(){
-        mLstBook.add(new Book("Harry Potter và Bảo Bối Tử Thần", R.drawable.book1, "Duy Duc", 4,"80000","40000"));
-        mLstBook.add(new Book("Cuộc sống của bạn đã tốt đẹp chưa", R.drawable.book2, "Duy Duc", 4,"80000","4000"));
-        mLstBook.add(new Book("11 bí quyết giao tiếp để thành công", R.drawable.book3, "Duy Duc", 4,"80000","40000"));
-        mLstBook.add(new Book("Tiếng gọi nơi hoang dã", R.drawable.book4, "Duy Duc", 4,"80000","40000"));
+        mLstBook.add(new Book(1,"Harry Potter và Bảo Bối Tử Thần", 1,"100000","80000","Duy Duc",1,2000,R.drawable.book1,197,"Harry Potter và Bảo Bối Tử Thần",200,3.8F, true));
+        mLstBook.add(new Book(2,"Cuộc sống của bạn đã tốt đẹp chưa", 1,"100000","80000","Duy Duc",1,2000,R.drawable.book2,197,"Harry Potter và Bảo Bối Tử Thần",200,1.5F,true));
+        mLstBook.add(new Book(3,"11 bí quyết giao tiếp để thành công", 1,"100000","80000","Duy Duc",1,2000,R.drawable.book3,197,"Harry Potter và Bảo Bối Tử Thần",200,2.3F,true));
+        mLstBook.add(new Book(4,"Tiếng gọi nơi hoang dã", 1,"100000","80000","Duy Duc",1,2000,R.drawable.book4,197,"Harry Potter và Bảo Bối Tử Thần",200, (float) 4.3,true));
     }
+
 
     private void getListNews(){
         mLstNews.add(new News(R.drawable.news1, "Nhìn thẳng, không né tránh những vấn đề của ngành sách"));
