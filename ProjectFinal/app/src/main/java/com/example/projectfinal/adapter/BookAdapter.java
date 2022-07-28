@@ -52,8 +52,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.price.setText(b.getPrice());
         holder.salePrice.setText(b.getSalePrice());
         holder.ratingBar.setRating(b.getRating());
-//        holder.category.setText(b.getCategoryId());
-//        holder.description.setText(b.getDescription());
         holder.layoutDetailBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,13 +70,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     @Override
     public int getItemCount() {
-        if (mLst != null) {
-            if (mLst.size() > 4) {
-                return 4;
-            }
-            return mLst.size();
-        }
-        return 0;
+//        if (mLst != null) {
+//            if (mLst.size() > 4) {
+//                return 4;
+//            }
+//            return mLst.size();
+//        }
+//        return 0;
+        return mLst.size();
     }
 
     public static class BookViewHolder extends RecyclerView.ViewHolder {

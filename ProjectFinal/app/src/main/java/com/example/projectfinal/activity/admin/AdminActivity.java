@@ -64,10 +64,16 @@ public class AdminActivity extends AppCompatActivity {
         Button btnAccount = findViewById(R.id.btnAdminAccount);
         Button btnLogout = findViewById(R.id.btnAdminLogout);
         Button btnToMain = findViewById(R.id.btnAdminToMainScreen);
+        Button btnAdminCategory = findViewById(R.id.btnAdminCategory);
+        Button btnAdminPublisher = findViewById(R.id.btnAdminPublisher);
+        Button btnAdminBook = findViewById(R.id.btnAdminBook);
 
         btnLogout.setOnClickListener(listenerLogout);
         btnToMain.setOnClickListener(listenerToMain);
         btnAccount.setOnClickListener(listenerToAccount);
+        btnAdminCategory.setOnClickListener(listenerToCategory);
+        btnAdminPublisher.setOnClickListener(listenerToPublisher);
+        btnAdminBook.setOnClickListener(listenerToBook);
     }
 
     //Hành động nút đăng xuất
@@ -99,6 +105,33 @@ public class AdminActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(AdminActivity.this, AdminAccountActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    //Hành động vào trang quản lý sachs
+    private View.OnClickListener listenerToBook = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(AdminActivity.this, AdminBookActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    //Hành động vào trang quản lý NXB
+    private View.OnClickListener listenerToPublisher = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(AdminActivity.this, AdminPublisherActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    //Hành động vào trang quản lý danh muc
+    private View.OnClickListener listenerToCategory = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(AdminActivity.this, AdminCategoryActivity.class);
             startActivity(intent);
         }
     };

@@ -13,6 +13,7 @@ import java.util.List;
  * @author acer
  */
 public interface IBookDAO {
+
     public List<Book> getAll();
 
     public void insert(Book b);
@@ -20,4 +21,6 @@ public interface IBookDAO {
     public void delete(int id);
 
     public void update(Book b);
+
+    public Book findByName(String name);
 }
