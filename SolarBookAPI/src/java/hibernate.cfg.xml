@@ -11,5 +11,6 @@
         <mapping class="entity.Category"/>
         <mapping class="entity.Publisher"/>        
         <mapping class="entity.Book"/>
+        <mapping class="entity.City"/>
     </session-factory>
 </hibernate-configuration>
