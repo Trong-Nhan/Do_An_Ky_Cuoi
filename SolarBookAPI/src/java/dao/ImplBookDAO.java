@@ -87,4 +87,14 @@ public class ImplBookDAO implements IBookDAO {
         }
     }
 
+    @Override
+    public Book findByName(String name) {
+        s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("select b from Book u where u.name like :name");
+        q.setParameter("name", name);
+        Book u = (Book) q.uniqueResult();
+        s.close();
+        return u;
+    }
+
 }

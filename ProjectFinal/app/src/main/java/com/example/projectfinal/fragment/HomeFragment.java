@@ -65,6 +65,9 @@ public class HomeFragment extends Fragment {
         mLstBook.add(new Book(2,"Cuộc sống của bạn đã tốt đẹp chưa", 1,"100000","80000","Duy Duc",1,2000,R.drawable.book2,197,"Harry Potter và Bảo Bối Tử Thần",200,1.5F,true));
         mLstBook.add(new Book(3,"11 bí quyết giao tiếp để thành công", 1,"100000","80000","Duy Duc",1,2000,R.drawable.book3,197,"Harry Potter và Bảo Bối Tử Thần",200,2.3F,true));
         mLstBook.add(new Book(4,"Tiếng gọi nơi hoang dã", 1,"100000","80000","Duy Duc",1,2000,R.drawable.book4,197,"Harry Potter và Bảo Bối Tử Thần",200, (float) 4.3,true));
+        mLstBook.add(new Book(2,"Cuộc sống của bạn đã tốt đẹp chưa", 1,"100000","80000","Duy Duc",1,2000,R.drawable.book2,197,"Harry Potter và Bảo Bối Tử Thần",200,1.5F,true));
+        mLstBook.add(new Book(3,"11 bí quyết giao tiếp để thành công", 1,"100000","80000","Duy Duc",1,2000,R.drawable.book3,197,"Harry Potter và Bảo Bối Tử Thần",200,2.3F,true));
+
     }
 
 
