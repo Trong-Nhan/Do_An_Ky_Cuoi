@@ -1,4 +1,4 @@
-Create Database SolarBook
+﻿Create Database SolarBook
 GO
 Use SolarBook
 GO
@@ -51,7 +51,7 @@ Create Table tblUser(
 	Email varchar(100),
 	CityId int,
 	[Address] text,
-	role varchar(10),
+	[Role] varchar(10),
 
 	Foreign Key (CityId) References tblCity(Id)
 )
@@ -128,4 +128,14 @@ Create Table tblRating(
 
 GO
 
-Select * From tblBook
+
+Insert Into tblCity(Name) Values (N'Hà Nội'), (N'TP. Hồ Chí Minh'), (N'Đà Nẵng');
+
+Insert Into tblUser(Name, Phone, Password, Email, CityId, Role) Values ('Admin', '0974079806', 'admin', 'tuanng16apu@gmail.com', 1, 'admin')
+Insert Into tblUser(Name, Phone, Password, Email, CityId, Role) Values (N'Nguyễn Tuấn Sơn', '0974079806', 'Ts311297', 'tson.nguyen3112@gmail.com', 1, 'user')
+
+Insert Into tblCategory(Name) Values (N'Sách thiếu nhi'), (N'Sách Chính trị - Xã hội'), (N'Sách dành cho giới trẻ'), (N'Sách gia đình'), (N'Sách Giáo khoa - Giáo trình'),
+(N'Sách ngoại ngữ'), (N'Sách Quản lý - Kinh tế'), (N'Sách Khoa học - Công nghệ'), (N'Sách Văn học - Nghệ thuật'), (N'Sách khác')
+
+Insert Into tblPublisher(Name) Values (N'NXB Kim Đồng'), (N'NXB Trẻ'), (N'NXB Giáo Dục'), (N'NXB Hội Nhà Văn'), (N'NXB Lao Động')
+
