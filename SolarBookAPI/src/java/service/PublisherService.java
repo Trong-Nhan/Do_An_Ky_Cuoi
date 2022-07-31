@@ -4,6 +4,7 @@ package service;
 import dao.ImplPublisherDAO;
 import entity.Publisher;
 import java.util.List;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -32,7 +33,7 @@ public class PublisherService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getpublisher")
-    public List<Publisher> getCategory() {
+    public List<Publisher> getPublisher() {
         return pDAO.getAll();
     }
 
@@ -50,7 +51,7 @@ public class PublisherService {
         pDAO.update(n);
     }
 
-    @POST
+    @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path("deletepublisher/{id}")
     public void deletePublisher(@PathParam("id") int id) {

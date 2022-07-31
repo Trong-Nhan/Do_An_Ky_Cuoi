@@ -62,12 +62,16 @@ public class ImplPublisherDAO implements IPublisherDAO {
 
     @Override
     public void delete(int id) {
-        s = HibernateUtil.getSessionFactory().openSession();
-        Publisher p = getbyId(id);
-        s.getTransaction().begin();
-        s.delete(p);
-        s.getTransaction().commit();
-        s.close();
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            s.getTransaction().begin();
+            Publisher p = getbyId(id);
+            s.delete(p);
+            s.getTransaction().commit();
+            s.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

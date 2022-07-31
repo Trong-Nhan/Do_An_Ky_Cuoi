@@ -13,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface PublisherAPI {
@@ -33,9 +34,9 @@ public interface PublisherAPI {
     @PUT("publisher/updatepublisher")
     Call<Publisher> updatePublisher(@Body Publisher publisher);
 
-    @POST("publisher/deletepublisher")
-    Call<Publisher> deletePublisher(@Body Publisher publisher);
+    @POST("publisher/deletepublisher/{id}")
+    Call<Publisher> deletePublisher(@Path("id") int id );
 
-    @GET("publisher/detailpublisher")
-    Call<Publisher> detailPublisher(@Query("id") int id);
+    @GET("publisher/detailpublisher/{id}")
+    Call<Publisher> detailPublisher(@Path("id") int id);
 }
