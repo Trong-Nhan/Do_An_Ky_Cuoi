@@ -51,7 +51,7 @@ public class PublisherService {
         pDAO.update(n);
     }
 
-    @DELETE
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("deletepublisher/{id}")
     public void deletePublisher(@PathParam("id") int id) {
