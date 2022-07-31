@@ -1,14 +1,14 @@
 package com.example.projectfinal.entity;
 
-public class Category {
+public class Publisher {
     private int id;
     private String name;
 
-    public Category(String name) {
-        this.name = name;
+    public Publisher() {
     }
 
-    public Category() {
+    public Publisher(String name) {
+        this.name = name;
     }
 
     public int getId() {
