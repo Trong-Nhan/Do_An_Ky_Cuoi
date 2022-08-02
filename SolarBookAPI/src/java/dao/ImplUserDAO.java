@@ -47,5 +47,33 @@ public class ImplUserDAO implements IUserDAO{
         session.close();
         return u;
     }
+
+    @Override
+    public void insert(User u) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+        session.save(u);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public void update(User u) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+        session.update(u);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public void delete(int userId) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        User u = (User) session.get(User.class, userId);
+        session.getTransaction().begin();
+        session.delete(u);
+        session.getTransaction().commit();
+        session.close();
+    }
     
 }
