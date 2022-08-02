@@ -9,8 +9,11 @@ import dao.ImplUserDAO;
 import entity.User;
 import java.util.List;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -42,5 +45,17 @@ public class UserService {
         return uDAO.findByEmail(email);
     }
     
-
+    @POST
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void insertUser(User u){
+        uDAO.insert(u);
+    }
+    
+    @DELETE
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("{id}")
+    public void deleteUser(@PathParam("id") int id){
+        uDAO.delete(id);
+    }
 }

@@ -1,15 +1,20 @@
 package com.example.projectfinal.activity.admin;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.example.projectfinal.R;
-import com.example.projectfinal.adapter.AdminAccountAdapter;
+import com.example.projectfinal.adapter.admin.AdminAccountAdapter;
 import com.example.projectfinal.api.UserAPI;
 import com.example.projectfinal.entity.User;
 
@@ -54,5 +59,38 @@ public class AdminAccountActivity extends AppCompatActivity {
                 Toast.makeText(AdminAccountActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_admin_account, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.menuAdminAccountAdd:
+                Intent intent = new Intent(AdminAccountActivity.this, AdminAddAccountActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int id = mLst.get(info.position).getId();
+        switch(item.getItemId()){
+            case 101:
+                Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
+                break;
+            case 111:
+
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 }

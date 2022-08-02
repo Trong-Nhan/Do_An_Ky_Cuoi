@@ -10,8 +10,10 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface UserAPI {
@@ -31,4 +33,7 @@ public interface UserAPI {
 
     @POST("user")
     Call<User> insertUser(@Body User user);
+
+    @DELETE("user/{id}")
+    Call<Void> deleteUser(@Path("id") int id);
 }
