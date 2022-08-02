@@ -15,6 +15,9 @@
         android:theme="@style/Theme.SolarBook"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.admin.AdminAddAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.admin.AddPublisherActivity"
             android:exported="false" />
         <activity
