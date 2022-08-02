@@ -22,15 +22,7 @@ public class AdminAccountAdapter extends RecyclerView.Adapter<AdminAccountAdapte
 
     private Context mCtx;
     private List<User> mLst;
-    private int position;
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
 
     public AdminAccountAdapter(Context mCtx, List<User> mLst) {
         this.mCtx = mCtx;
@@ -56,13 +48,6 @@ public class AdminAccountAdapter extends RecyclerView.Adapter<AdminAccountAdapte
         holder.userName.setText(u.getName());
         holder.userEmail.setText(u.getEmail());
         holder.userRole.setText(u.getRole());
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                setPosition(holder.getPosition());
-                return false;
-            }
-        });
     }
 
     @Override
@@ -94,8 +79,8 @@ public class AdminAccountAdapter extends RecyclerView.Adapter<AdminAccountAdapte
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             menu.setHeaderTitle("Lựa chọn");
-            menu.add(this.getAdapterPosition(), 101, 0, "Cập nhật");
-            menu.add(this.getAdapterPosition(), 111, 1, "Xóa");
+            menu.add(0, 101, getAdapterPosition(), "Cập nhật");
+            menu.add(0, 111, getAdapterPosition(), "Xóa");
         }
 
 
