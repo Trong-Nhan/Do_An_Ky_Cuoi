@@ -1,4 +1,4 @@
-Create Database SolarBook
+﻿Create Database SolarBook
 GO
 Use SolarBook
 GO
