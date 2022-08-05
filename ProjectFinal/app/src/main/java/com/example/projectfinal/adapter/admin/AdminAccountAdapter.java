@@ -81,6 +81,7 @@ public class AdminAccountAdapter extends RecyclerView.Adapter<AdminAccountAdapte
             menu.setHeaderTitle("Lựa chọn");
             menu.add(0, 101, getAdapterPosition(), "Cập nhật");
             menu.add(0, 111, getAdapterPosition(), "Xóa");
+            menu.add(0, 121, getAdapterPosition(), "Đổi mật khẩu");
         }
 
 
