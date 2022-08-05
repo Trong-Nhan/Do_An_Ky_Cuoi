@@ -84,7 +84,11 @@ public class AdminAccountActivity extends AppCompatActivity {
         User u = mLst.get(item.getOrder());
         switch(item.getItemId()){
             case 101:
-                Toast.makeText(this, "" + u.getId(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AdminAccountActivity.this, AdminUpdateAccountActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("updateUser", u);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
             case 111:
                 UserAPI.userApi.deleteUser(u.getId()).enqueue(new Callback<Void>() {
