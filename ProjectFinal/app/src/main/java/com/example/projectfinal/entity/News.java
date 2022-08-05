@@ -1,30 +1,71 @@
 package com.example.projectfinal.entity;
 
+import java.util.Date;
+
 public class News {
-    private int img;
-    private String title;
+    private int id;
+    private String name;
+    private String description;
+    private String detail;
+    private String picture;
+    private Date createdDate;
 
     public News() {
     }
 
-    public News(int img, String title) {
-        this.img = img;
-        this.title = title;
+    public News(String name, String description, String detail, String picture, Date createdDate) {
+        this.name = name;
+        this.description = description;
+        this.detail = detail;
+        this.picture = picture;
+        this.createdDate = createdDate;
     }
 
-    public int getImg() {
-        return img;
+    public int getId() {
+        return id;
     }
 
-    public void setImg(int img) {
-        this.img = img;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }

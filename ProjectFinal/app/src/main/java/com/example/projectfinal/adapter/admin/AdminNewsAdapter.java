@@ -1,4 +1,4 @@
-package com.example.projectfinal.adapter;
+package com.example.projectfinal.adapter.admin;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,31 +11,31 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectfinal.R;
+import com.example.projectfinal.entity.Category;
 import com.example.projectfinal.entity.News;
 
 import java.util.List;
 
-
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
+public class AdminNewsAdapter extends RecyclerView.Adapter<AdminNewsAdapter.NewsViewHolder> {
 
     private Context mCtx;
     private List<News> mLst;
 
-    public NewsAdapter(Context mCtx, List<News> mLst) {
+    public AdminNewsAdapter(Context mCtx, List<News> mLst) {
         this.mCtx = mCtx;
         this.mLst = mLst;
     }
 
     @NonNull
     @Override
-    public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mCtx).inflate(R.layout.item_news_grid_layout, parent, false);
-        NewsViewHolder nvh = new NewsViewHolder(view);
+    public AdminNewsAdapter.NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mCtx).inflate(R.layout.item_admin_news, parent, false);
+        AdminNewsAdapter.NewsViewHolder nvh = new AdminNewsAdapter.NewsViewHolder(view);
         return nvh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdminNewsAdapter.NewsViewHolder holder, int position) {
         News n = mLst.get(position);
         if (n == null) {
             return;
@@ -52,8 +52,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @Override
     public int getItemCount() {
         if (mLst != null) {
-            if (mLst.size() > 10) {
-                return 10;
+            if (mLst.size() > 20) {
+                return 20;
             }
             return mLst.size();
         }

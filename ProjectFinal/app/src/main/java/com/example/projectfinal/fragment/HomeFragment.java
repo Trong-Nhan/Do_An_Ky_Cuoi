@@ -19,6 +19,8 @@ import com.example.projectfinal.adapter.NewsAdapter;
 import com.example.projectfinal.entity.Book;
 import com.example.projectfinal.entity.News;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,13 +53,17 @@ public class HomeFragment extends Fragment {
         rcvDiscountBook.setAdapter(mBookAdapter);
 
         //set dữ liệu lên RecycleView Homepage News
-        getListNews();
+//        try {
+//            getListNews();
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
         mNewsAdapter = new NewsAdapter(getActivity(), mLstNews);
         RecyclerView rcvHomeNews = view.findViewById(R.id.rcvHomeNews);
         rcvHomeNews.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         rcvHomeNews.setAdapter(mNewsAdapter);
-        return view;
 
+        return view;
     }
 
     private void getListBook(){
@@ -71,11 +77,14 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void getListNews(){
-        mLstNews.add(new News(R.drawable.news1, "Nhìn thẳng, không né tránh những vấn đề của ngành sách"));
-        mLstNews.add(new News(R.drawable.news2, "Sách nói phát triển mạnh ở nhiều quốc gia"));
-        mLstNews.add(new News(R.drawable.news3, "Nhiều hoạt động hưởng ứng Ngày Sách và Văn hóa đọc"));
-        mLstNews.add(new News(R.drawable.news1, "Nhìn thẳng, không né tránh những vấn đề của ngành sách"));
-        mLstNews.add(new News(R.drawable.news2, "Sách nói phát triển mạnh ở nhiều quốc gia"));
-    }
+//    private void getListNews() throws ParseException {
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+//
+//        mLstNews.add(new News(1,"Tin Tức", "Mô tả", "Chi tiết", "news1.png", formatter.parse("2006/12/12")));
+//        mLstNews.add(new News(2,"Tin Tức", "Mô tả", "Chi tiết", "news1.png", formatter.parse("2006/12/12")));
+//        mLstNews.add(new News(3,"Tin Tức", "Mô tả", "Chi tiết", "news1.png", formatter.parse("2006/12/12")));
+//        mLstNews.add(new News(4,"Tin Tức", "Mô tả", "Chi tiết", "news1.png", formatter.parse("2006/12/12")));
+//        mLstNews.add(new News(5,"Tin Tức", "Mô tả", "Chi tiết", "news1.png", formatter.parse("2006/12/12")));
+//
+//    }
 }
