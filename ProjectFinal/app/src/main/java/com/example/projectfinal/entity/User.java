@@ -1,6 +1,8 @@
 package com.example.projectfinal.entity;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private int id;
     private String name;
     private String phone;
@@ -28,6 +30,16 @@ public class User {
         this.name = name;
         this.phone = phone;
         this.password = password;
+        this.email = email;
+        this.cityId = cityId;
+        this.address = address;
+        this.role = role;
+    }
+
+    public User(int id, String name, String phone, String email, int cityId, String address, String role) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
         this.email = email;
         this.cityId = cityId;
         this.address = address;
