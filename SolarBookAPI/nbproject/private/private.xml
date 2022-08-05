@@ -7,5 +7,10 @@
             <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/NewsDAO.java</file>
         </group>
         <group/>
+        <group>
+            <file>file:/D:/Project/Sem_Iv/Android/Test/SolarBookAPI/src/java/dao/HibernateUtil.java</file>
+            <file>file:/D:/Project/Sem_Iv/Android/Test/SolarBookAPI/src/java/service/UserService.java</file>
+            <file>file:/D:/Project/Sem_Iv/Android/Test/SolarBookAPI/src/java/dao/ImplUserDAO.java</file>
+        </group>
     </open-files>
 </project-private>

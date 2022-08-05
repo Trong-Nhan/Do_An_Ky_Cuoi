@@ -81,14 +81,31 @@ public class AdminAccountActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int id = mLst.get(info.position).getId();
+        User u = mLst.get(item.getOrder());
         switch(item.getItemId()){
             case 101:
-                Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AdminAccountActivity.this, AdminUpdateAccountActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("updateUser", u);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
             case 111:
+                UserAPI.userApi.deleteUser(u.getId()).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()){
+                            Toast.makeText(AdminAccountActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(AdminAccountActivity.this, AdminAccountActivity.class);
+                            startActivity(intent);
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(AdminAccountActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
         }
         return super.onContextItemSelected(item);
