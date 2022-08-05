@@ -27,6 +27,12 @@
             android:name=".activity.admin.AddCategoryActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.admin.AddNewsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.AdminNewsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.admin.AdminCategoryActivity"
             android:exported="false" />
         <activity
