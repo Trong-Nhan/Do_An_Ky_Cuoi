@@ -28,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private List<City> mLstCity;
     private Spinner mSpCity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         CityAPI.cityApi.getListCities().enqueue(new Callback<List<City>>() {
             @Override
             public void onResponse(Call<List<City>> call, Response<List<City>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     mLstCity = response.body();
                     ArrayAdapter<City> adapter = new ArrayAdapter<>(RegisterActivity.this, android.R.layout.simple_list_item_1, mLstCity);
                     mSpCity.setAdapter(adapter);
@@ -78,13 +79,13 @@ public class RegisterActivity extends AppCompatActivity {
             String uCPassword = edtConfirmPassword.getText().toString();
             String uAddress = edtAddress.getText().toString();
             String uRole = "user";
-            
-            if(uPassword.equals(uCPassword)){
+
+            if (uPassword.equals(uCPassword)) {
                 User u = new User(uName, uPhone, uPassword, uEmail, c.getId(), uAddress, uRole);
                 UserAPI.userApi.insertUser(u).enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
@@ -96,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
                     }
                 });
-            }else{
+            } else {
                 Toast.makeText(RegisterActivity.this, "Mật khẩu không trùng, xin vui lòng thử lại", Toast.LENGTH_SHORT).show();
             }
         }

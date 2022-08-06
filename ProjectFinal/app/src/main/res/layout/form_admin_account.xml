@@ -81,16 +81,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
                     android:text="Thành phố"
-                    android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:layout_marginRight="20dp"/>
+                    android:textSize="18sp" />
 
                 <Spinner
                     android:id="@+id/spnFormAccountCity"
@@ -101,24 +101,24 @@
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/rdoFormAccountAdmin"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Admin"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/rdoFormAccountUser"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="User"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
             </RadioGroup>
 
             <LinearLayout
@@ -129,34 +129,34 @@
                 <Button
                     android:id="@+id/btnFormAccountAdd"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Thêm mới"
-                    android:textSize="18sp"
                     android:layout_gravity="center"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:text="Thêm mới"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/btnFormAccountUpdate"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Cập nhật"
-                    android:textSize="18sp"
                     android:layout_gravity="center"
                     android:layout_marginRight="5dp"
-                    android:visibility="gone"/>
+                    android:layout_weight="1"
+                    android:text="Cập nhật"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/btnFormAccountCancel"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Hủy bỏ"
-                    android:textSize="18sp"
-                    android:backgroundTint="@android:color/holo_red_dark"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/holo_red_dark"
+                    android:text="Hủy bỏ"
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

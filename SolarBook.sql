@@ -136,8 +136,12 @@ Insert Into tblUser(Name, Phone, Password, Email, CityId, Role) Values ('Admin',
 Insert Into tblUser(Name, Phone, Password, Email, CityId, Role) Values (N'Nguyễn Tuấn Sơn', '0974079806', 'Ts311297', 'tson.nguyen3112@gmail.com', 1, 'user')
 
 
-Insert Into tblNews(Name, Description, Detail, Picture, CreatedDate) Values (N'Tin Tức', N'Mô tả', N'Chi tiết', '123.jpg','2006/12/12')
-Insert Into tblNews(Name, Description, Detail, Picture, CreatedDate) Values (N'Tin Tức', N'Mô tả', N'Chi tiết', '123.jpg','2006/12/12')
-Insert Into tblNews(Name, Description, Detail, Picture, CreatedDate) Values (N'Tin Tức', N'Mô tả', N'Chi tiết', '123.jpg','2006/12/12')
-Insert Into tblNews(Name, Description, Detail, Picture, CreatedDate) Values (N'Tin Tức', N'Mô tả', N'Chi tiết', '123.jpg','2006/12/12')
-Insert Into tblNews(Name, Description, Detail, Picture, CreatedDate) Values (N'Tin Tức', N'Mô tả', N'Chi tiết', '123.jpg','2006/12/12')
+Insert Into tblNews(Name, Description, Detail, Picture, CreatedDate) Values (N'Tin tuc', N'Mo ta', N'Chi tiet', 'news1.png','2006/12/12')
+Insert Into tblNews(Name, Description, Detail, Picture, CreatedDate) Values (N'Tin tuc', N'Mo ta', N'Chi tiet', 'news1.png','2006/12/12')
+Insert Into tblNews(Name, Description, Detail, Picture, CreatedDate) Values (N'Tin tuc', N'Mo ta', N'Chi tiet', 'news1.png','2006/12/12')
+Insert Into tblNews(Name, Description, Detail, Picture, CreatedDate) Values (N'Tin tuc', N'Mo ta', N'Chi tiet', 'news1.png','2006/12/12')
+Insert Into tblNews(Name, Description, Detail, Picture, CreatedDate) Values (N'Tin tuc', N'Mo ta', N'Chi tiet', 'news1.png','2006/12/12')
+go
+
+Truncate table tblNews
+go

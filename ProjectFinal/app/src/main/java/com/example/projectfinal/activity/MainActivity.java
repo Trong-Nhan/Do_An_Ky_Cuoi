@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (getIntent().getExtras().get("userName") != null && getIntent().getExtras().get("userId") != null) {
             mUserName = getIntent().getExtras().get("userName").toString();
             mUserId = getIntent().getExtras().get("userId").toString();
-        } else if(getIntent().getExtras().get("adminName") != null){
+        } else if (getIntent().getExtras().get("adminName") != null) {
             mUserName = getIntent().getExtras().get("adminName").toString();
         }
 

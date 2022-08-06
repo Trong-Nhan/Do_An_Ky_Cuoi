@@ -42,7 +42,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         recyclerViewCategory = findViewById(R.id.rcvAdminCategory);
         //set dữ liệu lên recycler view
         recyclerViewCategory.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewCategory.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        recyclerViewCategory.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         //chuyen sang form them moi
         TextView txtAdd = findViewById(R.id.add_category);
         txtAdd.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +55,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
     }
 
     //Lay du lieu Category qua API
-    private void getList(){
+    private void getList() {
         CategoryAPI.categoryAPI.getCategory().enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {

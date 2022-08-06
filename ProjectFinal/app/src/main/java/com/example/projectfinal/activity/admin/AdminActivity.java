@@ -67,6 +67,7 @@ public class AdminActivity extends AppCompatActivity {
         Button btnAdminCategory = findViewById(R.id.btnAdminCategory);
         Button btnAdminPublisher = findViewById(R.id.btnAdminPublisher);
         Button btnAdminBook = findViewById(R.id.btnAdminBook);
+        Button btnAdminNews = findViewById(R.id.btnAdminNews);
 
         btnLogout.setOnClickListener(listenerLogout);
         btnToMain.setOnClickListener(listenerToMain);
@@ -74,6 +75,7 @@ public class AdminActivity extends AppCompatActivity {
         btnAdminCategory.setOnClickListener(listenerToCategory);
         btnAdminPublisher.setOnClickListener(listenerToPublisher);
         btnAdminBook.setOnClickListener(listenerToBook);
+        btnAdminNews.setOnClickListener(listenerToNews);
     }
 
     //Hành động nút đăng xuất
@@ -132,6 +134,15 @@ public class AdminActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(AdminActivity.this, AdminCategoryActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    //Hành động vào trang quản lý tin tuc
+    private View.OnClickListener listenerToNews = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(AdminActivity.this, AdminNewsActivity.class);
             startActivity(intent);
         }
     };

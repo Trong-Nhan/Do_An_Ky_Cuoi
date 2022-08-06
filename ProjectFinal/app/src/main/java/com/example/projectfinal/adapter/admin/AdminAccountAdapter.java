@@ -18,7 +18,7 @@ import com.example.projectfinal.entity.User;
 
 import java.util.List;
 
-public class AdminAccountAdapter extends RecyclerView.Adapter<AdminAccountAdapter.AdminAccountViewHolder>{
+public class AdminAccountAdapter extends RecyclerView.Adapter<AdminAccountAdapter.AdminAccountViewHolder> {
 
     private Context mCtx;
     private List<User> mLst;
@@ -40,7 +40,7 @@ public class AdminAccountAdapter extends RecyclerView.Adapter<AdminAccountAdapte
     @Override
     public void onBindViewHolder(@NonNull AdminAccountViewHolder holder, int position) {
         final User u = mLst.get(position);
-        if(u == null){
+        if (u == null) {
             return;
         }
 
@@ -52,7 +52,7 @@ public class AdminAccountAdapter extends RecyclerView.Adapter<AdminAccountAdapte
 
     @Override
     public int getItemCount() {
-        if(mLst != null){
+        if (mLst != null) {
             return mLst.size();
         }
         return 0;
@@ -65,6 +65,7 @@ public class AdminAccountAdapter extends RecyclerView.Adapter<AdminAccountAdapte
         private TextView userEmail;
         private TextView userRole;
         private LinearLayout layoutAccount;
+
         public AdminAccountViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -83,7 +84,6 @@ public class AdminAccountAdapter extends RecyclerView.Adapter<AdminAccountAdapte
             menu.add(0, 111, getAdapterPosition(), "Xóa");
             menu.add(0, 121, getAdapterPosition(), "Đổi mật khẩu");
         }
-
 
 
     }
