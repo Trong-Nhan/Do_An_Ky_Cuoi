@@ -74,13 +74,13 @@ public class UpdateNewsActivity extends AppCompatActivity {
     private View.OnClickListener listenerUpdateNews = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String nName = edtName.getText().toString();
             String nDescription = edtDescription.getText().toString();
             String nDetail = edtDetail.getText().toString();
             String nPicture = edtPicture.getText().toString();
             String nCreatedDate = edtCreatedDate.getText().toString();
             //chuyen kieu du lieu String sang kieu Date
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             Date strDate = null;
             try {
                 strDate = formatter.parse(nCreatedDate);
@@ -99,7 +99,6 @@ public class UpdateNewsActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 }
-
                 @Override
                 public void onFailure(Call<News> call, Throwable throwable) {
                     Toast.makeText(UpdateNewsActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();

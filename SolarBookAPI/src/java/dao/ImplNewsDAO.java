@@ -34,6 +34,7 @@ public class ImplNewsDAO implements NewsDAO {
         session.getTransaction().begin();
         session.save(b);
         session.getTransaction().commit();
+        session.close();
     }
 
     public News getById(int id) {
