@@ -1,10 +1,12 @@
 package com.example.projectfinal.adapter.admin;
 
 import android.content.Context;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,24 +54,32 @@ public class AdminNewsAdapter extends RecyclerView.Adapter<AdminNewsAdapter.News
     @Override
     public int getItemCount() {
         if (mLst != null) {
-            if (mLst.size() > 20) {
-                return 20;
-            }
             return mLst.size();
         }
         return 0;
     }
 
-    public static class NewsViewHolder extends RecyclerView.ViewHolder {
+    public static class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 
         private ImageView imgNews;
         private TextView txtNewsTitle;
+        private LinearLayout layoutNews;
 
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imgNews = itemView.findViewById(R.id.itemNewsImg);
             txtNewsTitle = itemView.findViewById(R.id.itemNewsTitle);
+            layoutNews = itemView.findViewById(R.id.layoutAdminNews);
+            layoutNews.setOnCreateContextMenuListener(this);
+        }
+
+        //dinh nghia nhung truong hien thi trong menu pop-up
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.setHeaderTitle("Lựa chọn");
+            menu.add(0, 101, getAdapterPosition(), "Cập nhật");
+            menu.add(0, 111, getAdapterPosition(), "Xóa");
         }
     }
 }

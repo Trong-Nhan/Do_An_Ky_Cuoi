@@ -1,8 +1,9 @@
 package com.example.projectfinal.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class News {
+public class News implements Serializable {
     private int id;
     private String name;
     private String description;
@@ -11,6 +12,15 @@ public class News {
     private Date createdDate;
 
     public News() {
+    }
+
+    public News(int id, String name, String description, String detail, String picture, Date createdDate) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.detail = detail;
+        this.picture = picture;
+        this.createdDate = createdDate;
     }
 
     public News(String name, String description, String detail, String picture, Date createdDate) {
