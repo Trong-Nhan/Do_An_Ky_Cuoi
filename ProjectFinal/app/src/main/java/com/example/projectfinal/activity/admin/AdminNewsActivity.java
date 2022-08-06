@@ -2,22 +2,20 @@ package com.example.projectfinal.activity.admin;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectfinal.R;
-import com.example.projectfinal.adapter.NewsAdapter;
-import com.example.projectfinal.adapter.admin.AdminCategoryAdapter;
 import com.example.projectfinal.adapter.admin.AdminNewsAdapter;
-import com.example.projectfinal.api.CategoryAPI;
 import com.example.projectfinal.api.NewsAPI;
-import com.example.projectfinal.entity.Category;
 import com.example.projectfinal.entity.News;
 
 import java.util.ArrayList;
@@ -70,5 +68,40 @@ public class AdminNewsActivity extends AppCompatActivity {
                 Toast.makeText(AdminNewsActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    //khi nhấn giữ một trường bản ghi thì sẽ hiển thị
+    //một menu pop-up lên để chọn sửa hoặc xóa bản ghi ấy
+    //bắt sự kiện khi click lên menu pop-up
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        News n = mLstNews.get(item.getOrder());
+        switch(item.getItemId()){
+            case 101:
+                Intent intent = new Intent(AdminNewsActivity.this, UpdateNewsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("updateNews", n);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                break;
+            case 111:
+                NewsAPI.newsAPI.deleteNews(n.getId()).enqueue(new Callback<News>() {
+                    @Override
+                    public void onResponse(Call<News> call, Response<News> response) {
+                        if (response.isSuccessful()){
+                            Toast.makeText(AdminNewsActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(AdminNewsActivity.this, AdminNewsActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<News> call, Throwable t) {
+                        Toast.makeText(AdminNewsActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 }

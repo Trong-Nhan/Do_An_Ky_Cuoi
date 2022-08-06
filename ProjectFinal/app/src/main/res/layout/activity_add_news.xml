@@ -72,6 +72,15 @@
             android:text="Thêm mới" />
 
         <Button
+            android:id="@+id/btn_update_news"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:text="Cập nhật"
+            android:visibility="gone"/>
+
+        <Button
             android:id="@+id/btn_cancel_news"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -31,6 +31,9 @@ public class AddNewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_news);
 
         Button btnAdd = findViewById(R.id.btn_add_news);
+        Button btnUpdate = findViewById(R.id.btn_update_news);
+        btnAdd.setVisibility(View.VISIBLE);
+        btnUpdate.setVisibility(View.GONE);
         btnAdd.setOnClickListener(listenerAddNews);
     }
 
@@ -48,7 +51,7 @@ public class AddNewsActivity extends AppCompatActivity {
             String nDetail = edtDetail.getText().toString();
             String nPicture = edtPicture.getText().toString();
             String nCreatedDate = edtCreatedDate.getText().toString();
-
+            //chuyen kieu du lieu String sang kieu Date
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             Date strDate = null;
             try {
@@ -57,8 +60,8 @@ public class AddNewsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            News c = new News(nName, nDescription, nDetail, nPicture, strDate);
-            NewsAPI.newsAPI.addNews(c).enqueue(new Callback<News>() {
+            News n = new News(nName, nDescription, nDetail, nPicture, strDate);
+            NewsAPI.newsAPI.addNews(n).enqueue(new Callback<News>() {
                 @Override
                 public void onResponse(Call<News> call, Response<News> response) {
                     if (response.isSuccessful()) {
