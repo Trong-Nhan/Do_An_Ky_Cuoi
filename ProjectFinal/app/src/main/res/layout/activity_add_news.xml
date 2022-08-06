@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp"
     android:orientation="vertical"
-    tools:context=".activity.admin.AddCategoryActivity">
+    tools:context=".activity.admin.AddNewsActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -55,6 +55,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:hint="Ngay tao tin tuc"
+        android:onClick="openDatePicker"
+        android:focusableInTouchMode="false"
+        android:focusable="false"
         android:inputType="textCapWords" />
 
     <LinearLayout

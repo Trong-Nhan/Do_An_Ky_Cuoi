@@ -53,4 +53,5 @@ public class AddCategoryActivity extends AppCompatActivity {
             });
         }
     };
+
 }

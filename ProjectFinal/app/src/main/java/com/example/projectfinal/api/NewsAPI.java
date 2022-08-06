@@ -21,7 +21,9 @@ import retrofit2.http.Query;
 public interface NewsAPI {
     //Link API: http://localhost:8080/SolarBookAPI/solar_book/news/getnews
 
-    Gson gson = new GsonBuilder().setLenient().create();
+    Gson gson = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd")
+            .create();
     NewsAPI newsAPI = new Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080/SolarBookAPI/solar_book/")
             .addConverterFactory(GsonConverterFactory.create(gson))
