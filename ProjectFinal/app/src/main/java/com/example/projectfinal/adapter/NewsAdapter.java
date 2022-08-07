@@ -1,16 +1,22 @@
 package com.example.projectfinal.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectfinal.R;
+import com.example.projectfinal.activity.BookDetailActivity;
+import com.example.projectfinal.activity.NewsDetailActivity;
+import com.example.projectfinal.entity.Book;
 import com.example.projectfinal.entity.News;
 
 import java.util.List;
@@ -42,6 +48,22 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         }
         holder.imgNews.setImageResource(getImageId(mCtx, n.getPicture()));
         holder.txtNewsTitle.setText(n.getDescription());
+        //khi ấn vào tin tức
+        holder.layoutDetailNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickGoToDetailNews(n);
+            }
+        });
+    }
+
+    //kịch bản khi nhấn vào một tin tức
+    private void onClickGoToDetailNews(News n) {
+        Intent intent = new Intent(mCtx, NewsDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("object_news", n);
+        intent.putExtras(bundle);
+        mCtx.startActivity(intent);
     }
 
     private int getImageId(Context context, String imageName) {
@@ -64,12 +86,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
         private ImageView imgNews;
         private TextView txtNewsTitle;
+        private LinearLayout layoutDetailNews;
 
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imgNews = itemView.findViewById(R.id.itemNewsImg);
             txtNewsTitle = itemView.findViewById(R.id.itemNewsTitle);
+            layoutDetailNews = itemView.findViewById(R.id.layout_detail_news);
         }
     }
 }
