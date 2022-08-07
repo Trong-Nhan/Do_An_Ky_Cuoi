@@ -34,7 +34,7 @@ public interface CategoryAPI {
     Call<Category> updateCategory(@Body Category category);
 
     @POST("category/deletecategory/{id}")
-    Call<Category> deleteCategory(@Path("id") int id);
+    Call<Void> deleteCategory(@Path("id") int id);
 
     @GET("category/detailCategory/{id}")
     Call<Category> detailCategory(@Path("id") int id);

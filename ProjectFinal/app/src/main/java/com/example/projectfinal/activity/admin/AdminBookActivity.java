@@ -91,17 +91,17 @@ public class AdminBookActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.menuDelete:
-                BookAPI.bookAPI.deleteBook(idBook).enqueue(new Callback<Book>() {
+                BookAPI.bookAPI.deleteBook(idBook).enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Book> call, Response<Book> response) {
+                    public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {
                             Toast.makeText(AdminBookActivity.this, "Xóa thành công!", Toast.LENGTH_SHORT).show();
-                            onResume();
+                            //getList();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Book> call, Throwable t) {
+                    public void onFailure(Call<Void> call, Throwable t) {
                         Toast.makeText(AdminBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -110,8 +110,9 @@ public class AdminBookActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-//        getList();
-        super.onResume();
+    public void onBackPressed() {
+        Intent intent = new Intent(AdminBookActivity.this, AdminActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }

@@ -63,10 +63,10 @@ public class ImplCategoryDAO implements ICategoryDAO {
     @Override
     public void delete(int id) {
         try {
+            Category b = getById(id);
             session = HibernateUtil.getSessionFactory().openSession();
-            Category c = getById(id);
             session.getTransaction().begin();
-            session.delete(c);
+            session.delete(b);
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {

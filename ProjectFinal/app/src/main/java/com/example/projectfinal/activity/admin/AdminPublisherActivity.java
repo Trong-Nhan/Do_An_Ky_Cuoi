@@ -91,17 +91,17 @@ public class AdminPublisherActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.menuDelete:
-                PublisherAPI.publisherAPI.deletePublisher(idPublisher).enqueue(new Callback<Publisher>() {
+                PublisherAPI.publisherAPI.deletePublisher(idPublisher).enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Publisher> call, Response<Publisher> response) {
+                    public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {
                             Toast.makeText(AdminPublisherActivity.this, "Xóa thành công!", Toast.LENGTH_SHORT).show();
-                            onResume();
+                            getList();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Publisher> call, Throwable t) {
+                    public void onFailure(Call<Void> call, Throwable t) {
                         Toast.makeText(AdminPublisherActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -110,8 +110,9 @@ public class AdminPublisherActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        getList();
-        super.onResume();
+    public void onBackPressed() {
+        Intent intent = new Intent(AdminPublisherActivity.this, AdminActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }

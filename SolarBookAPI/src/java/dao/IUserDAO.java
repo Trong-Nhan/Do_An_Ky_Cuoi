@@ -16,4 +16,7 @@ public interface IUserDAO {
     public List<User> getUser();
     public User findById(int userId);
     public User findByEmail(String email);
+    public void insert(User u);
+    public void update(User u);
+    public void delete(int userId);
 }

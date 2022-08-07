@@ -35,7 +35,7 @@ public interface PublisherAPI {
     Call<Publisher> updatePublisher(@Body Publisher publisher);
 
     @POST("publisher/deletepublisher/{id}")
-    Call<Publisher> deletePublisher(@Path("id") int id );
+    Call<Void> deletePublisher(@Path("id") int id );
 
     @GET("publisher/detailpublisher/{id}")
     Call<Publisher> detailPublisher(@Path("id") int id);
