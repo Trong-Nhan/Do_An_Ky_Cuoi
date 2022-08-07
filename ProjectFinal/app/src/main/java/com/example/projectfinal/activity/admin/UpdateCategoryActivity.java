@@ -28,19 +28,24 @@ public class UpdateCategoryActivity extends AppCompatActivity {
 
         Button btnUpdate = findViewById(R.id.btn_update_category);
         btnUpdate.setOnClickListener(listenerUpdateCategory);
+        //Ẩn nút
         Button btnAdd = findViewById(R.id.btn_add_category);
         btnAdd.setVisibility(View.GONE);
+        //lấy object được truyền từ AdminCategoryActivity
+        Bundle bundle = getIntent().getExtras();
+        category = (Category) bundle.get("idCategory");
+        //load dữ liệu
+        EditText editText = findViewById(R.id.edit_category_name);
+        editText.setText(category.getName());
     }
 
     private View.OnClickListener listenerUpdateCategory = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             EditText edtName = findViewById(R.id.edit_category_name);
-            int idCategory = getIntent().getExtras().getInt("idCategory");
-
             String cName = edtName.getText().toString();
 
-            Category c = new Category(idCategory, cName);
+            Category c = new Category(category.getId(), cName);
             CategoryAPI.categoryAPI.updateCategory(c).enqueue(new Callback<Category>() {
                 @Override
                 public void onResponse(Call<Category> call, Response<Category> response) {

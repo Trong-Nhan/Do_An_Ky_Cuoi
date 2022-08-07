@@ -26,6 +26,7 @@ public class AddPublisherActivity extends AppCompatActivity {
 
         Button btnAdd = findViewById(R.id.btn_add_publisher);
         btnAdd.setOnClickListener(listenerAddPublisher);
+        //Ẩn nút
         Button btnUpdate = findViewById(R.id.btn_update_publisher);
         btnUpdate.setVisibility(View.GONE);
     }
@@ -34,7 +35,6 @@ public class AddPublisherActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             EditText edtName = findViewById(R.id.edit_publisher_name);
-
             String cName = edtName.getText().toString();
 
             Publisher c = new Publisher(cName);

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectfinal.R;
 import com.example.projectfinal.api.PublisherAPI;
+import com.example.projectfinal.entity.Category;
 import com.example.projectfinal.entity.Publisher;
 
 import android.content.Intent;
@@ -28,19 +29,24 @@ public class UpdatePublisherActivity extends AppCompatActivity {
 
         Button btnUpdate = findViewById(R.id.btn_update_publisher);
         btnUpdate.setOnClickListener(listenerUpdatePublisher);
+        //Ẩn nút
         Button btnAdd = findViewById(R.id.btn_add_publisher);
         btnAdd.setVisibility(View.GONE);
+        //lấy object được truyền từ AdminPublisherActivity
+        Bundle bundle = getIntent().getExtras();
+        publisher = (Publisher) bundle.get("idPublisher");
+        //load du lieu
+        EditText editText = findViewById(R.id.edit_publisher_name);
+        editText.setText(publisher.getName());
     }
 
     private View.OnClickListener listenerUpdatePublisher = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             EditText edtName = findViewById(R.id.edit_publisher_name);
-            int idPublisher = getIntent().getExtras().getInt("idPublisher");
-
             String cName = edtName.getText().toString();
 
-            Publisher p = new Publisher(idPublisher, cName);
+            Publisher p = new Publisher(publisher.getId(), cName);
             PublisherAPI.publisherAPI.updatePublisher(p).enqueue(new Callback<Publisher>() {
                 @Override
                 public void onResponse(Call<Publisher> call, Response<Publisher> response) {

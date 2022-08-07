@@ -80,18 +80,19 @@ public class AdminPublisherActivity extends AppCompatActivity {
     //
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int idPublisher = mLstPublisher.get(info.position).getId();
+        //Lấy vị trí object đc chọn
+        Publisher idPublisher = mLstPublisher.get(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position);
 
-        switch (id) {
+        switch (item.getItemId()) {
             case R.id.menuUpdate:
+                //chuyển activity
                 Intent intent = new Intent(AdminPublisherActivity.this, UpdatePublisherActivity.class);
+                //truyền object
                 intent.putExtra("idPublisher", idPublisher);
                 startActivity(intent);
                 break;
             case R.id.menuDelete:
-                PublisherAPI.publisherAPI.deletePublisher(idPublisher).enqueue(new Callback<Void>() {
+                PublisherAPI.publisherAPI.deletePublisher(idPublisher.getId()).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {

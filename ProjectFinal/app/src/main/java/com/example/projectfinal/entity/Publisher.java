@@ -1,6 +1,8 @@
 package com.example.projectfinal.entity;
 
-public class Publisher {
+import java.io.Serializable;
+
+public class Publisher implements Serializable {
     private int id;
     private String name;
 

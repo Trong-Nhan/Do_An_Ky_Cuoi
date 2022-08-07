@@ -24,17 +24,17 @@ public class AddCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_category);
 
-        Button btnUpdate = findViewById(R.id.btn_update_category);
-        btnUpdate.setVisibility(View.GONE);
         Button btnAdd = findViewById(R.id.btn_add_category);
         btnAdd.setOnClickListener(listenerAddCategory);
+        //Ẩn nút
+        Button btnUpdate = findViewById(R.id.btn_update_category);
+        btnUpdate.setVisibility(View.GONE);
     }
 
     private View.OnClickListener listenerAddCategory = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             EditText edtName = findViewById(R.id.edit_category_name);
-
             String cName = edtName.getText().toString();
 
             Category c = new Category(cName);

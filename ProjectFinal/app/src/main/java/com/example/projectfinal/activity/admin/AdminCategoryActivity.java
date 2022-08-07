@@ -80,18 +80,19 @@ public class AdminCategoryActivity extends AppCompatActivity {
     //
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int idCategory = mLstCategory.get(info.position).getId();
+        //Lấy vị trí object đc chọn
+        Category idCategory = mLstCategory.get(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position);
 
-        switch (id) {
+        switch (item.getItemId()) {
             case R.id.menuUpdate:
+                //chuyển activity
                 Intent intent = new Intent(AdminCategoryActivity.this, UpdateCategoryActivity.class);
+                //truyền object
                 intent.putExtra("idCategory", idCategory);
                 startActivity(intent);
                 break;
             case R.id.menuDelete:
-                CategoryAPI.categoryAPI.deleteCategory(idCategory).enqueue(new Callback<Void>() {
+                CategoryAPI.categoryAPI.deleteCategory(idCategory.getId()).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {
