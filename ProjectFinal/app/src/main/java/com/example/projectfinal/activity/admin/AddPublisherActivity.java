@@ -26,6 +26,8 @@ public class AddPublisherActivity extends AppCompatActivity {
 
         Button btnAdd = findViewById(R.id.btn_add_publisher);
         btnAdd.setOnClickListener(listenerAddPublisher);
+        Button btnUpdate = findViewById(R.id.btn_update_publisher);
+        btnUpdate.setVisibility(View.GONE);
     }
 
     private View.OnClickListener listenerAddPublisher = new View.OnClickListener() {

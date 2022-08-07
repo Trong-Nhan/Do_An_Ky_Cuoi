@@ -35,15 +35,16 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:text="Cập nhật" />
+            android:text="Thêm Mới"
+            android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btn_cancel_publisher"
+            android:id="@+id/btn_update_publisher"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:backgroundTint="@android:color/holo_red_dark"
-            android:text="Hủy bỏ" />
+            android:text="Cập Nhật"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>

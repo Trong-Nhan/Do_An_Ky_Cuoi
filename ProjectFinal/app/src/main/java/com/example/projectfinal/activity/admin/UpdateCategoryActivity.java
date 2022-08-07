@@ -26,9 +26,10 @@ public class UpdateCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_category);
 
-
+        Button btnUpdate = findViewById(R.id.btn_update_category);
+        btnUpdate.setOnClickListener(listenerUpdateCategory);
         Button btnAdd = findViewById(R.id.btn_add_category);
-        btnAdd.setOnClickListener(listenerUpdateCategory);
+        btnAdd.setVisibility(View.GONE);
     }
 
     private View.OnClickListener listenerUpdateCategory = new View.OnClickListener() {

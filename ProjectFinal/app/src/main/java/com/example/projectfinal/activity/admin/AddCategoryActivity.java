@@ -24,6 +24,8 @@ public class AddCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_category);
 
+        Button btnUpdate = findViewById(R.id.btn_update_category);
+        btnUpdate.setVisibility(View.GONE);
         Button btnAdd = findViewById(R.id.btn_add_category);
         btnAdd.setOnClickListener(listenerAddCategory);
     }

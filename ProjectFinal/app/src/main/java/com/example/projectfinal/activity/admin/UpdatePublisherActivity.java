@@ -26,8 +26,10 @@ public class UpdatePublisherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_publisher);
 
+        Button btnUpdate = findViewById(R.id.btn_update_publisher);
+        btnUpdate.setOnClickListener(listenerUpdatePublisher);
         Button btnAdd = findViewById(R.id.btn_add_publisher);
-        btnAdd.setOnClickListener(listenerUpdatePublisher);
+        btnAdd.setVisibility(View.GONE);
     }
 
     private View.OnClickListener listenerUpdatePublisher = new View.OnClickListener() {
