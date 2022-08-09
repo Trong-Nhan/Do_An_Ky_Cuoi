@@ -18,6 +18,7 @@ import com.example.projectfinal.api.UserAPI;
 import com.example.projectfinal.entity.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private String mUserName;
     private String mUserId;
     private SharedPreferences sharedPreferences;
+    private User mUser;
+    private String mKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         mNavigationView = findViewById(R.id.bottomNav);
         mViewPager = findViewById(R.id.viewPager);
-
+        Bundle bundle = getIntent().getExtras();
         setUpViewPager();
         mNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -65,28 +68,16 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
         //lấy tên và id người dùng
 
-        if (sharedPreferences.getString("UserEmail", null) != null) {
-            String uEmail = sharedPreferences.getString("UserEmail", null);
-            UserAPI.userApi.getUserByEmail(uEmail).enqueue(new Callback<User>() {
-                @Override
-                public void onResponse(Call<User> call, Response<User> response) {
-                    if (response.isSuccessful()) {
-                        User u = response.body();
-                        mUserName = u.getName();
-                        mUserId = String.valueOf(u.getId());
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<User> call, Throwable t) {
-                    Toast.makeText(MainActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else if (getIntent().getExtras().get("userName") != null && getIntent().getExtras().get("userId") != null) {
-            mUserName = getIntent().getExtras().get("userName").toString();
-            mUserId = getIntent().getExtras().get("userId").toString();
-        } else if (getIntent().getExtras().get("adminName") != null) {
-            mUserName = getIntent().getExtras().get("adminName").toString();
+        if (sharedPreferences.contains("uInfo")) {
+            Gson gson = new Gson();
+            String uJson = sharedPreferences.getString("uInfo", null);
+            mUser = gson.fromJson(uJson, User.class);
+        } else{
+            if(bundle.containsKey("userInfo")){
+                mUser = (User) bundle.get("userInfo");
+            }else{
+                mUser = (User) bundle.get("adInfo");
+            }
         }
 
 
@@ -134,11 +125,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public String getmUserName() {
-        return mUserName;
+    public User getmUser() {
+        return mUser;
     }
 
-    public String getmUserId() {
-        return mUserId;
-    }
 }

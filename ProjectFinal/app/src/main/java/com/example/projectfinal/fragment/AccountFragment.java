@@ -20,26 +20,26 @@ import com.example.projectfinal.activity.LoginActivity;
 import com.example.projectfinal.activity.MainActivity;
 import com.example.projectfinal.R;
 import com.example.projectfinal.activity.admin.AdminActivity;
+import com.example.projectfinal.entity.User;
 
 public class AccountFragment extends Fragment {
     private MainActivity mMainActivity;
     private SharedPreferences sharedPreferences;
     private TextView mTxtUserName;
     private TextView mTxtUserId;
+    private User mUser;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         sharedPreferences = getContext().getSharedPreferences("UserInfo", MODE_PRIVATE);
         mMainActivity = (MainActivity) getActivity();
+        mUser = mMainActivity.getmUser();
 
         mTxtUserName = view.findViewById(R.id.txtUserName);
         mTxtUserId = view.findViewById(R.id.txtUserId);
 
-        mTxtUserName.setText(mMainActivity.getmUserName());
-        if(mMainActivity.getmUserId() != null){
-            mTxtUserId.setText(mMainActivity.getmUserId());
-        }
+        mTxtUserName.setText(mUser.getName());
 
 
         Button btnUserDetail = view.findViewById(R.id.btnUserDetail);
@@ -48,16 +48,12 @@ public class AccountFragment extends Fragment {
         Button btnLogout = view.findViewById(R.id.btnLogout);
 
         //nếu được chuyển từ AdminActivity qua
-        /*
-        if(getActivity().getIntent().getExtras().get("adminName") != null){
-
+        if(mUser.getRole().equals("admin")){
             btnUserDetail.setVisibility(View.GONE);
             btnHistoryOder.setVisibility(View.GONE);
             btnToAdmin.setVisibility(View.VISIBLE);
-        }else{
-
         }
-        */
+
 
 
         btnLogout.setOnClickListener(listenerLogout);
@@ -90,7 +86,9 @@ public class AccountFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getActivity(), AdminActivity.class);
-            intent.putExtra("adminPageName", mTxtUserName.getText().toString());
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("userInfo", mUser);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     };

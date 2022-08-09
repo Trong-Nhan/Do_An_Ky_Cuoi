@@ -18,12 +18,14 @@
         android:textStyle="bold"/>
 
     <EditText
+        android:id="@+id/edtConfirmEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nhập email của bạn"
         android:layout_marginTop="10dp"/>
 
     <Button
+        android:id="@+id/btnConfirmEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Tiếp tục"
