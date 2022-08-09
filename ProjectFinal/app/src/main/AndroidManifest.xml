@@ -4,6 +4,7 @@
     package="com.example.projectfinal">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -19,6 +20,9 @@
             android:exported="false" />
         <activity
             android:name=".activity.ConfirmEmailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.AddBookActivity"
             android:exported="false" />
         <activity
             android:name=".activity.admin.AdminUpdateAccountActivity"
