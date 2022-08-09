@@ -9,7 +9,10 @@
             <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplNewsDAO.java</file>
         </group>
         <group>
-            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplNewsDAO.java</file>
+            <file>file:/E:/Study/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/UserService.java</file>
+            <file>file:/E:/Study/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/NewsDAO.java</file>
+            <file>file:/E:/Study/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/entity/News.java</file>
+            <file>file:/E:/Study/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/NewsService.java</file>
         </group>
     </open-files>
 </project-private>
