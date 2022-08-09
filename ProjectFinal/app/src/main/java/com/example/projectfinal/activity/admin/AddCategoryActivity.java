@@ -55,4 +55,11 @@ public class AddCategoryActivity extends AppCompatActivity {
             });
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddCategoryActivity.this, AdminCategoryActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.projectfinal.adapter.admin;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import com.example.projectfinal.entity.Book;
 import com.example.projectfinal.entity.Category;
 import com.example.projectfinal.entity.Publisher;
 
+import java.io.File;
 import java.util.List;
 
 import retrofit2.Call;
@@ -53,12 +56,14 @@ public class AdminBookAdapter extends ArrayAdapter<Book> {
         TextView txtSale = item.findViewById(R.id.sale_price);
         TextView txtNumber = item.findViewById(R.id.book_number);
 
+        File imgFile = new File(c.getPicture());
+        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        imgBook.setImageBitmap(myBitmap);
 
-        imgBook.setImageResource(c.getPicture());
         txtName.setText(c.getName());
         txtAuthor.setText(c.getName());
-        txtPrice.setText(c.getPrice());
-        txtSale.setText(c.getSalePrice());
+        txtPrice.setText(c.getPrice().toString());
+        txtSale.setText(c.getSalePrice().toString());
         txtNumber.setText(c.getNumber());
         return item;
     }

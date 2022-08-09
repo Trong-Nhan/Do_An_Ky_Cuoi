@@ -6,12 +6,12 @@ public class Book implements Serializable {
     private int id;
     private String name;
     private int categoryId;
-    private String price;
-    private String salePrice;
+    private Float price;
+    private Float salePrice;
     private String author;
     private int publisherId;
     private int publishYear;
-    private int picture;
+    private String picture;
     private int number;
     private String description;
     private int page;
@@ -21,8 +21,24 @@ public class Book implements Serializable {
     public Book() {
     }
 
-    public Book(int id, String name, int categoryId, String price, String salePrice, String author, int publisherId, int publishYear, int picture, int number, String description, int page, float rating, boolean status) {
+    public Book(int id, String name, int categoryId, Float price, Float salePrice, String author, int publisherId, int publishYear, String picture, int number, String description, int page, float rating, boolean status) {
         this.id = id;
+        this.name = name;
+        this.categoryId = categoryId;
+        this.price = price;
+        this.salePrice = salePrice;
+        this.author = author;
+        this.publisherId = publisherId;
+        this.publishYear = publishYear;
+        this.picture = picture;
+        this.number = number;
+        this.description = description;
+        this.page = page;
+        this.rating = rating;
+        this.status = status;
+    }
+
+    public Book(String name, int categoryId, Float price, Float salePrice, String author, int publisherId, int publishYear, String picture, int number, String description, int page, float rating, boolean status) {
         this.name = name;
         this.categoryId = categoryId;
         this.price = price;
@@ -62,19 +78,19 @@ public class Book implements Serializable {
         this.categoryId = categoryId;
     }
 
-    public String getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
-    public String getSalePrice() {
+    public Float getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(String salePrice) {
+    public void setSalePrice(Float salePrice) {
         this.salePrice = salePrice;
     }
 
@@ -102,11 +118,11 @@ public class Book implements Serializable {
         this.publishYear = publishYear;
     }
 
-    public int getPicture() {
+    public String getPicture() {
         return picture;
     }
 
-    public void setPicture(int picture) {
+    public void setPicture(String picture) {
         this.picture = picture;
     }
 

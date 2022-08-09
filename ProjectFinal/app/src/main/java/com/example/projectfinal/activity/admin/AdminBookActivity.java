@@ -50,7 +50,7 @@ public class AdminBookActivity extends AppCompatActivity {
         });
     }
 
-    //Lay du lieu Category qua API
+    //Lay du lieu Book qua API
     private void getList() {
         BookAPI.bookAPI.getBook().enqueue(new Callback<List<Book>>() {
             @Override

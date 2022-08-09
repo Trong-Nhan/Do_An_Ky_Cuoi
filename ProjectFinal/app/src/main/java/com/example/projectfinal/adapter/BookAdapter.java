@@ -2,6 +2,8 @@ package com.example.projectfinal.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.example.projectfinal.activity.BookDetailActivity;
 import com.example.projectfinal.entity.Book;
 
 
+import java.io.File;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
@@ -46,12 +49,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         if (b == null) {
             return;
         }
-        holder.bookImg.setImageResource(b.getPicture());
+        //Hien thi anh
+        File imgFile = new File(b.getPicture());
+        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        holder.bookImg.setImageBitmap(myBitmap);
+
         holder.bookName.setText(b.getName());
         holder.bookAuthor.setText(b.getAuthor());
-        holder.price.setText(b.getPrice());
-        holder.salePrice.setText(b.getSalePrice());
+        holder.price.setText(b.getPrice().toString());
+        holder.salePrice.setText(b.getSalePrice().toString());
         holder.ratingBar.setRating(b.getRating());
+        //khi ấn vào hình quyển sách
         holder.layoutDetailBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +68,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         });
     }
 
+    //kịch bản khi nhấn vào hình quyển sách
     private void onClickGoToDetailBook(Book b) {
         Intent intent = new Intent(mCtx, BookDetailActivity.class);
         Bundle bundle = new Bundle();
