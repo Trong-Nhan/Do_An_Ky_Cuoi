@@ -25,7 +25,9 @@ public class ImplNewsDAO implements NewsDAO {
     public List<News> getAll() {
         session = HibernateUtil.getSessionFactory().openSession();
         Query q = session.createQuery("from News");
-        return q.list();
+        List<News> data = q.list();
+        session.close();
+        return data;
     }
 
     @Override
@@ -34,20 +36,24 @@ public class ImplNewsDAO implements NewsDAO {
         session.getTransaction().begin();
         session.save(b);
         session.getTransaction().commit();
+        session.close();
     }
 
     public News getById(int id) {
         session = HibernateUtil.getSessionFactory().openSession();
-        return (News) session.get(News.class, id);
+        News n = (News) session.get(News.class, id);
+        session.close();
+        return n;
     }
 
     @Override
     public void delete(int id) {
-        session = HibernateUtil.getSessionFactory().openSession();
         News b = getById(id);
+        session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
         session.delete(b);
         session.getTransaction().commit();
+        session.close();
     }
 
     @Override
@@ -56,6 +62,7 @@ public class ImplNewsDAO implements NewsDAO {
         session.getTransaction().begin();
         session.update(b);
         session.getTransaction().commit();
+        session.close();
     }
 
 }
