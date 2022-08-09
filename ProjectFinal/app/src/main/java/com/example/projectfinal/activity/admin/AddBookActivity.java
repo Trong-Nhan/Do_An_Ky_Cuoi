@@ -6,6 +6,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.projectfinal.R;
 import com.example.projectfinal.RealPathUtil;
 import com.example.projectfinal.activity.MainActivity;
@@ -35,7 +36,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +76,7 @@ public class AddBookActivity extends AppCompatActivity {
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                             imgView.setImageBitmap(bitmap);
-//                            imageName.setText(getNameImg());
+                            imageName.setText(getNameImg());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -115,6 +118,7 @@ public class AddBookActivity extends AppCompatActivity {
         btnUpdate.setVisibility(View.GONE);
         spinCategory = findViewById(R.id.spin_category);
         spinPublisher = findViewById(R.id.spin_publisher);
+        imageName = findViewById(R.id.image_name);
         getListCategory();
         getListPublisher();
     }
@@ -191,7 +195,14 @@ public class AddBookActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        mActivityResultLauncher.launch(Intent.createChooser(intent, "Select Image"));
+        mActivityResultLauncher.launch(Intent.createChooser(intent, "Chọn Ảnh"));
+    }
+
+    //Lay ten file anh
+    private String getNameImg() {
+        String realPathUtil = RealPathUtil.getRealPath(this, mUri);
+        File file = new File(realPathUtil);
+        return file.getName();
     }
 
     private View.OnClickListener listenerAddBook = new View.OnClickListener() {
