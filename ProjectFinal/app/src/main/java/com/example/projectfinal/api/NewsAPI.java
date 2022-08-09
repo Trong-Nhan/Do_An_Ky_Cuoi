@@ -38,9 +38,11 @@ public interface NewsAPI {
     @PUT("news/updatenews")
     Call<News> updateNews(@Body News news);
 
+    //truyền id vào link post thì mới xóa được, sử dụng @Path chứ không dùng @Query
     @POST("news/deletenews/{id}")
     Call<News> deleteNews(@Path("id") int id);
 
-    @GET("news/detailnews")
-    Call<News> detailNews(@Query("id") int id);
+    //hiển thị chi tiết tin tức
+    @GET("news/detailnews/{id}")
+    Call<News> detailNews(@Path("id") int id);
 }

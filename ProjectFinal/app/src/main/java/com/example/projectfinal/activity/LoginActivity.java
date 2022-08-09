@@ -99,6 +99,9 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        TextView txtResetPassword = findViewById(R.id.formResetPassword);
+        txtResetPassword.setOnClickListener(listenerResetPassword);
     }
 
     private void login() {
@@ -187,5 +190,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
+    private View.OnClickListener listenerResetPassword = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(LoginActivity.this, ConfirmEmailActivity.class);
+            startActivity(intent);
+        }
+    };
 }

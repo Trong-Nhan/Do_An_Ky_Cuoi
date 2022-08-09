@@ -15,6 +15,9 @@
         android:theme="@style/Theme.SolarBook"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.ConfirmEmailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.admin.AdminUpdateAccountActivity"
             android:exported="false" />
         <activity
@@ -46,6 +49,9 @@
             android:exported="false" />
         <activity
             android:name=".activity.admin.AdminAccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.NewsDetailActivity"
             android:exported="false" />
         <activity
             android:name=".activity.RegisterActivity"

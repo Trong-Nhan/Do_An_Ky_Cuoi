@@ -52,6 +52,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.price.setText(b.getPrice());
         holder.salePrice.setText(b.getSalePrice());
         holder.ratingBar.setRating(b.getRating());
+        //khi ấn vào hình quyển sách
         holder.layoutDetailBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +61,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         });
     }
 
+    //kịch bản khi nhấn vào hình quyển sách
     private void onClickGoToDetailBook(Book b) {
         Intent intent = new Intent(mCtx, BookDetailActivity.class);
         Bundle bundle = new Bundle();
