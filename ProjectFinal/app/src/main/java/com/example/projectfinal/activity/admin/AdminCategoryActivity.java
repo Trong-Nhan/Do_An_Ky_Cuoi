@@ -1,25 +1,22 @@
 package com.example.projectfinal.activity.admin;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projectfinal.R;
-import com.example.projectfinal.activity.LoginActivity;
-import com.example.projectfinal.activity.RegisterActivity;
 import com.example.projectfinal.adapter.admin.AdminCategoryAdapter;
 import com.example.projectfinal.api.CategoryAPI;
-import com.example.projectfinal.api.UserAPI;
 import com.example.projectfinal.entity.Category;
-import com.example.projectfinal.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +28,7 @@ import retrofit2.Response;
 public class AdminCategoryActivity extends AppCompatActivity {
     private List<Category> mLstCategory = new ArrayList<>();
     private AdminCategoryAdapter mAdminCategoryAdapter;
-    RecyclerView recyclerViewCategory;
+    ListView listviewCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +36,9 @@ public class AdminCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_category);
 
         getList();
-        recyclerViewCategory = findViewById(R.id.rcvAdminCategory);
-        //set dữ liệu lên recycler view
-        recyclerViewCategory.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewCategory.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        listviewCategory = findViewById(R.id.listviewCategory);
+        // Cài đặt context menu cho ListView
+        registerForContextMenu(listviewCategory);
         //chuyen sang form them moi
         TextView txtAdd = findViewById(R.id.add_category);
         txtAdd.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +58,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     mLstCategory = response.body();
                     mAdminCategoryAdapter = new AdminCategoryAdapter(AdminCategoryActivity.this, mLstCategory);
-                    recyclerViewCategory.setAdapter(mAdminCategoryAdapter);
+                    listviewCategory.setAdapter(mAdminCategoryAdapter);
                 }
             }
 
@@ -71,5 +67,53 @@ public class AdminCategoryActivity extends AppCompatActivity {
                 Toast.makeText(AdminCategoryActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    //Tạo view sub menu
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        getMenuInflater().inflate(R.menu.sub_menu, menu);
+        menu.setHeaderTitle("Lựa chọn: ");
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    //
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        //Lấy vị trí object đc chọn
+        Category idCategory = mLstCategory.get(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position);
+
+        switch (item.getItemId()) {
+            case R.id.menuUpdate:
+                //chuyển activity
+                Intent intent = new Intent(AdminCategoryActivity.this, UpdateCategoryActivity.class);
+                //truyền object
+                intent.putExtra("idCategory", idCategory);
+                startActivity(intent);
+                break;
+            case R.id.menuDelete:
+                CategoryAPI.categoryAPI.deleteCategory(idCategory.getId()).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(AdminCategoryActivity.this, "Xóa thành công!", Toast.LENGTH_SHORT).show();
+                            getList();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(AdminCategoryActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AdminCategoryActivity.this, AdminActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }
