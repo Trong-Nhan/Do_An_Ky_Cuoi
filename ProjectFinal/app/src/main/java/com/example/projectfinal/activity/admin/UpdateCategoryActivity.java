@@ -17,40 +17,48 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddCategoryActivity extends AppCompatActivity {
+public class UpdateCategoryActivity extends AppCompatActivity {
+
+    private Category category = new Category();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_category);
+        setContentView(R.layout.activity_update_category);
 
-        Button btnAdd = findViewById(R.id.btn_add_category);
-        btnAdd.setOnClickListener(listenerAddCategory);
-        //Ẩn nút
         Button btnUpdate = findViewById(R.id.btn_update_category);
-        btnUpdate.setVisibility(View.GONE);
+        btnUpdate.setOnClickListener(listenerUpdateCategory);
+        //Ẩn nút
+        Button btnAdd = findViewById(R.id.btn_add_category);
+        btnAdd.setVisibility(View.GONE);
+        //lấy object được truyền từ AdminCategoryActivity
+        Bundle bundle = getIntent().getExtras();
+        category = (Category) bundle.get("idCategory");
+        //load dữ liệu
+        EditText editText = findViewById(R.id.edit_category_name);
+        editText.setText(category.getName());
     }
 
-    private View.OnClickListener listenerAddCategory = new View.OnClickListener() {
+    private View.OnClickListener listenerUpdateCategory = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             EditText edtName = findViewById(R.id.edit_category_name);
             String cName = edtName.getText().toString();
 
-            Category c = new Category(cName);
-            CategoryAPI.categoryAPI.addCategory(c).enqueue(new Callback<Category>() {
+            Category c = new Category(category.getId(), cName);
+            CategoryAPI.categoryAPI.updateCategory(c).enqueue(new Callback<Category>() {
                 @Override
                 public void onResponse(Call<Category> call, Response<Category> response) {
                     if (response.isSuccessful()) {
-                        Toast.makeText(AddCategoryActivity.this, "Thêm mới thành công", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(AddCategoryActivity.this, AdminCategoryActivity.class);
+                        Toast.makeText(UpdateCategoryActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(UpdateCategoryActivity.this, AdminCategoryActivity.class);
                         startActivity(intent);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Category> call, Throwable throwable) {
-                    Toast.makeText(AddCategoryActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdateCategoryActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -58,7 +66,7 @@ public class AddCategoryActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(AddCategoryActivity.this, AdminCategoryActivity.class);
+        Intent intent = new Intent(UpdateCategoryActivity.this, AdminCategoryActivity.class);
         startActivity(intent);
         super.onBackPressed();
     }
