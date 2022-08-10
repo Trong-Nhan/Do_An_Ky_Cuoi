@@ -28,7 +28,7 @@ import retrofit2.Response;
 public class AdminPublisherActivity extends AppCompatActivity {
     private List<Publisher> mLstPublisher = new ArrayList<>();
     private AdminPublisherAdapter mAdminPublisherAdapter;
-    ListView listviewPublisher;
+    ListView listViewPublisher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +36,9 @@ public class AdminPublisherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_publisher);
 
         getList();
-        listviewPublisher = findViewById(R.id.listviewPublisher);
+        listViewPublisher = findViewById(R.id.list_view_publisher);
         // Cài đặt context menu cho ListView
-        registerForContextMenu(listviewPublisher);
+        registerForContextMenu(listViewPublisher);
         //chuyen sang form them moi
         TextView txtAdd = findViewById(R.id.add_publisher);
         txtAdd.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +58,7 @@ public class AdminPublisherActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     mLstPublisher = response.body();
                     mAdminPublisherAdapter = new AdminPublisherAdapter(AdminPublisherActivity.this, mLstPublisher);
-                    listviewPublisher.setAdapter(mAdminPublisherAdapter);
+                    listViewPublisher.setAdapter(mAdminPublisherAdapter);
                 }
             }
 

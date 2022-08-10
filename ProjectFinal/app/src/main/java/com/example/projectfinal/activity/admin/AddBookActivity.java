@@ -59,6 +59,129 @@ public class AddBookActivity extends AppCompatActivity {
     private Uri mUri;
     private TextView imageName;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_book);
+
+        initUi();
+
+        //Nhấn nút chọn ảnh trong gallery
+        btnSelectImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickRepestPermisson();
+            }
+        });
+        btnAdd.setOnClickListener(listenerAddBook);
+    }
+
+    //khai báo các thành phần có trong View
+    private void initUi() {
+        bookName = findViewById(R.id.edit_book_name);
+        author = findViewById(R.id.edit_author_name);
+        price = findViewById(R.id.edit_book_price);
+        salePrice = findViewById(R.id.edit_book_sale);
+        publisherYear = findViewById(R.id.edit_publisher_year);
+        page = findViewById(R.id.edit_page);
+        number = findViewById(R.id.edit_number);
+        imgView = findViewById(R.id.img_from_gallery);
+        btnSelectImg = findViewById(R.id.btn_select_img);
+        btnAdd = findViewById(R.id.btn_add_book);
+        btnUpdate = findViewById(R.id.btn_update_book);
+        description = findViewById(R.id.edit_description);
+        btnUpdate.setVisibility(View.GONE);
+        spinCategory = findViewById(R.id.spin_category);
+        spinPublisher = findViewById(R.id.spin_publisher);
+        imageName = findViewById(R.id.image_name);
+        getListCategory();
+        getListPublisher();
+    }
+
+    //Lấy dữ liệu Category vào Spinner
+    private void getListCategory() {
+        CategoryAPI.categoryAPI.getCategory().enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                if (response.isSuccessful()) {
+                    mLstCategory = response.body();
+                    ArrayAdapter<Category> adapter = new ArrayAdapter<>(AddBookActivity.this, android.R.layout.simple_list_item_1, mLstCategory);
+                    spinCategory.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+                Toast.makeText(AddBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //Lấy dữ liệu Publisher vào Spinner
+    private void getListPublisher() {
+        PublisherAPI.publisherAPI.getPublisher().enqueue(new Callback<List<Publisher>>() {
+            @Override
+            public void onResponse(Call<List<Publisher>> call, Response<List<Publisher>> response) {
+                if (response.isSuccessful()) {
+                    mLstPublisher = response.body();
+                    ArrayAdapter<Publisher> adapter = new ArrayAdapter<>(AddBookActivity.this, android.R.layout.simple_list_item_1, mLstPublisher);
+                    spinPublisher.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Publisher>> call, Throwable t) {
+                Toast.makeText(AddBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddBookActivity.this, AdminBookActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
+    }
+
+    //Check phiên bản Android
+    private void onClickRepestPermisson() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            openGallery();
+            return;
+        }
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            openGallery();
+        } else {
+            String[] permission = {Manifest.permission.READ_EXTERNAL_STORAGE};
+            requestPermissions(permission, MY_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openGallery();
+            }
+        }
+    }
+
+    //Mở thư mục ảnh
+    private void openGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        mActivityResultLauncher.launch(Intent.createChooser(intent, "Chọn Ảnh"));
+    }
+
+    //Lấy tên ảnh
+    private String getNameImg() {
+        String realPathUtil = RealPathUtil.getRealPath(this, mUri);
+        File file = new File(realPathUtil);
+        return file.getName();
+    }
+
     //Hiện ảnh vừa chọn
     ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -85,126 +208,7 @@ public class AddBookActivity extends AppCompatActivity {
             }
     );
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_book);
-
-        initUi();
-
-        //Nhấn nút chọn ảnh trong gallery
-        btnSelectImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickRepestPermisson();
-            }
-        });
-        btnAdd.setOnClickListener(listenerAddBook);
-    }
-
-    private void initUi() {
-        bookName = findViewById(R.id.edit_book_name);
-        author = findViewById(R.id.edit_author_name);
-        price = findViewById(R.id.edit_book_price);
-        salePrice = findViewById(R.id.edit_book_sale);
-        publisherYear = findViewById(R.id.edit_publisher_year);
-        page = findViewById(R.id.edit_page);
-        number = findViewById(R.id.edit_number);
-        imgView = findViewById(R.id.img_from_gallery);
-        btnSelectImg = findViewById(R.id.btn_select_img);
-        btnAdd = findViewById(R.id.btn_add_book);
-        btnUpdate = findViewById(R.id.btn_update_book);
-        description = findViewById(R.id.edit_description);
-        btnUpdate.setVisibility(View.GONE);
-        spinCategory = findViewById(R.id.spin_category);
-        spinPublisher = findViewById(R.id.spin_publisher);
-        imageName = findViewById(R.id.image_name);
-        getListCategory();
-        getListPublisher();
-    }
-
-    private void getListCategory() {
-        CategoryAPI.categoryAPI.getCategory().enqueue(new Callback<List<Category>>() {
-            @Override
-            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-                if (response.isSuccessful()) {
-                    mLstCategory = response.body();
-                    ArrayAdapter<Category> adapter = new ArrayAdapter<>(AddBookActivity.this, android.R.layout.simple_list_item_1, mLstCategory);
-                    spinCategory.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Category>> call, Throwable t) {
-                Toast.makeText(AddBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void getListPublisher() {
-        PublisherAPI.publisherAPI.getPublisher().enqueue(new Callback<List<Publisher>>() {
-            @Override
-            public void onResponse(Call<List<Publisher>> call, Response<List<Publisher>> response) {
-                if (response.isSuccessful()) {
-                    mLstPublisher = response.body();
-                    ArrayAdapter<Publisher> adapter = new ArrayAdapter<>(AddBookActivity.this, android.R.layout.simple_list_item_1, mLstPublisher);
-                    spinPublisher.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Publisher>> call, Throwable t) {
-                Toast.makeText(AddBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(AddBookActivity.this, AdminBookActivity.class);
-        startActivity(intent);
-        super.onBackPressed();
-    }
-
-    //check phien ban android
-    private void onClickRepestPermisson() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            openGallery();
-            return;
-        }
-        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            openGallery();
-        } else {
-            String[] permission = {Manifest.permission.READ_EXTERNAL_STORAGE};
-            requestPermissions(permission, MY_REQUEST_CODE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == MY_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                openGallery();
-            }
-        }
-    }
-
-    //Mo thu muc anh
-    private void openGallery() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        mActivityResultLauncher.launch(Intent.createChooser(intent, "Chọn Ảnh"));
-    }
-
-    //Lay ten file anh
-    private String getNameImg() {
-        String realPathUtil = RealPathUtil.getRealPath(this, mUri);
-        File file = new File(realPathUtil);
-        return file.getName();
-    }
-
+    //Hành động thêm ảnh
     private View.OnClickListener listenerAddBook = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

@@ -1,6 +1,8 @@
 package com.example.projectfinal.adapter.admin;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectfinal.R;
-import com.example.projectfinal.entity.Category;
 import com.example.projectfinal.entity.News;
 
+import java.io.File;
 import java.util.List;
 
 public class AdminNewsAdapter extends RecyclerView.Adapter<AdminNewsAdapter.NewsViewHolder> {
@@ -42,7 +44,9 @@ public class AdminNewsAdapter extends RecyclerView.Adapter<AdminNewsAdapter.News
         if (n == null) {
             return;
         }
-        holder.imgNews.setImageResource(getImageId(mCtx, n.getPicture()));
+        File imgFile = new File(n.getPicture());
+        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        holder.imgNews.setImageBitmap(myBitmap);
         holder.txtNewsTitle.setText(n.getDescription());
     }
 

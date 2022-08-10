@@ -63,8 +63,8 @@ public class ImplBookDAO implements IBookDAO {
     @Override
     public void delete(int id) {
         try {
-            s = HibernateUtil.getSessionFactory().openSession();
             Book b = getbyId(id);
+            s = HibernateUtil.getSessionFactory().openSession();
             s.getTransaction().begin();
             s.delete(b);
             s.getTransaction().commit();

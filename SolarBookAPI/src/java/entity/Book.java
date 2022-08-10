@@ -42,6 +42,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Book.findByRating", query = "SELECT b FROM Book b WHERE b.rating = :rating"),
     @NamedQuery(name = "Book.findByStatus", query = "SELECT b FROM Book b WHERE b.status = :status")})
 public class Book implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -52,13 +53,19 @@ public class Book implements Serializable {
     @Column(name = "Name")
     private String name;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @JoinColumn(name = "CategoryId", referencedColumnName = "Id")
+    @ManyToOne
+    private Category categoryId;
     @Column(name = "Price")
-    private Double price;
+    private float price;
     @Column(name = "SalePrice")
-    private Double salePrice;
+    private float salePrice;
     @Size(max = 100)
     @Column(name = "Author")
     private String author;
+    @JoinColumn(name = "PublisherId", referencedColumnName = "Id")
+    @ManyToOne
+    private Publisher publisherId;
     @Column(name = "PublishYear")
     private Integer publishYear;
     @Size(max = 255)
@@ -76,12 +83,6 @@ public class Book implements Serializable {
     private Double rating;
     @Column(name = "Status")
     private Boolean status;
-    @JoinColumn(name = "CategoryId", referencedColumnName = "Id")
-    @ManyToOne
-    private Category categoryId;
-    @JoinColumn(name = "PublisherId", referencedColumnName = "Id")
-    @ManyToOne
-    private Publisher publisherId;
 
     public Book() {
     }
@@ -106,19 +107,19 @@ public class Book implements Serializable {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
-    public Double getSalePrice() {
+    public float getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(Double salePrice) {
+    public void setSalePrice(float salePrice) {
         this.salePrice = salePrice;
     }
 
@@ -226,5 +227,5 @@ public class Book implements Serializable {
     public String toString() {
         return "entity.Book[ id=" + id + " ]";
     }
-    
+
 }

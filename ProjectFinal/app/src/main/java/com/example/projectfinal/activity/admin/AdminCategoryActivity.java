@@ -28,7 +28,7 @@ import retrofit2.Response;
 public class AdminCategoryActivity extends AppCompatActivity {
     private List<Category> mLstCategory = new ArrayList<>();
     private AdminCategoryAdapter mAdminCategoryAdapter;
-    ListView listviewCategory;
+    ListView listViewCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +36,9 @@ public class AdminCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_category);
 
         getList();
-        listviewCategory = findViewById(R.id.listviewCategory);
+        listViewCategory = findViewById(R.id.list_view_category);
         // Cài đặt context menu cho ListView
-        registerForContextMenu(listviewCategory);
+        registerForContextMenu(listViewCategory);
         //chuyen sang form them moi
         TextView txtAdd = findViewById(R.id.add_category);
         txtAdd.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +58,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     mLstCategory = response.body();
                     mAdminCategoryAdapter = new AdminCategoryAdapter(AdminCategoryActivity.this, mLstCategory);
-                    listviewCategory.setAdapter(mAdminCategoryAdapter);
+                    listViewCategory.setAdapter(mAdminCategoryAdapter);
                 }
             }
 

@@ -28,7 +28,7 @@ import retrofit2.Response;
 public class AdminBookActivity extends AppCompatActivity {
     private List<Book> mLstBook = new ArrayList<>();
     private AdminBookAdapter mAdminBookAdapter;
-    ListView listviewBook;
+    ListView listViewBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +36,9 @@ public class AdminBookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_book);
 
         getList();
-        listviewBook = findViewById(R.id.listviewBook);
+        listViewBook = findViewById(R.id.list_view_book);
         // Cài đặt context menu cho ListView
-        registerForContextMenu(listviewBook);
+        registerForContextMenu(listViewBook);
         //chuyen sang form them moi
         TextView txtAdd = findViewById(R.id.add_book);
         txtAdd.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +58,7 @@ public class AdminBookActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     mLstBook = response.body();
                     mAdminBookAdapter = new AdminBookAdapter(AdminBookActivity.this, mLstBook);
-                    listviewBook.setAdapter(mAdminBookAdapter);
+                    listViewBook.setAdapter(mAdminBookAdapter);
                 }
             }
 
@@ -86,6 +86,7 @@ public class AdminBookActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.menuUpdate:
+                //Chuyển sang form cập nhật
                 Intent intent = new Intent(AdminBookActivity.this, UpdateCategoryActivity.class);
                 intent.putExtra("idBook", idBook);
                 startActivity(intent);

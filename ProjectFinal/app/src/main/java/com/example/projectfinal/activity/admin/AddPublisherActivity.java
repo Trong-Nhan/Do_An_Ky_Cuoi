@@ -53,4 +53,11 @@ public class AddPublisherActivity extends AppCompatActivity {
             });
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddPublisherActivity.this, AdminPublisherActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
+    }
 }
