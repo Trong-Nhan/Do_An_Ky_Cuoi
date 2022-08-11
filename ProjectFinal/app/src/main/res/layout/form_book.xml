@@ -180,7 +180,6 @@
             android:id="@+id/btn_add_book"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:text="Thêm mới" />
 
@@ -188,9 +187,7 @@
             android:id="@+id/btn_update_book"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:backgroundTint="@android:color/holo_red_dark"
             android:text="Cập nhật" />
     </LinearLayout>
 </LinearLayout>

@@ -6,20 +6,12 @@
 package entity;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -27,54 +19,31 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "tblBook")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Book.findAll", query = "SELECT b FROM Book b"),
-    @NamedQuery(name = "Book.findById", query = "SELECT b FROM Book b WHERE b.id = :id"),
-    @NamedQuery(name = "Book.findByName", query = "SELECT b FROM Book b WHERE b.name = :name"),
-    @NamedQuery(name = "Book.findByPrice", query = "SELECT b FROM Book b WHERE b.price = :price"),
-    @NamedQuery(name = "Book.findBySalePrice", query = "SELECT b FROM Book b WHERE b.salePrice = :salePrice"),
-    @NamedQuery(name = "Book.findByAuthor", query = "SELECT b FROM Book b WHERE b.author = :author"),
-    @NamedQuery(name = "Book.findByPublishYear", query = "SELECT b FROM Book b WHERE b.publishYear = :publishYear"),
-    @NamedQuery(name = "Book.findByPicture", query = "SELECT b FROM Book b WHERE b.picture = :picture"),
-    @NamedQuery(name = "Book.findByNumber", query = "SELECT b FROM Book b WHERE b.number = :number"),
-    @NamedQuery(name = "Book.findByPage", query = "SELECT b FROM Book b WHERE b.page = :page"),
-    @NamedQuery(name = "Book.findByRating", query = "SELECT b FROM Book b WHERE b.rating = :rating"),
-    @NamedQuery(name = "Book.findByStatus", query = "SELECT b FROM Book b WHERE b.status = :status")})
 public class Book implements Serializable {
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
-    @Size(max = 100)
     @Column(name = "Name")
     private String name;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @JoinColumn(name = "CategoryId", referencedColumnName = "Id")
-    @ManyToOne
-    private Category categoryId;
+    @Column(name = "CategoryId")
+    private Integer categoryId;
     @Column(name = "Price")
-    private float price;
+    private Double price;
     @Column(name = "SalePrice")
-    private float salePrice;
-    @Size(max = 100)
+    private Double salePrice;
     @Column(name = "Author")
     private String author;
-    @JoinColumn(name = "PublisherId", referencedColumnName = "Id")
-    @ManyToOne
-    private Publisher publisherId;
+    @Column(name = "PublisherId")
+    private Integer publisherId;
     @Column(name = "PublishYear")
     private Integer publishYear;
-    @Size(max = 255)
     @Column(name = "Picture")
     private String picture;
     @Column(name = "Number")
     private Integer number;
-    @Lob
-    @Size(max = 2147483647)
     @Column(name = "Description")
     private String description;
     @Column(name = "Page")
@@ -87,8 +56,37 @@ public class Book implements Serializable {
     public Book() {
     }
 
-    public Book(Integer id) {
+    public Book(Integer id, String name, Integer categoryId, Double price, Double salePrice, String author, Integer publisherId, Integer publishYear, String picture, Integer number, String description, Integer page, Double rating, Boolean status) {
         this.id = id;
+        this.name = name;
+        this.categoryId = categoryId;
+        this.price = price;
+        this.salePrice = salePrice;
+        this.author = author;
+        this.publisherId = publisherId;
+        this.publishYear = publishYear;
+        this.picture = picture;
+        this.number = number;
+        this.description = description;
+        this.page = page;
+        this.rating = rating;
+        this.status = status;
+    }
+
+    public Book(String name, Integer categoryId, Double price, Double salePrice, String author, Integer publisherId, Integer publishYear, String picture, Integer number, String description, Integer page, Double rating, Boolean status) {
+        this.name = name;
+        this.categoryId = categoryId;
+        this.price = price;
+        this.salePrice = salePrice;
+        this.author = author;
+        this.publisherId = publisherId;
+        this.publishYear = publishYear;
+        this.picture = picture;
+        this.number = number;
+        this.description = description;
+        this.page = page;
+        this.rating = rating;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -107,19 +105,27 @@ public class Book implements Serializable {
         this.name = name;
     }
 
-    public float getPrice() {
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public float getSalePrice() {
+    public Double getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(float salePrice) {
+    public void setSalePrice(Double salePrice) {
         this.salePrice = salePrice;
     }
 
@@ -129,6 +135,14 @@ public class Book implements Serializable {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Integer getPublisherId() {
+        return publisherId;
+    }
+
+    public void setPublisherId(Integer publisherId) {
+        this.publisherId = publisherId;
     }
 
     public Integer getPublishYear() {
@@ -186,46 +200,4 @@ public class Book implements Serializable {
     public void setStatus(Boolean status) {
         this.status = status;
     }
-
-    public Category getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public Publisher getPublisherId() {
-        return publisherId;
-    }
-
-    public void setPublisherId(Publisher publisherId) {
-        this.publisherId = publisherId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Book)) {
-            return false;
-        }
-        Book other = (Book) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entity.Book[ id=" + id + " ]";
-    }
-
 }

@@ -80,24 +80,22 @@ public class AdminBookActivity extends AppCompatActivity {
     //
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int idBook = mLstBook.get(info.position).getId();
+        Book idBook = mLstBook.get(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position);
 
-        switch (id) {
+        switch (item.getItemId()) {
             case R.id.menuUpdate:
                 //Chuyển sang form cập nhật
-                Intent intent = new Intent(AdminBookActivity.this, UpdateCategoryActivity.class);
+                Intent intent = new Intent(AdminBookActivity.this, UpdateBookActivity.class);
                 intent.putExtra("idBook", idBook);
                 startActivity(intent);
                 break;
             case R.id.menuDelete:
-                BookAPI.bookAPI.deleteBook(idBook).enqueue(new Callback<Void>() {
+                BookAPI.bookAPI.deleteBook(idBook.getId()).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {
                             Toast.makeText(AdminBookActivity.this, "Xóa thành công!", Toast.LENGTH_SHORT).show();
-                            //getList();
+                            getList();
                         }
                     }
 

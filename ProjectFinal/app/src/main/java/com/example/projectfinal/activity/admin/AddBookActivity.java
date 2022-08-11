@@ -212,25 +212,79 @@ public class AddBookActivity extends AppCompatActivity {
     private View.OnClickListener listenerAddBook = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            float bookSale = 0;
-            String edtName = bookName.getText().toString();
-//            int idCategory = spinCategory.getSelectedItemPosition();
-            int idCategory = 1;
-            float bookPrice = Float.parseFloat(price.getText().toString());
-            if (salePrice.getText().toString() != null) {
+            float bookSale, bookPrice;
+            String edtName, bookAuthor, imgName, bookDesc;
+            int bookYear, bookNumber, bookPage;
+
+            if (bookName.getText().toString().equals("")) {
+                Toast.makeText(AddBookActivity.this, "Chưa nhập tên sách", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                edtName = bookName.getText().toString();
+            }
+
+            Category cat = (Category) spinCategory.getSelectedItem();
+
+            if (price.getText().toString().equals("")) {
+                Toast.makeText(AddBookActivity.this, "Chưa nhập giá sách", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                bookPrice = Float.parseFloat(price.getText().toString());
+            }
+
+            if (salePrice.getText().toString().equals("")) {
+                bookSale = 0;
+            } else {
                 bookSale = Float.parseFloat(salePrice.getText().toString());
             }
-            String bookAuthor = author.getText().toString();
-//            int idPublisher = spinPublisher.getSelectedItemPosition();
-            int idPublisher = 1;
-            int bookYear = Integer.parseInt(publisherYear.getText().toString());
-            String imgName = RealPathUtil.getRealPath(AddBookActivity.this, mUri);
-            int bookNumber = Integer.parseInt(number.getText().toString());
-            String bookDesc = description.getText().toString();
-            int bookPage = Integer.parseInt(page.getText().toString());
+
+            if (author.getText().toString().equals("")) {
+                Toast.makeText(AddBookActivity.this, "Chưa nhập tên tác giả", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                bookAuthor = author.getText().toString();
+            }
+
+            Publisher pub = (Publisher) spinPublisher.getSelectedItem();
+
+            if (publisherYear.getText().toString().equals("")) {
+                Toast.makeText(AddBookActivity.this, "Chưa nhập năm xuất bản", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                bookYear = Integer.parseInt(publisherYear.getText().toString());
+            }
+
+            if (imageName.getText().toString().equals("")) {
+                Toast.makeText(AddBookActivity.this, "Chưa có ảnh sách", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                imgName = RealPathUtil.getRealPath(AddBookActivity.this, mUri);
+            }
+
+            if (number.getText().toString().equals("")) {
+                Toast.makeText(AddBookActivity.this, "Chưa có số lượng", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                bookNumber = Integer.parseInt(number.getText().toString());
+            }
+
+            if (description.getText().toString().equals("")) {
+                Toast.makeText(AddBookActivity.this, "Chưa mô tả sách", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                bookDesc = description.getText().toString();
+            }
+
+            if (page.getText().toString().equals("")) {
+                Toast.makeText(AddBookActivity.this, "Chưa có trang sách", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                bookPage = Integer.parseInt(page.getText().toString());
+            }
             float rating = 2;
             boolean status = true;
-            Book b = new Book(edtName, idCategory, bookPrice, bookSale, bookAuthor, idPublisher, bookYear, imgName, bookNumber, bookDesc, bookPage, rating, status);
+
+            Book b = new Book(edtName, cat.getId(), bookPrice, bookSale, bookAuthor, pub.getId(), bookYear, imgName, bookNumber, bookDesc, bookPage, rating, status);
 
             BookAPI.bookAPI.addBook(b).enqueue(new Callback<Book>() {
                 @Override

@@ -20,6 +20,12 @@
             android:name=".activity.admin.UpdateBookActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.admin.UpdateCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.UpdatePublisherActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.admin.AddBookActivity"
             android:exported="false" />
         <activity

@@ -7,11 +7,14 @@
             <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplNewsDAO.java</file>
         </group>
         <group>
-            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplUserDAO.java</file>
             <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplNewsDAO.java</file>
         </group>
         <group>
-            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplNewsDAO.java</file>
+            <file>file:/C:/Users/acer/Desktop/GitHub/Do_An_Ky_Cuoi/SolarBookAPI/src/java/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/acer/Desktop/GitHub/Do_An_Ky_Cuoi/SolarBookAPI/src/java/entity/Publisher.java</file>
+            <file>file:/C:/Users/acer/Desktop/GitHub/Do_An_Ky_Cuoi/SolarBookAPI/src/java/entity/Book.java</file>
+            <file>file:/C:/Users/acer/Desktop/GitHub/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplCategoryDAO.java</file>
+            <file>file:/C:/Users/acer/Desktop/GitHub/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplPublisherDAO.java</file>
         </group>
     </open-files>
 </project-private>
