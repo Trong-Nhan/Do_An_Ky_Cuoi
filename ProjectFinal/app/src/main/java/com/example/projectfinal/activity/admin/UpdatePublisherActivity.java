@@ -42,8 +42,14 @@ public class UpdatePublisherActivity extends AppCompatActivity {
     private View.OnClickListener listenerUpdatePublisher = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            String cName;
             EditText edtName = findViewById(R.id.edit_publisher_name);
-            String cName = edtName.getText().toString();
+            if (edtName.getText().toString().equals("")) {
+                Toast.makeText(UpdatePublisherActivity.this, "Chưa nhập tên nhà xuất bản", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                cName = edtName.getText().toString();
+            }
 
             Publisher p = new Publisher(publisher.getId(), cName);
             PublisherAPI.publisherAPI.updatePublisher(p).enqueue(new Callback<Publisher>() {

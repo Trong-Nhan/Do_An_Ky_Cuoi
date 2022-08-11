@@ -26,21 +26,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AdminBookActivity extends AppCompatActivity {
-    private List<Book> mLstBook;
+    private List<Book> mLstBook = new ArrayList<>();
     private AdminBookAdapter mAdminBookAdapter;
-    ListView listviewBook;
+    ListView listViewBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_book);
 
-        mLstBook = new ArrayList<>();
-        listviewBook = findViewById(R.id.listviewBook);
         getList();
-
+        listViewBook = findViewById(R.id.list_view_book);
         // Cài đặt context menu cho ListView
-        registerForContextMenu(listviewBook);
+        registerForContextMenu(listViewBook);
         //chuyen sang form them moi
         TextView txtAdd = findViewById(R.id.add_book);
         txtAdd.setOnClickListener(new View.OnClickListener() {
@@ -57,10 +55,11 @@ public class AdminBookActivity extends AppCompatActivity {
         BookAPI.bookAPI.getBook().enqueue(new Callback<List<Book>>() {
             @Override
             public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
-                mLstBook = response.body();
-                mAdminBookAdapter = new AdminBookAdapter(AdminBookActivity.this, mLstBook);
-                listviewBook.setAdapter(mAdminBookAdapter);
-
+                if (response.isSuccessful()) {
+                    mLstBook = response.body();
+                    mAdminBookAdapter = new AdminBookAdapter(AdminBookActivity.this, mLstBook);
+                    listViewBook.setAdapter(mAdminBookAdapter);
+                }
             }
 
             @Override
@@ -68,7 +67,6 @@ public class AdminBookActivity extends AppCompatActivity {
                 Toast.makeText(AdminBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     //Tạo view sub menu
@@ -82,23 +80,22 @@ public class AdminBookActivity extends AppCompatActivity {
     //
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int idBook = mLstBook.get(info.position).getId();
+        Book idBook = mLstBook.get(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position);
 
-        switch (id) {
+        switch (item.getItemId()) {
             case R.id.menuUpdate:
-                Intent intent = new Intent(AdminBookActivity.this, UpdateCategoryActivity.class);
+                //Chuyển sang form cập nhật
+                Intent intent = new Intent(AdminBookActivity.this, UpdateBookActivity.class);
                 intent.putExtra("idBook", idBook);
                 startActivity(intent);
                 break;
             case R.id.menuDelete:
-                BookAPI.bookAPI.deleteBook(idBook).enqueue(new Callback<Void>() {
+                BookAPI.bookAPI.deleteBook(idBook.getId()).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {
                             Toast.makeText(AdminBookActivity.this, "Xóa thành công!", Toast.LENGTH_SHORT).show();
-                            //getList();
+                            getList();
                         }
                     }
 
@@ -117,5 +114,4 @@ public class AdminBookActivity extends AppCompatActivity {
         startActivity(intent);
         super.onBackPressed();
     }
-
 }
