@@ -118,7 +118,4 @@ public class AdminBookActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public void check(){
-
-    }
 }
