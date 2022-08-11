@@ -20,8 +20,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tblBook")
 public class Book implements Serializable {
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")

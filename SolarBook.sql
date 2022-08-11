@@ -3,6 +3,7 @@ GO
 Use SolarBook
 GO
 
+
 Create Table tblCategory(
 	Id int primary key identity,
 	[Name] nvarchar(100) unique
@@ -75,11 +76,11 @@ GO
 Create Table tblOrder(
 	Id int primary key identity,
 	UserId int,
-	OrderDate datetime,
+	OrderDate Date,
 	PromoCodeId int,
 	TotalPrice float,
 	CityId int,
-	ShippingAddress text,
+	ShippingAddress ntext,
 	ShippingPrice int,
 	PaymentId int,
 	Note nvarchar(255),
@@ -93,15 +94,27 @@ Create Table tblOrder(
 GO
 
 Create Table tblOrderDetail(
+	Id int primary key identity,
 	OrderId int,
 	BookId int,
-	Number int,
+	BookCount int
 
-	Primary Key (OrderId, BookId),
 	Foreign Key (OrderId) References tblOrder(Id),
 	Foreign Key (BookId) References tblBook(Id)
 )
 GO
+
+Create Table tblCart(
+	Id int primary key identity,
+	UserId int,
+	BookId int,
+	BookCount int
+
+	Foreign Key (UserId) References tblUser(Id),
+	Foreign Key (BookId) References tblBook(Id)
+)
+
+Insert Into tblCart(UserId, BookId, BookCount) Values (2, 1, 2), (2, 2, 1)
 
 Create Table tblNews(
 	Id int primary key identity,
@@ -128,7 +141,6 @@ Create Table tblRating(
 
 GO
 
-Select * From tblUser
 
 Insert Into tblCity(Name) Values (N'Hà Nội'), (N'TP. Hồ Chí Minh'), (N'Đà Nẵng');
 
@@ -156,5 +168,7 @@ Insert Into tblBook(Name, CategoryId, Price, SalePrice, Author, PublisherId, Pub
 (N'11 bí quyết giao tiếp để thành công', 2, 109000, 0, 'M.T.Lederman', 3, 2019, '/storage/emulated/0/Pictures/book3.jpg', 5, N'Trái với những gì nhiều chuyên gia về networking tư vấn', 284, 1),
 (N'Tiếng gọi nơi hoang dã', 9, 72000, 0, 'Jack London', 4, 2018, '/storage/emulated/0/Pictures/book4.jpg', 9, N'Tiếng gọi nơi hoang dã là cuốn sashc hay', 184, 1)
 GO
+
 Select * From tblCategory
 Select * From tblBook
+
