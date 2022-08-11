@@ -26,7 +26,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AdminBookActivity extends AppCompatActivity {
-    private List<Book> mLstBook = new ArrayList<>();
+    private List<Book> mLstBook;
     private AdminBookAdapter mAdminBookAdapter;
     ListView listviewBook;
 
@@ -35,8 +35,10 @@ public class AdminBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_book);
 
-        getList();
+        mLstBook = new ArrayList<>();
         listviewBook = findViewById(R.id.listviewBook);
+        getList();
+
         // Cài đặt context menu cho ListView
         registerForContextMenu(listviewBook);
         //chuyen sang form them moi
@@ -55,11 +57,10 @@ public class AdminBookActivity extends AppCompatActivity {
         BookAPI.bookAPI.getBook().enqueue(new Callback<List<Book>>() {
             @Override
             public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
-                if (response.isSuccessful()) {
-                    mLstBook = response.body();
-                    mAdminBookAdapter = new AdminBookAdapter(AdminBookActivity.this, mLstBook);
-                    listviewBook.setAdapter(mAdminBookAdapter);
-                }
+                mLstBook = response.body();
+                mAdminBookAdapter = new AdminBookAdapter(AdminBookActivity.this, mLstBook);
+                listviewBook.setAdapter(mAdminBookAdapter);
+
             }
 
             @Override
@@ -67,6 +68,7 @@ public class AdminBookActivity extends AppCompatActivity {
                 Toast.makeText(AdminBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     //Tạo view sub menu
@@ -114,5 +116,9 @@ public class AdminBookActivity extends AppCompatActivity {
         Intent intent = new Intent(AdminBookActivity.this, AdminActivity.class);
         startActivity(intent);
         super.onBackPressed();
+    }
+
+    public void check(){
+
     }
 }
