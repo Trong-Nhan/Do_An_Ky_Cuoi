@@ -76,7 +76,7 @@ public class AdminNewsActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         News n = mLstNews.get(item.getOrder());
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case 101:
                 Intent intent = new Intent(AdminNewsActivity.this, UpdateNewsActivity.class);
                 Bundle bundle = new Bundle();
@@ -88,7 +88,7 @@ public class AdminNewsActivity extends AppCompatActivity {
                 NewsAPI.newsAPI.deleteNews(n.getId()).enqueue(new Callback<News>() {
                     @Override
                     public void onResponse(Call<News> call, Response<News> response) {
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             Toast.makeText(AdminNewsActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(AdminNewsActivity.this, AdminNewsActivity.class);
                             startActivity(intent);
@@ -103,5 +103,12 @@ public class AdminNewsActivity extends AppCompatActivity {
                 break;
         }
         return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AdminNewsActivity.this, AdminActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }
