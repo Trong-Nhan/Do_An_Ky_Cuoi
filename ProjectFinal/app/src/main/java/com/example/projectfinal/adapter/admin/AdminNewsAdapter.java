@@ -44,15 +44,12 @@ public class AdminNewsAdapter extends RecyclerView.Adapter<AdminNewsAdapter.News
         if (n == null) {
             return;
         }
+        //hien thi hinh anh
         File imgFile = new File(n.getPicture());
         Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
         holder.imgNews.setImageBitmap(myBitmap);
-        holder.txtNewsTitle.setText(n.getDescription());
-    }
 
-    private int getImageId(Context context, String imageName) {
-        return context.getResources().getIdentifier("drawable/"
-                + imageName, null, context.getPackageName());
+        holder.txtNewsTitle.setText(n.getDescription());
     }
 
     @Override

@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectfinal.R;
 import com.example.projectfinal.adapter.BookAdapter;
-import com.example.projectfinal.adapter.admin.HomeNewsAdapter;
+import com.example.projectfinal.adapter.HomeNewsAdapter;
 import com.example.projectfinal.api.BookAPI;
 import com.example.projectfinal.api.NewsAPI;
 import com.example.projectfinal.entity.Book;
