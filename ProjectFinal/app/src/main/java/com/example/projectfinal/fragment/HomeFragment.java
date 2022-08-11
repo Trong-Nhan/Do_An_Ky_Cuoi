@@ -16,7 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectfinal.R;
 import com.example.projectfinal.adapter.BookAdapter;
-import com.example.projectfinal.adapter.admin.HomeNewsAdapter;
+import com.example.projectfinal.adapter.HomeNewsAdapter;
+import com.example.projectfinal.api.BookAPI;
 import com.example.projectfinal.api.NewsAPI;
 import com.example.projectfinal.entity.Book;
 import com.example.projectfinal.entity.News;
@@ -33,7 +34,7 @@ public class HomeFragment extends Fragment {
     private HomeNewsAdapter mHomeNewsAdapter;
     private List<Book> mLstBook = new ArrayList<>();
     private List<News> mLstNews = new ArrayList<>();
-    RecyclerView rcvHomeNews;
+    RecyclerView rcvHomeNews,rcvBook;
 
     @Nullable
     @Override
@@ -41,33 +42,10 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         getListBook();
-        mBookAdapter = new BookAdapter(getActivity(), mLstBook);
+        rcvBook = view.findViewById(R.id.rcvNewBook);
         //set dữ liệu lên RecycleView New Book
-        RecyclerView rcvNewBook = view.findViewById(R.id.rcvNewBook);
-        rcvNewBook.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        rcvNewBook.setAdapter(mBookAdapter);
-
-
-        //set dữ liệu lên RecycleView Popular Book
-        RecyclerView rcvPopularBook = view.findViewById(R.id.rcvPopularBook);
-        rcvPopularBook.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        rcvPopularBook.setAdapter(mBookAdapter);
-
-        //set dữ liệu lên RecycleView Discount Book
-        RecyclerView rcvDiscountBook = view.findViewById(R.id.rcvDiscountBook);
-        rcvDiscountBook.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
-        rcvDiscountBook.setAdapter(mBookAdapter);
-
-        //set dữ liệu lên RecycleView Homepage News
-//        try {
-//            getListNews();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        mNewsAdapter = new NewsAdapter(getActivity(), mLstNews);
-//        RecyclerView rcvHomeNews = view.findViewById(R.id.rcvHomeNews);
-//        rcvHomeNews.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
-//        rcvHomeNews.setAdapter(mNewsAdapter);
+        rcvBook.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        rcvBook.setAdapter(mBookAdapter);
 
         getListNews();
         rcvHomeNews = view.findViewById(R.id.rcvHomeNews);
@@ -98,7 +76,21 @@ public class HomeFragment extends Fragment {
     }
 
     private void getListBook() {
-       //Viet API
+        BookAPI.bookAPI.getBook().enqueue(new Callback<List<Book>>() {
+            @Override
+            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+                if (response.isSuccessful()) {
+                    mLstBook = response.body();
+                    mBookAdapter = new BookAdapter(getActivity(), mLstBook);
+                    rcvBook.setAdapter(mBookAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Book>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

@@ -48,7 +48,7 @@
             android:textStyle="bold" />
     </LinearLayout>
     <ListView
-        android:id="@+id/listviewPublisher"
+        android:id="@+id/list_view_publisher"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

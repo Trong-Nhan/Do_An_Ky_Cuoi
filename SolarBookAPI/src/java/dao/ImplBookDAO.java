@@ -23,16 +23,11 @@ public class ImplBookDAO implements IBookDAO {
 
     @Override
     public List<Book> getAll() {
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
+        s = HibernateUtil.getSessionFactory().openSession();
             Query q = s.createQuery("from Book");
             List<Book> data = q.list();
             s.close();
             return data;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     @Override
@@ -63,8 +58,8 @@ public class ImplBookDAO implements IBookDAO {
     @Override
     public void delete(int id) {
         try {
-            s = HibernateUtil.getSessionFactory().openSession();
             Book b = getbyId(id);
+            s = HibernateUtil.getSessionFactory().openSession();
             s.getTransaction().begin();
             s.delete(b);
             s.getTransaction().commit();

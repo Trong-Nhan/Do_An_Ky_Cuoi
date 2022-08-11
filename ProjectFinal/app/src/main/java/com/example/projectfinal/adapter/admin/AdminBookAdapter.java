@@ -63,9 +63,9 @@ public class AdminBookAdapter extends ArrayAdapter<Book> {
 
         txtName.setText(c.getName());
         txtAuthor.setText(c.getName());
-        txtPrice.setText(c.getPrice().toString());
-        txtSale.setText(c.getSalePrice().toString());
-        txtNumber.setText(c.getNumber());
+        txtPrice.setText(String.valueOf(c.getPrice()));
+        txtSale.setText(String.valueOf(c.getSalePrice()));
+        txtNumber.setText(String.valueOf(c.getNumber()));
         return item;
     }
 }

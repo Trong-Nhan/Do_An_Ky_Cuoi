@@ -1,5 +1,7 @@
 package com.example.projectfinal.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,6 +12,7 @@ import com.example.projectfinal.R;
 import com.example.projectfinal.entity.Book;
 import com.example.projectfinal.entity.News;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 
 public class NewsDetailActivity extends AppCompatActivity {
@@ -34,8 +37,11 @@ public class NewsDetailActivity extends AppCompatActivity {
         edtName.setText(mNews.getName());
         edtDescription.setText(mNews.getDescription());
         edtDetail.setText(mNews.getDetail());
-        //chưa biết cách sửa
-//        edtPicture.setImageResource(mNews.getPicture());
+        //hiển thị ảnh
+        File imgFile = new File(mNews.getPicture());
+        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        edtPicture.setImageBitmap(myBitmap);
+
         //chuyen kieu du lieu Date sang kieu String
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         edtCreatedDate.setText(formatter.format(mNews.getCreatedDate()));

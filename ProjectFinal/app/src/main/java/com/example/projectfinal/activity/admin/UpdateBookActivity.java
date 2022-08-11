@@ -7,21 +7,12 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projectfinal.R;
-import com.example.projectfinal.RealPathUtil;
-import com.example.projectfinal.activity.MainActivity;
-import com.example.projectfinal.api.BookAPI;
-import com.example.projectfinal.api.CategoryAPI;
-import com.example.projectfinal.api.PublisherAPI;
-import com.example.projectfinal.entity.Book;
-import com.example.projectfinal.entity.Category;
-import com.example.projectfinal.entity.Publisher;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,9 +27,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projectfinal.R;
+import com.example.projectfinal.RealPathUtil;
+import com.example.projectfinal.activity.MainActivity;
+import com.example.projectfinal.api.BookAPI;
+import com.example.projectfinal.api.CategoryAPI;
+import com.example.projectfinal.api.PublisherAPI;
+import com.example.projectfinal.entity.Book;
+import com.example.projectfinal.entity.Category;
+import com.example.projectfinal.entity.Publisher;
+
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,8 +46,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddBookActivity extends AppCompatActivity {
-
+public class UpdateBookActivity extends AppCompatActivity {
     private List<Category> mLstCategory = new ArrayList<>();
     private List<Publisher> mLstPublisher = new ArrayList<>();
     public static final String TAG = MainActivity.class.getName();
@@ -58,13 +57,30 @@ public class AddBookActivity extends AppCompatActivity {
     private static final int MY_REQUEST_CODE = 10;
     private Uri mUri;
     private TextView imageName;
+    private Book book = new Book();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_book);
+        setContentView(R.layout.activity_update_book);
 
         initUi();
+
+        //lấy object được truyền từ AdminCategoryActivity
+        Bundle bundle = getIntent().getExtras();
+        book = (Book) bundle.get("idBook");
+        //load dữ liệu
+        bookName.setText(book.getName());
+        author.setText(book.getAuthor());
+        price.setText(String.valueOf(book.getPrice()));
+        salePrice.setText(String.valueOf(book.getSalePrice()));
+        publisherYear.setText(String.valueOf(book.getPublishYear()));
+        page.setText(String.valueOf(book.getPage()));
+        number.setText(String.valueOf(book.getNumber()));
+        description.setText(book.getDescription());
+        File file = new File(book.getPicture());
+        Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+        imgView.setImageBitmap(bitmap);
 
         //Nhấn nút chọn ảnh trong gallery
         btnSelectImg.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +89,7 @@ public class AddBookActivity extends AppCompatActivity {
                 onClickRepestPermisson();
             }
         });
-        btnAdd.setOnClickListener(listenerAddBook);
+        btnUpdate.setOnClickListener(listenerUpdateBook);
     }
 
     //khai báo các thành phần có trong View
@@ -90,7 +106,7 @@ public class AddBookActivity extends AppCompatActivity {
         btnAdd = findViewById(R.id.btn_add_book);
         btnUpdate = findViewById(R.id.btn_update_book);
         description = findViewById(R.id.edit_description);
-        btnUpdate.setVisibility(View.GONE);
+        btnAdd.setVisibility(View.GONE);
         spinCategory = findViewById(R.id.spin_category);
         spinPublisher = findViewById(R.id.spin_publisher);
         imageName = findViewById(R.id.image_name);
@@ -105,14 +121,14 @@ public class AddBookActivity extends AppCompatActivity {
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 if (response.isSuccessful()) {
                     mLstCategory = response.body();
-                    ArrayAdapter<Category> adapter = new ArrayAdapter<>(AddBookActivity.this, android.R.layout.simple_list_item_1, mLstCategory);
+                    ArrayAdapter<Category> adapter = new ArrayAdapter<>(UpdateBookActivity.this, android.R.layout.simple_list_item_1, mLstCategory);
                     spinCategory.setAdapter(adapter);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
-                Toast.makeText(AddBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -124,21 +140,21 @@ public class AddBookActivity extends AppCompatActivity {
             public void onResponse(Call<List<Publisher>> call, Response<List<Publisher>> response) {
                 if (response.isSuccessful()) {
                     mLstPublisher = response.body();
-                    ArrayAdapter<Publisher> adapter = new ArrayAdapter<>(AddBookActivity.this, android.R.layout.simple_list_item_1, mLstPublisher);
+                    ArrayAdapter<Publisher> adapter = new ArrayAdapter<>(UpdateBookActivity.this, android.R.layout.simple_list_item_1, mLstPublisher);
                     spinPublisher.setAdapter(adapter);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Publisher>> call, Throwable t) {
-                Toast.makeText(AddBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(AddBookActivity.this, AdminBookActivity.class);
+        Intent intent = new Intent(UpdateBookActivity.this, AdminBookActivity.class);
         startActivity(intent);
         super.onBackPressed();
     }
@@ -209,7 +225,7 @@ public class AddBookActivity extends AppCompatActivity {
     );
 
     //Hành động thêm ảnh
-    private View.OnClickListener listenerAddBook = new View.OnClickListener() {
+    private View.OnClickListener listenerUpdateBook = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             float bookSale, bookPrice;
@@ -217,7 +233,7 @@ public class AddBookActivity extends AppCompatActivity {
             int bookYear, bookNumber, bookPage;
 
             if (bookName.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Chưa nhập tên sách", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Chưa nhập tên sách", Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 edtName = bookName.getText().toString();
@@ -226,7 +242,7 @@ public class AddBookActivity extends AppCompatActivity {
             Category cat = (Category) spinCategory.getSelectedItem();
 
             if (price.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Chưa nhập giá sách", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Chưa nhập giá sách", Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 bookPrice = Float.parseFloat(price.getText().toString());
@@ -239,7 +255,7 @@ public class AddBookActivity extends AppCompatActivity {
             }
 
             if (author.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Chưa nhập tên tác giả", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Chưa nhập tên tác giả", Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 bookAuthor = author.getText().toString();
@@ -248,35 +264,35 @@ public class AddBookActivity extends AppCompatActivity {
             Publisher pub = (Publisher) spinPublisher.getSelectedItem();
 
             if (publisherYear.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Chưa nhập năm xuất bản", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Chưa nhập năm xuất bản", Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 bookYear = Integer.parseInt(publisherYear.getText().toString());
             }
 
             if (imageName.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Chưa có ảnh sách", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Chưa có ảnh sách", Toast.LENGTH_SHORT).show();
                 return;
             } else {
-                imgName = RealPathUtil.getRealPath(AddBookActivity.this, mUri);
+                imgName = RealPathUtil.getRealPath(UpdateBookActivity.this, mUri);
             }
 
             if (number.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Chưa có số lượng", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Chưa có số lượng", Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 bookNumber = Integer.parseInt(number.getText().toString());
             }
 
             if (description.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Chưa mô tả sách", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Chưa mô tả sách", Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 bookDesc = description.getText().toString();
             }
 
             if (page.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Chưa có trang sách", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Chưa có trang sách", Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 bookPage = Integer.parseInt(page.getText().toString());
@@ -284,21 +300,21 @@ public class AddBookActivity extends AppCompatActivity {
             float rating = 2;
             boolean status = true;
 
-            Book b = new Book(edtName, cat.getId(), bookPrice, bookSale, bookAuthor, pub.getId(), bookYear, imgName, bookNumber, bookDesc, bookPage, rating, status);
+            Book b = new Book(book.getId(),edtName, cat.getId(), bookPrice, bookSale, bookAuthor, pub.getId(), bookYear, imgName, bookNumber, bookDesc, bookPage, rating, status);
 
-            BookAPI.bookAPI.addBook(b).enqueue(new Callback<Book>() {
+            BookAPI.bookAPI.updateBook(b).enqueue(new Callback<Book>() {
                 @Override
                 public void onResponse(Call<Book> call, Response<Book> response) {
                     if (response.isSuccessful()) {
-                        Toast.makeText(AddBookActivity.this, "Thêm mới thành công", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(AddBookActivity.this, AdminBookActivity.class);
+                        Toast.makeText(UpdateBookActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(UpdateBookActivity.this, AdminBookActivity.class);
                         startActivity(intent);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Book> call, Throwable throwable) {
-                    Toast.makeText(AddBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdateBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
                 }
             });
         }

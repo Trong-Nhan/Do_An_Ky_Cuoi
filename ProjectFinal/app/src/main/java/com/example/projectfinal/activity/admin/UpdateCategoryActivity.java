@@ -42,8 +42,14 @@ public class UpdateCategoryActivity extends AppCompatActivity {
     private View.OnClickListener listenerUpdateCategory = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            String cName;
             EditText edtName = findViewById(R.id.edit_category_name);
-            String cName = edtName.getText().toString();
+            if (edtName.getText().toString().equals("")) {
+                Toast.makeText(UpdateCategoryActivity.this, "Chưa nhập tên danh mục", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                cName = edtName.getText().toString();
+            }
 
             Category c = new Category(category.getId(), cName);
             CategoryAPI.categoryAPI.updateCategory(c).enqueue(new Callback<Category>() {
