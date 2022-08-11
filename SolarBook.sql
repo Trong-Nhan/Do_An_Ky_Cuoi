@@ -3,6 +3,7 @@ GO
 Use SolarBook
 GO
 
+
 Create Table tblCategory(
 	Id int primary key identity,
 	[Name] nvarchar(100) unique
@@ -27,7 +28,7 @@ Create Table tblBook(
 	PublishYear int,
 	Picture nvarchar(255),
 	Number int,
-	[Description] text, 
+	[Description] ntext, 
 	[Page] int, 
 	Rating float,
 	[Status] bit,
@@ -75,11 +76,11 @@ GO
 Create Table tblOrder(
 	Id int primary key identity,
 	UserId int,
-	OrderDate datetime,
+	OrderDate Date,
 	PromoCodeId int,
 	TotalPrice float,
 	CityId int,
-	ShippingAddress text,
+	ShippingAddress ntext,
 	ShippingPrice int,
 	PaymentId int,
 	Note nvarchar(255),
@@ -93,15 +94,27 @@ Create Table tblOrder(
 GO
 
 Create Table tblOrderDetail(
+	Id int primary key identity,
 	OrderId int,
 	BookId int,
-	Number int,
+	BookCount int
 
-	Primary Key (OrderId, BookId),
 	Foreign Key (OrderId) References tblOrder(Id),
 	Foreign Key (BookId) References tblBook(Id)
 )
 GO
+
+Create Table tblCart(
+	Id int primary key identity,
+	UserId int,
+	BookId int,
+	BookCount int
+
+	Foreign Key (UserId) References tblUser(Id),
+	Foreign Key (BookId) References tblBook(Id)
+)
+
+Insert Into tblCart(UserId, BookId, BookCount) Values (2, 1, 2), (2, 2, 1)
 
 Create Table tblNews(
 	Id int primary key identity,
@@ -128,11 +141,10 @@ Create Table tblRating(
 
 GO
 
-Select * From tblUser
 
 Insert Into tblCity(Name) Values (N'Hà Nội'), (N'TP. Hồ Chí Minh'), (N'Đà Nẵng');
 
-Insert Into tblUser(Name, Phone, Password, Email, CityId, Role) Values ('Admin', '0974079806', 'admin', 'tuanng16apu@gmail.com', 1, 'admin')
+Insert Into tblUser(Name, Phone, Password, Email, CityId, Role) Values ('Admin', '0974079806', '123456', 'tuanng16apu@gmail.com', 1, 'admin')
 Insert Into tblUser(Name, Phone, Password, Email, CityId, Role) Values (N'Nguyễn Tuấn Sơn', '0974079806', 'Ts311297', 'tson.nguyen3112@gmail.com', 1, 'user')
 
 
@@ -143,4 +155,20 @@ Insert Into tblNews(Name, Description, Detail, Picture, CreatedDate) Values (N'T
 Insert Into tblNews(Name, Description, Detail, Picture, CreatedDate) Values (N'Tin tuc', N'Mo ta', N'Chi tiet', 'news1.png','2006/12/12')
 go
 
-select * from tblNews
+Insert Into tblCategory(Name) Values (N'Sách thiếu nhi'), (N'Sách dành cho giới trẻ'), (N'Sách Chính trị - Xã hội'), (N'Tủ sách gia đình'), (N'Sách Giáo khoa - Giáo trình'), (N'Sách ngoại ngữ'), 
+(N'Sách Quản lý - Kinh tế'), (N'Sách Khoa học - Công nghệ'), (N'Sách Văn học - Nghệ thuật'), (N'Sách khác')
+GO
+Insert Into tblPublisher(Name) Values (N'Trẻ'), (N'Thanh Hóa'), (N'Lao Động - Xã Hội'), (N'Hội Nhà Văn')
+GO
+
+
+Insert Into tblBook(Name, CategoryId, Price, SalePrice, Author, PublisherId, PublishYear, Picture, Number, Description, Page, Status) Values
+(N'Harry Potter và Bảo Bối Tử Thần', 9, 210000, 0, 'J.K.Rowling', 1, 2021, '/storage/emulated/0/Pictures/book1.jpg', 11, N'Harry Potter đang chuẩn bị rời khoiar nhà Dursley', 846, 1),
+(N'Cuộc sống của bạn đã tốt đẹp chưa', 2, 63000, 0, 'Marcia Ullett', 2, 2016, '/storage/emulated/0/Pictures/book2.jpg', 7, N'Cuộc sống của bạn đã tốt đẹp chưa? ', 198, 1),
+(N'11 bí quyết giao tiếp để thành công', 2, 109000, 0, 'M.T.Lederman', 3, 2019, '/storage/emulated/0/Pictures/book3.jpg', 5, N'Trái với những gì nhiều chuyên gia về networking tư vấn', 284, 1),
+(N'Tiếng gọi nơi hoang dã', 9, 72000, 0, 'Jack London', 4, 2018, '/storage/emulated/0/Pictures/book4.jpg', 9, N'Tiếng gọi nơi hoang dã là cuốn sashc hay', 184, 1)
+GO
+
+Select * From tblCategory
+Select * From tblBook
+

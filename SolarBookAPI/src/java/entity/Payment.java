@@ -12,42 +12,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 /**
  *
- * @author acer
+ * @author MY PC
  */
 @Entity
-@Table(name = "tblCategory")
-public class Category implements Serializable {
-
-
+@Table(name = "tblPayment")
+public class Payment implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private Integer id;
-    @Size(max = 100)
+    private int id;
     @Column(name = "Name")
     private String name;
 
-    public Category() {
+    public Payment() {
     }
 
-    public Category(Integer id, String name) {
+    public Payment(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Category(String name) {
+    public Payment(String name) {
         this.name = name;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -58,4 +54,8 @@ public class Category implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    
+    
+    
 }
