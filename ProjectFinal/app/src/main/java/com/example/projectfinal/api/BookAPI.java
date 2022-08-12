@@ -14,6 +14,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface BookAPI {
     //Link API: http://localhost:8080/SolarBookAPI/solar_book/category/getcategory
@@ -38,4 +39,7 @@ public interface BookAPI {
 
     @GET("book/detailbook/{id}")
     Call<Book> detailBook(@Path("id") int id);
+
+    @GET("book/getbook/find")
+    Call<List<Book>> findByName(@Query("name") String name);
 }

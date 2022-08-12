@@ -38,6 +38,7 @@ public class AddCategoryActivity extends AppCompatActivity {
             EditText edtName = findViewById(R.id.edit_category_name);
             if (edtName.getText().toString().equals("")) {
                 Toast.makeText(AddCategoryActivity.this, "Chưa nhập tên danh mục", Toast.LENGTH_SHORT).show();
+                edtName.requestFocus();
                 return;
             } else {
                 cName = edtName.getText().toString();

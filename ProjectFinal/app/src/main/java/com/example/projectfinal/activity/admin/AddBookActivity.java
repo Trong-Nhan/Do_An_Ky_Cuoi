@@ -221,7 +221,8 @@ public class AddBookActivity extends AppCompatActivity {
             int bookYear, bookNumber, bookPage;
             boolean status;
             if (bookName.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Ch?a nh?p tên sách", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddBookActivity.this, "Chưa nhập tên sách", Toast.LENGTH_SHORT).show();
+                bookName.requestFocus();
                 return;
             } else {
                 edtName = bookName.getText().toString();
@@ -230,7 +231,8 @@ public class AddBookActivity extends AppCompatActivity {
             Category cat = (Category) spinCategory.getSelectedItem();
 
             if (price.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Ch?a nh?p giá sách", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddBookActivity.this, "Chưa nhập giá sách", Toast.LENGTH_SHORT).show();
+                price.requestFocus();
                 return;
             } else {
                 bookPrice = Float.parseFloat(price.getText().toString());
@@ -243,7 +245,8 @@ public class AddBookActivity extends AppCompatActivity {
             }
 
             if (author.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Ch?a nh?p tên tác gi?", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddBookActivity.this, "Chưa nhâp tên tác giả", Toast.LENGTH_SHORT).show();
+                author.requestFocus();
                 return;
             } else {
                 bookAuthor = author.getText().toString();
@@ -252,35 +255,39 @@ public class AddBookActivity extends AppCompatActivity {
             Publisher pub = (Publisher) spinPublisher.getSelectedItem();
 
             if (publisherYear.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Ch?a nh?p n?m xu?t b?n", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddBookActivity.this, "Chưa nhập năm xuất bản", Toast.LENGTH_SHORT).show();
+                publisherYear.requestFocus();
                 return;
             } else {
                 bookYear = Integer.parseInt(publisherYear.getText().toString());
             }
 
             if (imageName.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Ch?a có ?nh sách", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddBookActivity.this, "Chưa có ảnh sách", Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 imgName = RealPathUtil.getRealPath(AddBookActivity.this, mUri);
             }
 
             if (number.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Ch?a nh?p s? l??ng", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddBookActivity.this, "Chưa nhập số lượng", Toast.LENGTH_SHORT).show();
+                number.requestFocus();
                 return;
             } else {
                 bookNumber = Integer.parseInt(number.getText().toString());
             }
 
             if (description.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Ch?a nh?p mô t? sách", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddBookActivity.this, "Chưa nhập mô tả sách", Toast.LENGTH_SHORT).show();
+                description.requestFocus();
                 return;
             } else {
                 bookDesc = description.getText().toString();
             }
 
             if (page.getText().toString().equals("")) {
-                Toast.makeText(AddBookActivity.this, "Ch?a có trang sách", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddBookActivity.this, "Chưa nhập số trang sách", Toast.LENGTH_SHORT).show();
+                page.requestFocus();
                 return;
             } else {
                 bookPage = Integer.parseInt(page.getText().toString());
@@ -293,7 +300,7 @@ public class AddBookActivity extends AppCompatActivity {
             } else if (raBtnDisplay.isChecked()) {
                 status = true;
             } else {
-                Toast.makeText(AddBookActivity.this, "Ch?a ch?n tr?ng thái", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddBookActivity.this, "Chưa chọn trạng thái", Toast.LENGTH_SHORT).show();
                 return;
             }
 
