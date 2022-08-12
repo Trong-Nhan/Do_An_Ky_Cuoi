@@ -47,10 +47,11 @@ import retrofit2.Response;
 
 public class AddNewsActivity extends AppCompatActivity {
     private static final int MY_REQUEST_CODE = 10;
-    ImageView imgView;
+    private ImageView imgView;
+//    private TextView imageName;
     private Uri mUri;
     public static final String TAG = MainActivity.class.getName();
-    Button btnSelectImg;
+    private Button btnSelectImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +81,23 @@ public class AddNewsActivity extends AppCompatActivity {
             EditText edtName = findViewById(R.id.edit_news_name);
             EditText edtDescription = findViewById(R.id.edit_news_description);
             EditText edtDetail = findViewById(R.id.edit_news_detail);
+//            imageName = findViewById(R.id.image_name);
             String edtPicture = RealPathUtil.getRealPath(AddNewsActivity.this, mUri);
             EditText edtCreatedDate = findViewById(R.id.edit_news_createdDate);
 
             SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
             try {
+                //kiem tra hinh anh da duoc chon hay chua
+                if (
+//                        "".equals(imageName.getText().toString()) ||
+                        "".equals(edtName.getText().toString()) ||
+                        "".equals(edtDescription.getText().toString()) ||
+                        "".equals(edtDetail.getText().toString()) ||
+                        "".equals(edtCreatedDate.getText().toString())
+                ) {
+                    Toast.makeText(AddNewsActivity.this, "Chưa nhập đủ các trường", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String nName = edtName.getText().toString();
                 String nDescription = edtDescription.getText().toString();
                 String nDetail = edtDetail.getText().toString();
@@ -187,6 +200,7 @@ public class AddNewsActivity extends AppCompatActivity {
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                             imgView.setImageBitmap(bitmap);
+//                            imageName.setText(getNameImg());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

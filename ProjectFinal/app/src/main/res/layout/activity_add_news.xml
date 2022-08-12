@@ -64,6 +64,14 @@
             android:layout_marginTop="10dp"
             android:src="@mipmap/ic_launcher" />
 
+        <TextView
+            android:id="@+id/image_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
         <Button
             android:id="@+id/btn_select"
             android:layout_width="match_parent"

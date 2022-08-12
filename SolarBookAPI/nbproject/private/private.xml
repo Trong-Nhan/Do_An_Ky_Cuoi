@@ -3,6 +3,33 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/E:/Study/Android/Final_Project/Project/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/UserService.java</file>
+            <file>file:/E:/Study/Android/Final_Project/Project/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplUserDAO.java</file>
+            <file>file:/E:/Study/Android/Final_Project/Project/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/BookService.java</file>
+            <file>file:/E:/Study/Android/Final_Project/Project/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplBookDAO.java</file>
+            <file>file:/E:/Study/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/UserService.java</file>
+            <file>file:/E:/Study/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/NewsDAO.java</file>
+            <file>file:/E:/Study/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/entity/News.java</file>
+            <file>file:/E:/Study/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/NewsService.java</file>
+            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplCityDAO.java</file>
+            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/BookService.java</file>
+            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplCityDAO.java</file>
+            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/BookService.java</file>
+        </group>
+        <group>
+            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/hibernate.cfg.xml</file>
+            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/org/netbeans/rest/application/config/ApplicationConfig.java</file>
+        </group>
+        <group>
+            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/hibernate.cfg.xml</file>
+            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/org/netbeans/rest/application/config/ApplicationConfig.java</file>
+        </group>
+        <group>
+            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/hibernate.cfg.xml</file>
+            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/org/netbeans/rest/application/config/ApplicationConfig.java</file>
+            <file>file:/E:/Study/Android/Final_Project/Project/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/BookService.java</file>
+        </group>
+        <group>
             <file>file:/E:/Study/Android/Final_Project/Project/Do_An_Ky_Cuoi/SolarBookAPI/src/java/entity/Publisher.java</file>
             <file>file:/E:/Study/Android/Final_Project/Project/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/UserService.java</file>
             <file>file:/E:/Study/Android/Final_Project/Project/Do_An_Ky_Cuoi/SolarBookAPI/src/java/entity/News.java</file>
