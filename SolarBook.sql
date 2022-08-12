@@ -143,5 +143,4 @@ Insert Into tblNews(Name, Description, Detail, Picture, CreatedDate) Values (N'T
 Insert Into tblNews(Name, Description, Detail, Picture, CreatedDate) Values (N'Tin tuc', N'Mo ta', N'Chi tiet', 'news1.png','2006/12/12')
 go
 
-Truncate table tblNews
-go
+select * from tblNews
