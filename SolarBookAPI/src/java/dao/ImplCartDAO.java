@@ -69,5 +69,20 @@ public class ImplCartDAO implements ICartDAO{
         session.close();
         return data;
     }
+
+    @Override
+    public void deleteByBookId(int userId, int bookId) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+        Query q = session.createQuery("Delete Cart c Where c.userId = :userId AND c.bookId = :bookId");
+        q.setParameter("userId", userId);
+        q.setParameter("bookId", bookId);
+        q.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+
+    }
+     
+     
     
 }

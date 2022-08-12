@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                login();
                 String loginEmail = edtLoginEmail.getText().toString().trim();
                 CheckBox chbRemember = findViewById(R.id.chbRemember);
                 //khi check vào nút ghi nhớ sẽ ghi nhớ dữ liệu user trên SharedPreferences
@@ -86,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
                 }
-                login();
+
             }
         });
 
@@ -113,65 +114,72 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        //khai báo biến check tài khoản mật khẩu của người dùng
-        boolean hasUser = false;
-        //khai báo biến check role của người dùng
-        boolean isRole = false;
-        for (User user : mLst) {
-            //nếu trùng tài khoản và mật khẩu với user thì hasUser là true
-            if (user.getEmail().equals(loginEmail) || user.getPassword().equals(loginPassword)) {
-                hasUser = true;
-                //nếu role là admin thì biến isRole là true
-                if (user.getRole().equals("admin")) {
-                    isRole = true;
+        if(loginEmail.isEmpty() || loginPassword.isEmpty()){
+            Toast.makeText(this, "Xin mời nhập Email và mật khẩu", Toast.LENGTH_SHORT).show();
+        }else{
+            //khai báo biến check tài khoản mật khẩu của người dùng
+            boolean hasUser = false;
+            //khai báo biến check role của người dùng
+            boolean isRole = false;
+            for (User user : mLst) {
+                //nếu trùng tài khoản và mật khẩu với user thì hasUser là true
+                if (user.getEmail().equals(loginEmail) && user.getPassword().equals(loginPassword)) {
+                    hasUser = true;
+                    //nếu role là admin thì biến isRole là true
+                    if (user.getRole().equals("admin")) {
+                        isRole = true;
+                    }
+                    break;
                 }
-                break;
+            }
+
+            if (hasUser) {
+                if (isRole) { //role admin
+                    UserAPI.userApi.getUserByEmail(loginEmail).enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+                            mUser = response.body();
+                            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("userInfo", mUser);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            Toast.makeText(LoginActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else { //role user
+                    UserAPI.userApi.getUserByEmail(loginEmail).enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+                            mUser = response.body();
+
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("userInfo", mUser);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+
+
+                            Toast.makeText(LoginActivity.this, "Xin chào: " + mUser.getName(), Toast.LENGTH_SHORT).show();
+                            ;
+                        }
+
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            Toast.makeText(LoginActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            } else {
+                Toast.makeText(LoginActivity.this, "Sai email và mật khẩu, xin thử lại", Toast.LENGTH_SHORT).show();
             }
         }
-        if (hasUser) {
-            if (isRole) { //role admin
-                UserAPI.userApi.getUserByEmail(loginEmail).enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        mUser = response.body();
-                        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("userInfo", mUser);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } else { //role user
-                UserAPI.userApi.getUserByEmail(loginEmail).enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        mUser = response.body();
-
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("userInfo", mUser);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
 
 
-                        Toast.makeText(LoginActivity.this, "Xin chào: " + mUser.getName(), Toast.LENGTH_SHORT).show();
-                        ;
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        } else {
-            Toast.makeText(LoginActivity.this, "Sai email và mật khẩu, xin thử lại", Toast.LENGTH_SHORT).show();
-        }
     }
 
 

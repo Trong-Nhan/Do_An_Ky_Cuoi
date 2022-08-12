@@ -57,6 +57,12 @@ public class CartService {
     public void deleteCart(@PathParam("id") int id){
         cDAO.delete(id);
     }
+    @DELETE
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("{userId}/{bookId}")
+    public void deleteCartByBookId(@PathParam("userId") int userId, @PathParam("bookId") int bookId){
+        cDAO.deleteByBookId(userId, bookId);
+    }
     
     @POST
     @Produces(MediaType.TEXT_PLAIN)

@@ -18,5 +18,6 @@ public interface ICartDAO {
     public void insert(Cart c);
     public void delete(int userId);
     public List<Cart> getNumberByUser(int userId);
+    public void deleteByBookId(int userId, int bookId);
 }
 

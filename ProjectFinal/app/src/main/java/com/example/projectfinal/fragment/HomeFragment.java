@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectfinal.R;
+import com.example.projectfinal.activity.MainActivity;
 import com.example.projectfinal.activity.SearchByName;
 import com.example.projectfinal.adapter.BookAdapter;
 import com.example.projectfinal.adapter.HomeNewsAdapter;
@@ -26,6 +27,7 @@ import com.example.projectfinal.api.BookAPI;
 import com.example.projectfinal.api.NewsAPI;
 import com.example.projectfinal.entity.Book;
 import com.example.projectfinal.entity.News;
+import com.example.projectfinal.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +37,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
+    private MainActivity mMainActivity;
     private BookAdapter mBookAdapter;
     private HomeNewsAdapter mHomeNewsAdapter;
     private List<Book> mLstBook = new ArrayList<>();
     private List<News> mLstNews = new ArrayList<>();
+    RecyclerView rcvHomeNews,rcvBook;
+    private User mUser;
     private RecyclerView rcvHomeNews, rcvBook, rcvPopularBook, rcvDiscountBook;
     private SearchView searchView;
 
@@ -46,6 +51,8 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        mMainActivity = (MainActivity) getActivity();
+        mUser = mMainActivity.getmUser();
 
         rcvBook = view.findViewById(R.id.rcvNewBook);
         rcvPopularBook = view.findViewById(R.id.rcvPopularBook);
@@ -113,6 +120,7 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
                 if (response.isSuccessful()) {
                     mLstBook = response.body();
+                    mBookAdapter = new BookAdapter(getActivity(), mLstBook, mUser);
                     for (int i = 0; i < mLstBook.size(); i++) {
                         Book b = mLstBook.get(i);
                         if (b.isStatus() == false) {
