@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projectfinal.R;
 import com.example.projectfinal.activity.BookDetailActivity;
 import com.example.projectfinal.entity.Book;
+import com.example.projectfinal.entity.User;
 
 
 import java.io.File;
@@ -29,10 +30,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     private Context mCtx;
     private List<Book> mLst;
+    private User mUser;
 
-    public BookAdapter(Context context, List<Book> list) {
+
+    public BookAdapter(Context context, List<Book> list, User user) {
         this.mCtx = context;
         this.mLst = list;
+        this.mUser = user;
     }
 
     @NonNull
@@ -73,6 +77,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Intent intent = new Intent(mCtx, BookDetailActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("object_book", b);
+        bundle.putSerializable("object_user", mUser);
         intent.putExtras(bundle);
         mCtx.startActivity(intent);
     }
