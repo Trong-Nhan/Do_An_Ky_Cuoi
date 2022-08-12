@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=SolarBook</property>
-        <property name="hibernate.connection.username">sa</property>
-        <property name="hibernate.connection.password">1234$</property>
-        <property name="hibernate.current_session_context_class">thread</property>
-        <mapping class="entity.User"/>
-        <mapping class="entity.Category"/>
-        <mapping class="entity.Publisher"/>        
-        <mapping class="entity.Book"/>
-        <mapping class="entity.City"/>
-        <mapping class="entity.News"/>
-    </session-factory>
+  <session-factory>
+    <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=SolarBook</property>
+    <property name="hibernate.connection.username">sa</property>
+    <property name="hibernate.connection.password">1234$</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <mapping class="entity.User"/>
+    <mapping class="entity.Category"/>
+    <mapping class="entity.Publisher"/>
+    <mapping class="entity.Book"/>
+    <mapping class="entity.City"/>
+    <mapping class="entity.News"/>
+    <mapping class="entity.Cart"/>
+    <mapping class="entity.OrderDetail"/>
+    <mapping class="entity.Payment"/>
+    <mapping class="entity.BookOrder"/>
+    <mapping class="entity.PromoCode"/>
+  </session-factory>
 </hibernate-configuration>
