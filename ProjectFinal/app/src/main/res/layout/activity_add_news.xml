@@ -109,7 +109,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/holo_red_dark"
-                android:text="Hủy bỏ" />
+                android:text="Nhập lại" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

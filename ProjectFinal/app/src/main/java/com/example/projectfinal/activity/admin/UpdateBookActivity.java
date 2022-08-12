@@ -80,10 +80,12 @@ public class UpdateBookActivity extends AppCompatActivity {
         page.setText(String.valueOf(book.getPage()));
         number.setText(String.valueOf(book.getNumber()));
         description.setText(book.getDescription());
+
         File file = new File(book.getPicture());
         Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
         imageName.setText(file.getName());
         imgView.setImageBitmap(bitmap);
+
         if (book.isStatus() == true) {
             raBtnDisplay.setChecked(true);
         } else {
