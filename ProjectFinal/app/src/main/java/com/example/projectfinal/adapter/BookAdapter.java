@@ -46,9 +46,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         final Book b = mLst.get(position);
-        if (b == null) {
-            return;
-        }
         //Hien thi anh
         File imgFile = new File(b.getPicture());
         Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
@@ -56,8 +53,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         holder.bookName.setText(b.getName());
         holder.bookAuthor.setText(b.getAuthor());
-        holder.price.setText(b.getPrice().toString());
-        holder.salePrice.setText(b.getSalePrice().toString());
+        holder.price.setText(String.format("%.0f",b.getPrice()));
+        holder.salePrice.setText(String.format("%.0f",b.getSalePrice()));
         holder.ratingBar.setRating(b.getRating());
         //khi ấn vào hình quyển sách
         holder.layoutDetailBook.setOnClickListener(new View.OnClickListener() {
@@ -79,16 +76,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     @Override
     public int getItemCount() {
-//        if (mLst != null) {
-//            if (mLst.size() > 4) {
-//                return 4;
-//            }
-//            return mLst.size();
-//        }
-//        return 0;
-        return mLst.size();
+        if (mLst != null) {
+            return mLst.size();
+        }
+        return 0;
     }
 
+    //Khai báo các thành phần trong view
     public static class BookViewHolder extends RecyclerView.ViewHolder {
 
         private TextView bookName;
@@ -113,7 +107,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             category = itemView.findViewById(R.id.book_category);
             description = itemView.findViewById(R.id.book_description);
             layoutDetailBook = itemView.findViewById(R.id.layout_detail_book);
-
         }
     }
 }

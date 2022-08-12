@@ -62,9 +62,9 @@ public class AdminBookAdapter extends ArrayAdapter<Book> {
         imgBook.setImageBitmap(myBitmap);
 
         txtName.setText(c.getName());
-        txtAuthor.setText(c.getName());
-        txtPrice.setText(String.valueOf(c.getPrice()));
-        txtSale.setText(String.valueOf(c.getSalePrice()));
+        txtAuthor.setText(c.getAuthor());
+        txtPrice.setText(String.format("%.0f", c.getPrice()));
+        txtSale.setText(String.format("%.0f", c.getSalePrice()));
         txtNumber.setText(String.valueOf(c.getNumber()));
         return item;
     }
