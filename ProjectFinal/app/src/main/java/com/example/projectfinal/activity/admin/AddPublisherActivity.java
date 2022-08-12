@@ -35,6 +35,7 @@ public class AddPublisherActivity extends AppCompatActivity {
             EditText edtName = findViewById(R.id.edit_publisher_name);
             if (edtName.getText().toString().equals("")) {
                 Toast.makeText(AddPublisherActivity.this, "Chưa nhập tên nhà xuất bản", Toast.LENGTH_SHORT).show();
+                edtName.requestFocus();
                 return;
             } else {
                 cName = edtName.getText().toString();

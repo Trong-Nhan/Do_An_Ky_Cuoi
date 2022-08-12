@@ -70,8 +70,10 @@ public class UpdateNewsActivity extends AppCompatActivity {
         edtCreatedDate = findViewById(R.id.edit_news_createdDate);
         Button btnAdd = findViewById(R.id.btn_add_news);
         Button btnUpdate = findViewById(R.id.btn_update_news);
+        Button btnReset = findViewById(R.id.btn_cancel_news);
         imgView = findViewById(R.id.img_from_gallery);
         imageName = findViewById(R.id.image_name);
+
         //an hien cac truong can hien thi tren form
         btnAdd.setVisibility(View.GONE);
         btnUpdate.setVisibility(View.VISIBLE);
@@ -87,18 +89,26 @@ public class UpdateNewsActivity extends AppCompatActivity {
         edtName.setText(mNews.getName());
         edtDescription.setText(mNews.getDescription());
         edtDetail.setText(mNews.getDetail());
-        //
+
+        //xu ly anh
         File imgFile = new File(mNews.getPicture());
         Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        imageName.setText(imgFile.getName());
         imgView.setImageBitmap(myBitmap);
+
         //chuyen kieu du lieu Date sang kieu String
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         edtCreatedDate.setText(formatter.format(mNews.getCreatedDate()));
 
         //an nut update
         btnUpdate.setOnClickListener(listenerUpdateNews);
+
+        //an nut reset
+        btnReset.setOnClickListener(listenerResetNews);
+
         //ấn nút chọn ảnh
         btnSelectImg = findViewById(R.id.btn_select);
+
         //Nhấn nút chọn ảnh trong gallery
         btnSelectImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,68 +116,6 @@ public class UpdateNewsActivity extends AppCompatActivity {
                 onClickRepestPermisson();
             }
         });
-    }
-
-    //ham goi su kien update
-    private View.OnClickListener listenerUpdateNews = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                String nName = edtName.getText().toString();
-                String nDescription = edtDescription.getText().toString();
-                String nDetail = edtDetail.getText().toString();
-
-                //kiem tra hinh anh da duoc chon hay chua
-                if ("".equals(imageName.getText().toString())) {
-                    Toast.makeText(UpdateNewsActivity.this, "Chưa có ảnh tin tức", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                String edtPicture = RealPathUtil.getRealPath(UpdateNewsActivity.this, mUri);
-
-                String nCreatedDate = edtCreatedDate.getText().toString();
-                //chuyen kieu du lieu String sang kieu Date
-                Date strDate = formatter.parse(nCreatedDate);
-                //goi constructor
-                News n = new News(mNews.getId(), nName, nDescription, nDetail, edtPicture, strDate);
-                //bat dau update
-                NewsAPI.newsAPI.updateNews(n).enqueue(new Callback<News>() {
-                    @Override
-                    public void onResponse(Call<News> call, Response<News> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(UpdateNewsActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(UpdateNewsActivity.this, AdminNewsActivity.class);
-                            startActivity(intent);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<News> call, Throwable throwable) {
-                        Toast.makeText(UpdateNewsActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-    };
-
-    public void openDatePicker(View view) {
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar c = Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                EditText edtCreatedDate = findViewById(R.id.edit_news_createdDate);
-                SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-                Calendar c = Calendar.getInstance();
-                c.set(year, month, day);
-                edtCreatedDate.setText(fmt.format(c.getTime()));
-            }
-        };
-
-        DatePickerDialog dialog = new DatePickerDialog(this, listener, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
-        dialog.show();
     }
 
     //Check phiên bản Android
@@ -234,4 +182,103 @@ public class UpdateNewsActivity extends AppCompatActivity {
                 }
             }
     );
+
+
+    //ham goi su kien update
+    private View.OnClickListener listenerUpdateNews = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+
+                //kiem tra ca truong thong tin da duoc nhap du hay chua
+                if (
+                        "".equals(edtName.getText().toString()) ||
+                                "".equals(edtDescription.getText().toString()) ||
+                                "".equals(edtDetail.getText().toString()) ||
+                                "".equals(edtCreatedDate.getText().toString())
+                ) {
+                    Toast.makeText(UpdateNewsActivity.this, "Chưa nhập đủ các trường", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //xu ly phan hinh anh
+                String edtPicture = "";
+                File file = new File(mNews.getPicture());
+                if (file.getName().equals(imageName.getText().toString())) {
+                    edtPicture = mNews.getPicture();
+                } else {
+                    edtPicture = RealPathUtil.getRealPath(UpdateNewsActivity.this, mUri);
+                }
+
+
+                String nName = edtName.getText().toString();
+                String nDescription = edtDescription.getText().toString();
+                String nDetail = edtDetail.getText().toString();
+                String nCreatedDate = edtCreatedDate.getText().toString();
+                //chuyen kieu du lieu String sang kieu Date
+                Date strDate = formatter.parse(nCreatedDate);
+                //goi constructor
+                News n = new News(mNews.getId(), nName, nDescription, nDetail, edtPicture, strDate);
+                //bat dau update
+                NewsAPI.newsAPI.updateNews(n).enqueue(new Callback<News>() {
+                    @Override
+                    public void onResponse(Call<News> call, Response<News> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(UpdateNewsActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(UpdateNewsActivity.this, AdminNewsActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<News> call, Throwable throwable) {
+                        Toast.makeText(UpdateNewsActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    //ham goi su kien reset cac truong thong tin
+    private View.OnClickListener listenerResetNews = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            edtName.setText("");
+            edtDescription.setText("");
+            edtDetail.setText("");
+            edtCreatedDate.setText("");
+            imageName.setText("");
+            imgView.setImageBitmap(null);
+        }
+    };
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(UpdateNewsActivity.this, AdminNewsActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
+    }
+
+    public void openDatePicker(View view) {
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                EditText edtCreatedDate = findViewById(R.id.edit_news_createdDate);
+                SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar c = Calendar.getInstance();
+                c.set(year, month, day);
+                edtCreatedDate.setText(fmt.format(c.getTime()));
+            }
+        };
+
+        DatePickerDialog dialog = new DatePickerDialog(this, listener, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        dialog.show();
+    }
+
+
 }

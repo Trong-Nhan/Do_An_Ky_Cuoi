@@ -23,6 +23,12 @@
             android:name=".activity.CartActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.SearchByName"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BookByCategory"
+            android:exported="false" />
+        <activity
             android:name=".activity.admin.UpdateBookActivity"
             android:exported="false" />
         <activity

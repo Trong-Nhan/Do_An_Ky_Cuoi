@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +59,7 @@ public class UpdateBookActivity extends AppCompatActivity {
     private Uri mUri;
     private TextView imageName;
     private Book book = new Book();
+    private RadioButton raBtnHide, raBtnDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,15 +74,23 @@ public class UpdateBookActivity extends AppCompatActivity {
         //load dữ liệu
         bookName.setText(book.getName());
         author.setText(book.getAuthor());
-        price.setText(String.valueOf(book.getPrice()));
-        salePrice.setText(String.valueOf(book.getSalePrice()));
+        price.setText(String.format("%.0f",book.getPrice()));
+        salePrice.setText(String.format("%.0f",book.getSalePrice()));
         publisherYear.setText(String.valueOf(book.getPublishYear()));
         page.setText(String.valueOf(book.getPage()));
         number.setText(String.valueOf(book.getNumber()));
         description.setText(book.getDescription());
+
         File file = new File(book.getPicture());
         Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+        imageName.setText(file.getName());
         imgView.setImageBitmap(bitmap);
+
+        if (book.isStatus() == true) {
+            raBtnDisplay.setChecked(true);
+        } else {
+            raBtnHide.setChecked(true);
+        }
 
         //Nhấn nút chọn ảnh trong gallery
         btnSelectImg.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +120,8 @@ public class UpdateBookActivity extends AppCompatActivity {
         spinCategory = findViewById(R.id.spin_category);
         spinPublisher = findViewById(R.id.spin_publisher);
         imageName = findViewById(R.id.image_name);
+        raBtnHide = findViewById(R.id.ra_btn_hide);
+        raBtnDisplay = findViewById(R.id.ra_btn_display);
         getListCategory();
         getListPublisher();
     }
@@ -210,10 +222,9 @@ public class UpdateBookActivity extends AppCompatActivity {
                         if (data == null) {
                             return;
                         }
-                        Uri uri = data.getData();
-                        mUri = uri;
+                        mUri = data.getData();
                         try {
-                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mUri);
                             imgView.setImageBitmap(bitmap);
                             imageName.setText(getNameImg());
                         } catch (IOException e) {
@@ -231,9 +242,11 @@ public class UpdateBookActivity extends AppCompatActivity {
             float bookSale, bookPrice;
             String edtName, bookAuthor, imgName, bookDesc;
             int bookYear, bookNumber, bookPage;
+            boolean status;
 
             if (bookName.getText().toString().equals("")) {
                 Toast.makeText(UpdateBookActivity.this, "Chưa nhập tên sách", Toast.LENGTH_SHORT).show();
+                bookName.requestFocus();
                 return;
             } else {
                 edtName = bookName.getText().toString();
@@ -243,6 +256,7 @@ public class UpdateBookActivity extends AppCompatActivity {
 
             if (price.getText().toString().equals("")) {
                 Toast.makeText(UpdateBookActivity.this, "Chưa nhập giá sách", Toast.LENGTH_SHORT).show();
+                price.requestFocus();
                 return;
             } else {
                 bookPrice = Float.parseFloat(price.getText().toString());
@@ -256,6 +270,7 @@ public class UpdateBookActivity extends AppCompatActivity {
 
             if (author.getText().toString().equals("")) {
                 Toast.makeText(UpdateBookActivity.this, "Chưa nhập tên tác giả", Toast.LENGTH_SHORT).show();
+                author.requestFocus();
                 return;
             } else {
                 bookAuthor = author.getText().toString();
@@ -265,42 +280,55 @@ public class UpdateBookActivity extends AppCompatActivity {
 
             if (publisherYear.getText().toString().equals("")) {
                 Toast.makeText(UpdateBookActivity.this, "Chưa nhập năm xuất bản", Toast.LENGTH_SHORT).show();
+                publisherYear.requestFocus();
                 return;
             } else {
                 bookYear = Integer.parseInt(publisherYear.getText().toString());
             }
 
-            if (imageName.getText().toString().equals("")) {
-                Toast.makeText(UpdateBookActivity.this, "Chưa có ảnh sách", Toast.LENGTH_SHORT).show();
-                return;
+            File file = new File(book.getPicture());
+            if (imageName.getText().toString().equals(file.getName())) {
+                imgName = book.getPicture();
             } else {
                 imgName = RealPathUtil.getRealPath(UpdateBookActivity.this, mUri);
             }
 
             if (number.getText().toString().equals("")) {
-                Toast.makeText(UpdateBookActivity.this, "Chưa có số lượng", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Chưa nhập số lượng", Toast.LENGTH_SHORT).show();
+                number.requestFocus();
                 return;
             } else {
                 bookNumber = Integer.parseInt(number.getText().toString());
             }
 
             if (description.getText().toString().equals("")) {
-                Toast.makeText(UpdateBookActivity.this, "Chưa mô tả sách", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Chưa nhập mô tả sách", Toast.LENGTH_SHORT).show();
+                description.requestFocus();
                 return;
             } else {
                 bookDesc = description.getText().toString();
             }
 
             if (page.getText().toString().equals("")) {
-                Toast.makeText(UpdateBookActivity.this, "Chưa có trang sách", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Chưa nhập số trang sách", Toast.LENGTH_SHORT).show();
+                page.requestFocus();
                 return;
             } else {
                 bookPage = Integer.parseInt(page.getText().toString());
             }
-            float rating = 2;
-            boolean status = true;
 
-            Book b = new Book(book.getId(),edtName, cat.getId(), bookPrice, bookSale, bookAuthor, pub.getId(), bookYear, imgName, bookNumber, bookDesc, bookPage, rating, status);
+            float rating = 0;
+
+            if (raBtnHide.isChecked()) {
+                status = false;
+            } else if (raBtnDisplay.isChecked()) {
+                status = true;
+            } else {
+                Toast.makeText(UpdateBookActivity.this, "Chưa chọn trạng thái", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Book b = new Book(book.getId(), edtName, cat.getId(), bookPrice, bookSale, bookAuthor, pub.getId(), bookYear, imgName, bookNumber, bookDesc, bookPage, rating, status);
 
             BookAPI.bookAPI.updateBook(b).enqueue(new Callback<Book>() {
                 @Override

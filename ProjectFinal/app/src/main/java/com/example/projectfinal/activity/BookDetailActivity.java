@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,7 +64,8 @@ public class BookDetailActivity extends AppCompatActivity {
         File imgFile = new File(mBook.getPicture());
         Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
         imgView.setImageBitmap(myBitmap);
-
+        RatingBar ratingBar = findViewById(R.id.rating_bar);
+        ratingBar.setRating(book.getRating());
         TextView tvAuthor = findViewById(R.id.book_author);
         tvAuthor.setText(mBook.getAuthor());
         TextView tvPrice = findViewById(R.id.book_price);
