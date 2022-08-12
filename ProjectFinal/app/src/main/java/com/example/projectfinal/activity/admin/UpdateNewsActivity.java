@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -51,7 +52,8 @@ public class UpdateNewsActivity extends AppCompatActivity {
     private EditText edtDetail;
     private EditText edtCreatedDate;
     private static final int MY_REQUEST_CODE = 10;
-    ImageView imgView;
+    private ImageView imgView;
+    private TextView imageName;
     private Uri mUri;
     public static final String TAG = MainActivity.class.getName();
     Button btnSelectImg;
@@ -69,6 +71,7 @@ public class UpdateNewsActivity extends AppCompatActivity {
         Button btnAdd = findViewById(R.id.btn_add_news);
         Button btnUpdate = findViewById(R.id.btn_update_news);
         imgView = findViewById(R.id.img_from_gallery);
+        imageName = findViewById(R.id.image_name);
         //an hien cac truong can hien thi tren form
         btnAdd.setVisibility(View.GONE);
         btnUpdate.setVisibility(View.VISIBLE);
@@ -114,7 +117,14 @@ public class UpdateNewsActivity extends AppCompatActivity {
                 String nName = edtName.getText().toString();
                 String nDescription = edtDescription.getText().toString();
                 String nDetail = edtDetail.getText().toString();
+
+                //kiem tra hinh anh da duoc chon hay chua
+                if ("".equals(imageName.getText().toString())) {
+                    Toast.makeText(UpdateNewsActivity.this, "Chưa có ảnh tin tức", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String edtPicture = RealPathUtil.getRealPath(UpdateNewsActivity.this, mUri);
+
                 String nCreatedDate = edtCreatedDate.getText().toString();
                 //chuyen kieu du lieu String sang kieu Date
                 Date strDate = formatter.parse(nCreatedDate);
@@ -216,6 +226,7 @@ public class UpdateNewsActivity extends AppCompatActivity {
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                             imgView.setImageBitmap(bitmap);
+                            imageName.setText(getNameImg());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

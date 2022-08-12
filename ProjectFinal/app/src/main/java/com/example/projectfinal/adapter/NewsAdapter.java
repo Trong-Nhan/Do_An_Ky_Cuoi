@@ -2,6 +2,8 @@ package com.example.projectfinal.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.example.projectfinal.activity.NewsDetailActivity;
 import com.example.projectfinal.entity.Book;
 import com.example.projectfinal.entity.News;
 
+import java.io.File;
 import java.util.List;
 
 
@@ -46,7 +49,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         if (n == null) {
             return;
         }
-        holder.imgNews.setImageResource(getImageId(mCtx, n.getPicture()));
+
+        //Hien thi anh
+//        holder.imgNews.setImageResource(getImageId(mCtx, n.getPicture()));
+        File imgFile = new File(n.getPicture());
+        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        holder.imgNews.setImageBitmap(myBitmap);
+
         holder.txtNewsTitle.setText(n.getDescription());
         //khi ấn vào tin tức
         holder.layoutDetailNews.setOnClickListener(new View.OnClickListener() {
@@ -66,10 +75,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         mCtx.startActivity(intent);
     }
 
-    private int getImageId(Context context, String imageName) {
-        return context.getResources().getIdentifier("drawable/"
-                + imageName, null, context.getPackageName());
-    }
+//    private int getImageId(Context context, String imageName) {
+//        return context.getResources().getIdentifier("drawable/"
+//                + imageName, null, context.getPackageName());
+//    }
 
     @Override
     public int getItemCount() {
