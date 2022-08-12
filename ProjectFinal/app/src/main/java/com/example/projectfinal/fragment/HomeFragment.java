@@ -34,18 +34,27 @@ public class HomeFragment extends Fragment {
     private HomeNewsAdapter mHomeNewsAdapter;
     private List<Book> mLstBook = new ArrayList<>();
     private List<News> mLstNews = new ArrayList<>();
-    RecyclerView rcvHomeNews,rcvBook;
+    RecyclerView rcvHomeNews, rcvBook, rcvPopularBook, rcvDiscountBook;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        getListBook();
         rcvBook = view.findViewById(R.id.rcvNewBook);
+        rcvPopularBook = view.findViewById(R.id.rcvPopularBook);
+        rcvDiscountBook = view.findViewById(R.id.rcvDiscountBook);
+
+        //Lấy tất cả sách
+        getListBook();
+
+        //Lấy sách có category = 1
+        getListBookCa();
         //set dữ liệu lên RecycleView New Book
-        rcvBook.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        rcvBook.setAdapter(mBookAdapter);
+
+        //Lấy sách có giả giám
+        getListBookSale();
+        //set dữ liệu lên RecycleView New Book
 
         getListNews();
         rcvHomeNews = view.findViewById(R.id.rcvHomeNews);
@@ -75,13 +84,22 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    //Tất cả
     private void getListBook() {
         BookAPI.bookAPI.getBook().enqueue(new Callback<List<Book>>() {
             @Override
             public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
                 if (response.isSuccessful()) {
                     mLstBook = response.body();
+                    for (int i = 0; i < mLstBook.size(); i++) {
+                        Book b = mLstBook.get(i);
+                        if (b.isStatus() == false) {
+                            mLstBook.remove(i);
+                        }
+                    }
                     mBookAdapter = new BookAdapter(getActivity(), mLstBook);
+                    //set dữ liệu lên RecycleView New Book
+                    rcvBook.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                     rcvBook.setAdapter(mBookAdapter);
                 }
             }
@@ -93,4 +111,57 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    //Lấy book có categoryId = 1
+    private void getListBookCa() {
+        BookAPI.bookAPI.getBook().enqueue(new Callback<List<Book>>() {
+            @Override
+            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+                if (response.isSuccessful()) {
+                    mLstBook = response.body();
+                    for (int i = 0; i < mLstBook.size(); i++) {
+                        Book b = mLstBook.get(i);
+                        if (b.isStatus() == false || b.getCategoryId() != 3) {
+                            i = i - 1;
+                            mLstBook.remove(b);
+                        }
+                    }
+                    mBookAdapter = new BookAdapter(getActivity(), mLstBook);
+                    rcvPopularBook.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+                    rcvPopularBook.setAdapter(mBookAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Book>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //Lấy book có giảm giá
+    private void getListBookSale() {
+        BookAPI.bookAPI.getBook().enqueue(new Callback<List<Book>>() {
+            @Override
+            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+                if (response.isSuccessful()) {
+                    mLstBook = response.body();
+                    for (int i = 0; i < mLstBook.size(); i++) {
+                        Book b = mLstBook.get(i);
+                        if (b.isStatus() == false || b.getSalePrice() == 0) {
+                            i = i - 1;
+                            mLstBook.remove(b);
+                        }
+                    }
+                    mBookAdapter = new BookAdapter(getActivity(), mLstBook);
+                    rcvDiscountBook.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+                    rcvDiscountBook.setAdapter(mBookAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Book>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.projectfinal.R;
@@ -33,7 +34,8 @@ public class BookDetailActivity extends AppCompatActivity {
         File imgFile = new File(book.getPicture());
         Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
         imgView.setImageBitmap(myBitmap);
-
+        RatingBar ratingBar = findViewById(R.id.rating_bar);
+        ratingBar.setRating(book.getRating());
         TextView tvAuthor = findViewById(R.id.book_author);
         tvAuthor.setText(book.getAuthor());
         TextView tvPrice = findViewById(R.id.book_price);

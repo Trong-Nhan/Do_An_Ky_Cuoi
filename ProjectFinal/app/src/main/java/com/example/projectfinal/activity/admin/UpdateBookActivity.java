@@ -74,8 +74,8 @@ public class UpdateBookActivity extends AppCompatActivity {
         //load dữ liệu
         bookName.setText(book.getName());
         author.setText(book.getAuthor());
-        price.setText(String.valueOf(book.getPrice()));
-        salePrice.setText(String.valueOf(book.getSalePrice()));
+        price.setText(String.format("%.0f",book.getPrice()));
+        salePrice.setText(String.format("%.0f",book.getSalePrice()));
         publisherYear.setText(String.valueOf(book.getPublishYear()));
         page.setText(String.valueOf(book.getPage()));
         number.setText(String.valueOf(book.getNumber()));
@@ -220,10 +220,9 @@ public class UpdateBookActivity extends AppCompatActivity {
                         if (data == null) {
                             return;
                         }
-                        Uri uri = data.getData();
-                        mUri = uri;
+                        mUri = data.getData();
                         try {
-                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mUri);
                             imgView.setImageBitmap(bitmap);
                             imageName.setText(getNameImg());
                         } catch (IOException e) {
@@ -281,12 +280,12 @@ public class UpdateBookActivity extends AppCompatActivity {
                 bookYear = Integer.parseInt(publisherYear.getText().toString());
             }
 
-//            if (imageName.getText().toString().equals("")) {
-//                Toast.makeText(UpdateBookActivity.this, "Chưa có ảnh sách", Toast.LENGTH_SHORT).show();
-//                return;
-//            } else {
-            imgName = RealPathUtil.getRealPath(UpdateBookActivity.this, mUri);
-//            }
+            File file = new File(book.getPicture());
+            if (imageName.getText().toString().equals(file.getName())) {
+                imgName = book.getPicture();
+            } else {
+                imgName = RealPathUtil.getRealPath(UpdateBookActivity.this, mUri);
+            }
 
             if (number.getText().toString().equals("")) {
                 Toast.makeText(UpdateBookActivity.this, "Chưa có số lượng", Toast.LENGTH_SHORT).show();
