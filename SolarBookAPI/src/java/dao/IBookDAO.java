@@ -22,5 +22,5 @@ public interface IBookDAO {
 
     public void update(Book b);
 
-    public Book findByName(String name);
+    public List<Book> findByName(String name);
 }

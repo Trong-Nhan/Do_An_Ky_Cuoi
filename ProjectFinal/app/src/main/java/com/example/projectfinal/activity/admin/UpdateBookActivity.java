@@ -244,6 +244,7 @@ public class UpdateBookActivity extends AppCompatActivity {
 
             if (bookName.getText().toString().equals("")) {
                 Toast.makeText(UpdateBookActivity.this, "Chưa nhập tên sách", Toast.LENGTH_SHORT).show();
+                bookName.requestFocus();
                 return;
             } else {
                 edtName = bookName.getText().toString();
@@ -253,6 +254,7 @@ public class UpdateBookActivity extends AppCompatActivity {
 
             if (price.getText().toString().equals("")) {
                 Toast.makeText(UpdateBookActivity.this, "Chưa nhập giá sách", Toast.LENGTH_SHORT).show();
+                price.requestFocus();
                 return;
             } else {
                 bookPrice = Float.parseFloat(price.getText().toString());
@@ -266,6 +268,7 @@ public class UpdateBookActivity extends AppCompatActivity {
 
             if (author.getText().toString().equals("")) {
                 Toast.makeText(UpdateBookActivity.this, "Chưa nhập tên tác giả", Toast.LENGTH_SHORT).show();
+                author.requestFocus();
                 return;
             } else {
                 bookAuthor = author.getText().toString();
@@ -275,6 +278,7 @@ public class UpdateBookActivity extends AppCompatActivity {
 
             if (publisherYear.getText().toString().equals("")) {
                 Toast.makeText(UpdateBookActivity.this, "Chưa nhập năm xuất bản", Toast.LENGTH_SHORT).show();
+                publisherYear.requestFocus();
                 return;
             } else {
                 bookYear = Integer.parseInt(publisherYear.getText().toString());
@@ -288,21 +292,24 @@ public class UpdateBookActivity extends AppCompatActivity {
             }
 
             if (number.getText().toString().equals("")) {
-                Toast.makeText(UpdateBookActivity.this, "Chưa có số lượng", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Chưa nhập số lượng", Toast.LENGTH_SHORT).show();
+                number.requestFocus();
                 return;
             } else {
                 bookNumber = Integer.parseInt(number.getText().toString());
             }
 
             if (description.getText().toString().equals("")) {
-                Toast.makeText(UpdateBookActivity.this, "Chưa mô tả sách", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Chưa nhập mô tả sách", Toast.LENGTH_SHORT).show();
+                description.requestFocus();
                 return;
             } else {
                 bookDesc = description.getText().toString();
             }
 
             if (page.getText().toString().equals("")) {
-                Toast.makeText(UpdateBookActivity.this, "Chưa có trang sách", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateBookActivity.this, "Chưa nhập số trang sách", Toast.LENGTH_SHORT).show();
+                page.requestFocus();
                 return;
             } else {
                 bookPage = Integer.parseInt(page.getText().toString());

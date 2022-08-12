@@ -17,6 +17,9 @@
         android:theme="@style/Theme.SolarBook"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.SearchByName"
+            android:exported="false" />
+        <activity
             android:name=".activity.BookByCategory"
             android:exported="false" />
         <activity

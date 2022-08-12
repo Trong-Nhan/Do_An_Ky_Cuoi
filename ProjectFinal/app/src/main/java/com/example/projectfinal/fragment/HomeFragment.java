@@ -1,9 +1,13 @@
 package com.example.projectfinal.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.appcompat.widget.SearchView;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectfinal.R;
+import com.example.projectfinal.activity.SearchByName;
 import com.example.projectfinal.adapter.BookAdapter;
 import com.example.projectfinal.adapter.HomeNewsAdapter;
 import com.example.projectfinal.api.BookAPI;
@@ -34,7 +39,8 @@ public class HomeFragment extends Fragment {
     private HomeNewsAdapter mHomeNewsAdapter;
     private List<Book> mLstBook = new ArrayList<>();
     private List<News> mLstNews = new ArrayList<>();
-    RecyclerView rcvHomeNews, rcvBook, rcvPopularBook, rcvDiscountBook;
+    private RecyclerView rcvHomeNews, rcvBook, rcvPopularBook, rcvDiscountBook;
+    private SearchView searchView;
 
     @Nullable
     @Override
@@ -44,7 +50,22 @@ public class HomeFragment extends Fragment {
         rcvBook = view.findViewById(R.id.rcvNewBook);
         rcvPopularBook = view.findViewById(R.id.rcvPopularBook);
         rcvDiscountBook = view.findViewById(R.id.rcvDiscountBook);
+        searchView = view.findViewById(R.id.searchBar);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                String strSearch = searchView.getQuery().toString();
+                Intent intent = new Intent(getActivity(), SearchByName.class);
+                intent.putExtra("searchName", strSearch);
+                startActivity(intent);
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         //Lấy tất cả sách
         getListBook();
 
@@ -63,6 +84,7 @@ public class HomeFragment extends Fragment {
         rcvHomeNews.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
         return view;
+
     }
 
     //Lay du lieu tin tuc qua API
