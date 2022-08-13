@@ -1,7 +1,10 @@
-package com.example.projectfinal.adapter.admin;
+package com.example.projectfinal.adapter;
 
 import android.content.Context;
-import android.view.ContextMenu;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +16,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectfinal.R;
+import com.example.projectfinal.activity.NewsDetailActivity;
 import com.example.projectfinal.entity.News;
 
+import java.io.File;
 import java.util.List;
 
 public class HomeNewsAdapter extends RecyclerView.Adapter<HomeNewsAdapter.NewsViewHolder> {
@@ -30,7 +35,7 @@ public class HomeNewsAdapter extends RecyclerView.Adapter<HomeNewsAdapter.NewsVi
     @NonNull
     @Override
     public HomeNewsAdapter.NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mCtx).inflate(R.layout.item_admin_news, parent, false);
+        View view = LayoutInflater.from(mCtx).inflate(R.layout.item_news, parent, false);
         HomeNewsAdapter.NewsViewHolder nvh = new HomeNewsAdapter.NewsViewHolder(view);
         return nvh;
     }
@@ -41,14 +46,32 @@ public class HomeNewsAdapter extends RecyclerView.Adapter<HomeNewsAdapter.NewsVi
         if (n == null) {
             return;
         }
-        holder.imgNews.setImageResource(getImageId(mCtx, n.getPicture()));
+
+        //Hien thi hinh anh
+        File imgFile = new File(n.getPicture());
+        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        holder.imgNews.setImageBitmap(myBitmap);
+
         holder.txtNewsTitle.setText(n.getDescription());
+
+        //khi ấn vào tin tức
+        holder.layoutDetailNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickGoToDetailNews(n);
+            }
+        });
     }
 
-    private int getImageId(Context context, String imageName) {
-        return context.getResources().getIdentifier("drawable/"
-                + imageName, null, context.getPackageName());
+    //kịch bản khi nhấn vào một tin tức
+    private void onClickGoToDetailNews(News n) {
+        Intent intent = new Intent(mCtx, NewsDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("object_news", n);
+        intent.putExtras(bundle);
+        mCtx.startActivity(intent);
     }
+
 
     public int getItemCount() {
         if (mLst != null) {
@@ -60,16 +83,18 @@ public class HomeNewsAdapter extends RecyclerView.Adapter<HomeNewsAdapter.NewsVi
         return 0;
     }
 
-    public static class NewsViewHolder extends RecyclerView.ViewHolder{
+    public static class NewsViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imgNews;
         private TextView txtNewsTitle;
+        private LinearLayout layoutDetailNews;
 
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imgNews = itemView.findViewById(R.id.itemNewsImg);
             txtNewsTitle = itemView.findViewById(R.id.itemNewsTitle);
+            layoutDetailNews = itemView.findViewById(R.id.layout_detail_news_home);
         }
 
     }

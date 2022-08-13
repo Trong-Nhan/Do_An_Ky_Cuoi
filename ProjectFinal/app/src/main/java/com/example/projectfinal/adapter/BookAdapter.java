@@ -2,6 +2,8 @@ package com.example.projectfinal.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,18 +20,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projectfinal.R;
 import com.example.projectfinal.activity.BookDetailActivity;
 import com.example.projectfinal.entity.Book;
+import com.example.projectfinal.entity.User;
 
 
+import java.io.File;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
     private Context mCtx;
     private List<Book> mLst;
+    private User mUser;
 
-    public BookAdapter(Context context, List<Book> list) {
+
+    public BookAdapter(Context context, List<Book> list, User user) {
         this.mCtx = context;
         this.mLst = list;
+        this.mUser = user;
     }
 
     @NonNull
@@ -43,14 +50,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         final Book b = mLst.get(position);
-        if (b == null) {
-            return;
-        }
-        holder.bookImg.setImageResource(b.getPicture());
+        //Hien thi anh
+        File imgFile = new File(b.getPicture());
+        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        holder.bookImg.setImageBitmap(myBitmap);
+
         holder.bookName.setText(b.getName());
         holder.bookAuthor.setText(b.getAuthor());
-        holder.price.setText(b.getPrice());
-        holder.salePrice.setText(b.getSalePrice());
+        holder.price.setText(String.format("%.0f",b.getPrice()));
+        holder.salePrice.setText(String.format("%.0f",b.getSalePrice()));
         holder.ratingBar.setRating(b.getRating());
         //khi ấn vào hình quyển sách
         holder.layoutDetailBook.setOnClickListener(new View.OnClickListener() {
@@ -66,22 +74,20 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Intent intent = new Intent(mCtx, BookDetailActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("object_book", b);
+        bundle.putSerializable("object_user", mUser);
         intent.putExtras(bundle);
         mCtx.startActivity(intent);
     }
 
     @Override
     public int getItemCount() {
-//        if (mLst != null) {
-//            if (mLst.size() > 4) {
-//                return 4;
-//            }
-//            return mLst.size();
-//        }
-//        return 0;
-        return mLst.size();
+        if (mLst != null) {
+            return mLst.size();
+        }
+        return 0;
     }
 
+    //Khai báo các thành phần trong view
     public static class BookViewHolder extends RecyclerView.ViewHolder {
 
         private TextView bookName;
@@ -106,7 +112,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             category = itemView.findViewById(R.id.book_category);
             description = itemView.findViewById(R.id.book_description);
             layoutDetailBook = itemView.findViewById(R.id.layout_detail_book);
-
         }
     }
 }

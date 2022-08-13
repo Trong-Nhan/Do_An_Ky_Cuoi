@@ -31,9 +31,15 @@ public class AddPublisherActivity extends AppCompatActivity {
     private View.OnClickListener listenerAddPublisher = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            String cName;
             EditText edtName = findViewById(R.id.edit_publisher_name);
-
-            String cName = edtName.getText().toString();
+            if (edtName.getText().toString().equals("")) {
+                Toast.makeText(AddPublisherActivity.this, "Chưa nhập tên nhà xuất bản", Toast.LENGTH_SHORT).show();
+                edtName.requestFocus();
+                return;
+            } else {
+                cName = edtName.getText().toString();
+            }
 
             Publisher c = new Publisher(cName);
             PublisherAPI.publisherAPI.addPublisher(c).enqueue(new Callback<Publisher>() {
@@ -53,4 +59,11 @@ public class AddPublisherActivity extends AppCompatActivity {
             });
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddPublisherActivity.this, AdminPublisherActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
+    }
 }

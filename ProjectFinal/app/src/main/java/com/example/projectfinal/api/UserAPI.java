@@ -40,4 +40,7 @@ public interface UserAPI {
 
     @PUT("user")
     Call<User> updateUser(@Body User user);
+
+    @GET("user/getuser")
+    Call<List<User>> getUser();
 }

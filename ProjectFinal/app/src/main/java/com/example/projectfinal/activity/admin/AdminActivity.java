@@ -15,6 +15,7 @@ import com.example.projectfinal.activity.LoginActivity;
 import com.example.projectfinal.activity.MainActivity;
 import com.example.projectfinal.api.UserAPI;
 import com.example.projectfinal.entity.User;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,6 +26,8 @@ public class AdminActivity extends AppCompatActivity {
     private String mAdminName;
     private TextView mTxtAdminName;
     private SharedPreferences sharedPreferences;
+    private Bundle mBundle;
+    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,31 +38,19 @@ public class AdminActivity extends AppCompatActivity {
 
         mTxtAdminName = findViewById(R.id.txtAdminName);
 
+        mBundle = getIntent().getExtras();
         //gán tên Admin lên trang Admin
-        if (sharedPreferences.getString("UserEmail", null) != null) {
-            String uEmail = sharedPreferences.getString("UserEmail", null);
-            UserAPI.userApi.getUserByEmail(uEmail).enqueue(new Callback<User>() {
-                @Override
-                public void onResponse(Call<User> call, Response<User> response) {
-                    if (response.isSuccessful()) {
-                        User u = response.body();
-                        mTxtAdminName.setText(u.getName());
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<User> call, Throwable t) {
-                    Toast.makeText(AdminActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else if (getIntent().getExtras().get("adminPageName") != null) {
-            mAdminName = getIntent().getExtras().get("adminPageName").toString();
-            mTxtAdminName.setText(mAdminName);
-        } else {
-            mAdminName = getIntent().getExtras().get("adminName").toString();
-            mTxtAdminName.setText(mAdminName);
-
+        if (sharedPreferences.contains("uInfo")) {
+            Gson gson = new Gson();
+            String uJson = sharedPreferences.getString("uInfo", null);
+            mUser = gson.fromJson(uJson, User.class);
+            mTxtAdminName.setText(mUser.getName());
+        }else{
+            mUser = (User) mBundle.get("userInfo");
+            mTxtAdminName.setText(mUser.getName());
         }
+
+
 
         Button btnAccount = findViewById(R.id.btnAdminAccount);
         Button btnLogout = findViewById(R.id.btnAdminLogout);
@@ -97,7 +88,9 @@ public class AdminActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             Intent intent = new Intent(AdminActivity.this, MainActivity.class);
-            intent.putExtra("adminName", mTxtAdminName.getText().toString());
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("adInfo", mUser);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     };

@@ -23,16 +23,11 @@ public class ImplBookDAO implements IBookDAO {
 
     @Override
     public List<Book> getAll() {
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
-            Query q = s.createQuery("from Book");
-            List<Book> data = q.list();
-            s.close();
-            return data;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("from Book");
+        List<Book> data = q.list();
+        s.close();
+        return data;
     }
 
     @Override
@@ -63,8 +58,8 @@ public class ImplBookDAO implements IBookDAO {
     @Override
     public void delete(int id) {
         try {
-            s = HibernateUtil.getSessionFactory().openSession();
             Book b = getbyId(id);
+            s = HibernateUtil.getSessionFactory().openSession();
             s.getTransaction().begin();
             s.delete(b);
             s.getTransaction().commit();
@@ -88,13 +83,13 @@ public class ImplBookDAO implements IBookDAO {
     }
 
     @Override
-    public Book findByName(String name) {
+    public List<Book> findByName(String name) {
         s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("select b from Book u where u.name like :name");
-        q.setParameter("name", name);
-        Book u = (Book) q.uniqueResult();
+        Query q = s.createQuery("select b from Book b where name like :name");
+        q.setString("name", "%" + name + "%");
+        List<Book> b = q.list();
         s.close();
-        return u;
+        return b;
     }
 
 }

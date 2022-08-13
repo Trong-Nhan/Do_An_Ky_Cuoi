@@ -13,7 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Query;
+import retrofit2.http.Path;
 
 public interface CategoryAPI {
     //Link API: http://localhost:8080/SolarBookAPI/solar_book/category/getcategory
@@ -33,9 +33,9 @@ public interface CategoryAPI {
     @PUT("category/updatecategory")
     Call<Category> updateCategory(@Body Category category);
 
-    @POST("category/deletecategory")
-    Call<Category> deleteCategory(@Body Category category);
+    @POST("category/deletecategory/{id}")
+    Call<Void> deleteCategory(@Path("id") int id);
 
-    @GET("category/detailCategory")
-    Call<Category> detailCategory(@Query("id") int id);
+    @GET("category/detailCategory/{id}")
+    Call<Category> detailCategory(@Path("id") int id);
 }
