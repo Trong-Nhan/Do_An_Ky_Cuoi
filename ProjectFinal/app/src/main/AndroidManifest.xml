@@ -33,6 +33,9 @@
             android:name=".activity.admin.AdminNewsActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.NewsDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.admin.UpdateNewsActivity"
             android:exported="false" />
         <activity
