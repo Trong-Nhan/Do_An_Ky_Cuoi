@@ -65,7 +65,7 @@ public class BookDetailActivity extends AppCompatActivity {
         Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
         imgView.setImageBitmap(myBitmap);
         RatingBar ratingBar = findViewById(R.id.rating_bar);
-        ratingBar.setRating(book.getRating());
+        ratingBar.setRating(mBook.getRating());
         TextView tvAuthor = findViewById(R.id.book_author);
         tvAuthor.setText(mBook.getAuthor());
         TextView tvPrice = findViewById(R.id.book_price);

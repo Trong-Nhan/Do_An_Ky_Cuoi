@@ -39,6 +39,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         this.mUser = user;
     }
 
+    public BookAdapter(Context context, List<Book> list) {
+        this.mCtx = context;
+        this.mLst = list;
+    }
+
     @NonNull
     @Override
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
