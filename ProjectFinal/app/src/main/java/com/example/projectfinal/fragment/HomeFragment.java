@@ -42,7 +42,6 @@ public class HomeFragment extends Fragment {
     private HomeNewsAdapter mHomeNewsAdapter;
     private List<Book> mLstBook = new ArrayList<>();
     private List<News> mLstNews = new ArrayList<>();
-    RecyclerView rcvHomeNews,rcvBook;
     private User mUser;
     private RecyclerView rcvHomeNews, rcvBook, rcvPopularBook, rcvDiscountBook;
     private SearchView searchView;
@@ -127,7 +126,6 @@ public class HomeFragment extends Fragment {
                             mLstBook.remove(i);
                         }
                     }
-                    mBookAdapter = new BookAdapter(getActivity(), mLstBook);
                     //set dữ liệu lên RecycleView New Book
                     rcvBook.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                     rcvBook.setAdapter(mBookAdapter);
@@ -155,7 +153,7 @@ public class HomeFragment extends Fragment {
                             mLstBook.remove(b);
                         }
                     }
-                    mBookAdapter = new BookAdapter(getActivity(), mLstBook);
+                    mBookAdapter = new BookAdapter(getActivity(), mLstBook, mUser);
                     rcvPopularBook.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                     rcvPopularBook.setAdapter(mBookAdapter);
                 }
@@ -182,7 +180,7 @@ public class HomeFragment extends Fragment {
                             mLstBook.remove(b);
                         }
                     }
-                    mBookAdapter = new BookAdapter(getActivity(), mLstBook);
+                    mBookAdapter = new BookAdapter(getActivity(), mLstBook, mUser);
                     rcvDiscountBook.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                     rcvDiscountBook.setAdapter(mBookAdapter);
                 }
