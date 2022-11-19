@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:hint="Tên tin tuc"
-            android:inputType="textCapWords" />
+            android:inputType="" />
 
         <EditText
             android:id="@+id/edit_news_description"
@@ -36,15 +36,18 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:hint="Mo ta tin tuc"
-            android:inputType="textCapWords" />
+            android:inputType="" />
 
         <EditText
             android:id="@+id/edit_news_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:gravity="top|start"
             android:hint="Chi tiet tin tuc"
-            android:inputType="textCapWords" />
+            android:inputType="textMultiLine"
+            android:lines="10"
+            android:scrollbars="vertical" />
 
         <EditText
             android:id="@+id/edit_news_createdDate"
@@ -54,7 +57,7 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:hint="Ngay tao tin tuc"
-            android:inputType="textCapWords"
+            android:inputType=""
             android:onClick="openDatePicker" />
 
         <ImageView
