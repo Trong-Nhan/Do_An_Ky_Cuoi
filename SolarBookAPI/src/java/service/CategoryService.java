@@ -18,7 +18,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author acer
+ * @author Nhan
  */
 @Path("/category")
 public class CategoryService {

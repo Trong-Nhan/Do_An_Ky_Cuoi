@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author TaiyoNg
+ * @author Nhan
  */
 public interface NewsDAO {
 

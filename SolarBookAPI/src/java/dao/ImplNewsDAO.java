@@ -12,7 +12,7 @@ import org.hibernate.Session;
 
 /**
  *
- * @author TaiyoNg
+ * @author Nhan
  */
 public class ImplNewsDAO implements NewsDAO {
 

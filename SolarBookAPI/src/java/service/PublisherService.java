@@ -20,7 +20,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author acer
+ * @author Nhan
  */
 @Path("/publisher")
 public class PublisherService {
