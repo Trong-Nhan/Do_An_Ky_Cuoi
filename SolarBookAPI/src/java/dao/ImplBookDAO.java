@@ -12,7 +12,7 @@ import org.hibernate.Session;
 
 /**
  *
- * @author acer
+ * @author Nhan
  */
 public class ImplBookDAO implements IBookDAO {
 
