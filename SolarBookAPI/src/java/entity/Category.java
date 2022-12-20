@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Nhan
+ * @author Admin
  */
 @Entity
 @Table(name = "tblCategory")

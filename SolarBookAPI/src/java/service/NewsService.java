@@ -20,7 +20,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author Nhan
+ * @author Admin
  */
 @Path("/news")
 public class NewsService {
