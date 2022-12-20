@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Nhan
+ * @author Admin
  */
 @Entity
 @Table(name = "tblNews")

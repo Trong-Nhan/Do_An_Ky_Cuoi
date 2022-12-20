@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Nhan
+ * @author Admin
  */
 public interface ICategoryDAO {
     public List<Category> getAll();
