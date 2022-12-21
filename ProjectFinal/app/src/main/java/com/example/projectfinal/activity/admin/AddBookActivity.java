@@ -1,22 +1,5 @@
 package com.example.projectfinal.activity.admin;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.projectfinal.R;
-import com.example.projectfinal.RealPathUtil;
-import com.example.projectfinal.activity.MainActivity;
-import com.example.projectfinal.api.BookAPI;
-import com.example.projectfinal.api.CategoryAPI;
-import com.example.projectfinal.api.PublisherAPI;
-import com.example.projectfinal.entity.Book;
-import com.example.projectfinal.entity.Category;
-import com.example.projectfinal.entity.Publisher;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -37,9 +20,25 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.projectfinal.R;
+import com.example.projectfinal.RealPathUtil;
+import com.example.projectfinal.activity.MainActivity;
+import com.example.projectfinal.api.BookAPI;
+import com.example.projectfinal.api.CategoryAPI;
+import com.example.projectfinal.api.PublisherAPI;
+import com.example.projectfinal.entity.Book;
+import com.example.projectfinal.entity.Category;
+import com.example.projectfinal.entity.Publisher;
+
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +67,7 @@ public class AddBookActivity extends AppCompatActivity {
 
         initUi();
 
-        //Nh?n nút ch?n ?nh trong gallery
+        //Nhấn nút chọn ảnh trong gallery
         btnSelectImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +77,7 @@ public class AddBookActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(listenerAddBook);
     }
 
-    //khai báo các thành ph?n có trong View
+    //khai báo các thành phần có trong View
     private void initUi() {
         bookName = findViewById(R.id.edit_book_name);
         author = findViewById(R.id.edit_author_name);
@@ -102,7 +101,7 @@ public class AddBookActivity extends AppCompatActivity {
         getListPublisher();
     }
 
-    //L?y d? li?u Category vào Spinner
+    //Lấy dữ liệu Category vào Spinner
     private void getListCategory() {
         CategoryAPI.categoryAPI.getCategory().enqueue(new Callback<List<Category>>() {
             @Override
@@ -116,12 +115,12 @@ public class AddBookActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
-                Toast.makeText(AddBookActivity.this, "L?i khi g?i API", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    //L?y d? li?u Publisher vào Spinner
+    //Lấy dữ liệu Publisher vào Spinner
     private void getListPublisher() {
         PublisherAPI.publisherAPI.getPublisher().enqueue(new Callback<List<Publisher>>() {
             @Override
@@ -135,7 +134,7 @@ public class AddBookActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Publisher>> call, Throwable t) {
-                Toast.makeText(AddBookActivity.this, "L?i khi g?i API", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddBookActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -147,7 +146,7 @@ public class AddBookActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    //Check phiên b?n Android
+    //Check phiên bản Android
     private void onClickRepestPermisson() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             openGallery();
@@ -171,22 +170,22 @@ public class AddBookActivity extends AppCompatActivity {
         }
     }
 
-    //M? th? m?c ?nh
+    //Mở thư mục ảnh
     private void openGallery() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        mActivityResultLauncher.launch(Intent.createChooser(intent, "Ch?n ?nh"));
+        mActivityResultLauncher.launch(Intent.createChooser(intent, "Chọn ảnh"));
     }
 
-    //L?y tên ?nh
+    //Lấy tên ảnh
     private String getNameImg() {
         String realPathUtil = RealPathUtil.getRealPath(this, mUri);
         File file = new File(realPathUtil);
         return file.getName();
     }
 
-    //Hi?n ?nh v?a ch?n
+    //Hiện ảnh vừa chọn
     ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -212,7 +211,7 @@ public class AddBookActivity extends AppCompatActivity {
             }
     );
 
-    //Hành ??ng thêm ?nh
+    //Hành động thêm ảnh
     private View.OnClickListener listenerAddBook = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -310,7 +309,7 @@ public class AddBookActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Book> call, Response<Book> response) {
                     if (response.isSuccessful()) {
-                        Toast.makeText(AddBookActivity.this, "Thêm m?i thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddBookActivity.this, "Thêm mới thành công", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(AddBookActivity.this, AdminBookActivity.class);
                         startActivity(intent);
                     }

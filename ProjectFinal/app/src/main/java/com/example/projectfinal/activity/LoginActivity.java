@@ -1,7 +1,5 @@
 package com.example.projectfinal.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +9,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectfinal.R;
 import com.example.projectfinal.activity.admin.AdminActivity;
@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if(loginEmail.isEmpty() || loginPassword.isEmpty()){
-            Toast.makeText(this, "Xin mời nhập Email và mật khẩu", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Xin mời nhập email và mật khẩu", Toast.LENGTH_SHORT).show();
         }else{
             //khai báo biến check tài khoản mật khẩu của người dùng
             boolean hasUser = false;
