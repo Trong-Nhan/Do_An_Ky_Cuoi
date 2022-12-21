@@ -1,17 +1,15 @@
 package com.example.projectfinal.activity.admin;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.example.projectfinal.R;
 import com.example.projectfinal.adapter.admin.AdminAccountAdapter;
@@ -109,5 +107,12 @@ public class AdminAccountActivity extends AppCompatActivity {
                 break;
         }
         return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AdminAccountActivity.this, AdminActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }

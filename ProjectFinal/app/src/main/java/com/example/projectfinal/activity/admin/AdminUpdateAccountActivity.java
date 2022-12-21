@@ -1,7 +1,5 @@
 package com.example.projectfinal.activity.admin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +9,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectfinal.R;
 import com.example.projectfinal.api.CityAPI;
@@ -98,7 +98,7 @@ public class AdminUpdateAccountActivity extends AppCompatActivity {
         edtEmail.setText(mUser.getEmail());
         edtPhone.setText(mUser.getPhone());
         edtAddress.setText(mUser.getAddress());
-        if (mUser.getRole() == "admin") {
+        if ("admin".equals(mUser.getRole())) {
             rdoAdmin.setChecked(true);
         } else {
             rdoUser.setChecked(true);
@@ -128,7 +128,7 @@ public class AdminUpdateAccountActivity extends AppCompatActivity {
             }
             City c = (City) mSpCity.getSelectedItem();
 
-            User u = new User(mUser.getId(), name, phone, email, c.getId(), address, role);
+            User u = new User(mUser.getId(), name, phone, mUser.getPassword(), email, c.getId(), address, role);
             UserAPI.userApi.updateUser(u).enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
