@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,12 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-
 import com.example.projectfinal.R;
 import com.example.projectfinal.adapter.ViewPagerAdapter;
 import com.example.projectfinal.api.CartAPI;
-import com.example.projectfinal.api.UserAPI;
-import com.example.projectfinal.entity.Book;
 import com.example.projectfinal.entity.Cart;
 import com.example.projectfinal.entity.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -185,6 +180,14 @@ public class MainActivity extends AppCompatActivity {
 
     public User getmUser() {
         return mUser;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 }
