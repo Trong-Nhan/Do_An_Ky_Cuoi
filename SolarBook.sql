@@ -68,7 +68,7 @@ GO
 Create Table tblOrder(
 	Id int primary key identity,
 	UserId int,
-	OrderDate Date,
+	OrderDate varchar(10),
 	BookId int,
 	BookNumber int,
 	TotalPrice float,
@@ -77,7 +77,6 @@ Create Table tblOrder(
 	ShippingPrice int,
 	PaymentId int,
 	Note nvarchar(255),
-	CreatedDate Date,
 	Status nvarchar(100)
 
 	Foreign Key (UserId) References tblUser(Id),
