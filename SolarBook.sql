@@ -70,13 +70,15 @@ Create Table tblOrder(
 	UserId int,
 	OrderDate Date,
 	BookId int,
+	BookNumber int,
 	TotalPrice float,
 	CityId int,
 	ShippingAddress ntext,
 	ShippingPrice int,
 	PaymentId int,
 	Note nvarchar(255),
-	CreatedDate Date
+	CreatedDate Date,
+	Status nvarchar(100)
 
 	Foreign Key (UserId) References tblUser(Id),
 	Foreign Key (CityId) References tblCity(Id),
@@ -219,3 +221,8 @@ go
 
 Insert Into tblCart(UserId, BookId, BookCount) Values (2, 1, 2), (2, 2, 1)
 go
+
+Insert Into tblPayment(Name) Values (N'Thanh toán khi nhận hàng'), (N'Chuyển khoản ngân hàng')
+go 
+
+select * from tblOrder

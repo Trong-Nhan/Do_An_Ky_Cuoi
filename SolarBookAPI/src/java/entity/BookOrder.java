@@ -28,54 +28,68 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "tblOrder")
-@XmlRootElement
 public class BookOrder implements Serializable {
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
+    @Column(name = "UserId")
+    @NotNull
+    private Integer userId;
     @Column(name = "OrderDate")
-    @Temporal(TemporalType.DATE)
-    private Date orderDate;
+    private String orderDate;
+    @Column(name = "BookId")
+    @NotNull
+    private Integer bookId;
     @Column(name = "BookNumber")
     private Integer bookNumber;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "TotalPrice")
     private Double totalPrice;
-    @Size(max = 1073741823)
+    @Column(name = "CityId")
+    @NotNull
+    private Integer cityId;
     @Column(name = "ShippingAddress")
     private String shippingAddress;
     @Column(name = "ShippingPrice")
     private Integer shippingPrice;
-    @Size(max = 255)
+    @Column(name = "PaymentId")
+    @NotNull
+    private Integer paymentId;
     @Column(name = "Note")
     private String note;
-    @Column(name = "CreatedDate")
-    @Temporal(TemporalType.DATE)
-    private Date createdDate;
+    @Column(name = "Status")
+    private String status;
 
     public BookOrder() {
     }
 
-    public BookOrder(Integer id) {
+    public BookOrder(Integer id, Integer userId, String orderDate, Integer bookId, Integer bookNumber, Double totalPrice, Integer cityId, String shippingAddress, Integer shippingPrice, Integer paymentId, String note, String status) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
+        this.userId = userId;
         this.orderDate = orderDate;
+        this.bookId = bookId;
+        this.bookNumber = bookNumber;
+        this.totalPrice = totalPrice;
+        this.cityId = cityId;
+        this.shippingAddress = shippingAddress;
+        this.shippingPrice = shippingPrice;
+        this.paymentId = paymentId;
+        this.note = note;
+        this.status = status;
+    }
+
+    public BookOrder(Integer userId, String orderDate, Integer bookId, Integer bookNumber, Double totalPrice, Integer cityId, String shippingAddress, Integer shippingPrice, Integer paymentId, String note, String status) {
+        this.userId = userId;
+        this.orderDate = orderDate;
+        this.bookId = bookId;
+        this.bookNumber = bookNumber;
+        this.totalPrice = totalPrice;
+        this.cityId = cityId;
+        this.shippingAddress = shippingAddress;
+        this.shippingPrice = shippingPrice;
+        this.paymentId = paymentId;
+        this.note = note;
+        this.status = status;
     }
 
     public Integer getBookNumber() {
@@ -86,12 +100,53 @@ public class BookOrder implements Serializable {
         this.bookNumber = bookNumber;
     }
 
+    
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public Integer getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
+    }
+
     public Double getTotalPrice() {
         return totalPrice;
     }
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public Integer getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
     }
 
     public String getShippingAddress() {
@@ -110,6 +165,14 @@ public class BookOrder implements Serializable {
         this.shippingPrice = shippingPrice;
     }
 
+    public Integer getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(Integer paymentId) {
+        this.paymentId = paymentId;
+    }
+
     public String getNote() {
         return note;
     }
@@ -118,37 +181,13 @@ public class BookOrder implements Serializable {
         this.note = note;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BookOrder)) {
-            return false;
-        }
-        BookOrder other = (BookOrder) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entity.BookOrder[ id=" + id + " ]";
-    }
     
 }

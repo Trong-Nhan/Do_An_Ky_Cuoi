@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projectfinal.R;
+import com.example.projectfinal.activity.admin.AddBookActivity;
 import com.example.projectfinal.activity.admin.AdminAddAccountActivity;
 import com.example.projectfinal.adapter.BookPaymentAdapter;
 import com.example.projectfinal.api.CityAPI;
@@ -162,11 +164,12 @@ public class PaymentActivity extends AppCompatActivity {
 
             try {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 Calendar calendar = Calendar.getInstance();
                 String strDate = simpleDateFormat.format(calendar.getTime());
-                Date date = simpleDateFormat.parse(strDate);
                 City c = (City) city.getSelectedItem();
                 int cityId = c.getId();
+
                 float price = Float.parseFloat(totalPrice.getText().toString());
                 String shippingAddress = userAddress.getText().toString();
                 int shipPrice = Integer.parseInt(shippingPrice.getText().toString());
@@ -177,8 +180,24 @@ public class PaymentActivity extends AppCompatActivity {
                     paymentId = 2;
                 }
                 String note = paymentNote.getText().toString();
+                Order o = new Order(mUser.getId(), strDate, mBook.getId(), mBookNumber, price, cityId, shippingAddress, shipPrice, paymentId, note, "Đã nhận");
+                OrderAPI.orderApi.insertOrder(o).enqueue(new Callback<Order>() {
+                    @Override
+                    public void onResponse(Call<Order> call, Response<Order> response) {
+                        Toast.makeText(PaymentActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(PaymentActivity.this, MainActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("userInfo", mUser);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
 
-            } catch (ParseException e) {
+                    @Override
+                    public void onFailure(Call<Order> call, Throwable t) {
+                        Toast.makeText(PaymentActivity.this, "Lỗi Khi Gọi API", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
