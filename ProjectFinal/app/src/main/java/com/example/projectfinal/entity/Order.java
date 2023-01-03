@@ -7,7 +7,8 @@ public class Order implements Serializable {
     private int id;
     private int userId;
     private Date orderDate;
-    private int promoCodeId;
+    private int bookNumber;
+    private int bookId;
     private float totalPrice;
     private int cityId;
     private String shippingAddress;
@@ -19,11 +20,12 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(int id, int userId, Date orderDate, int promoCodeId, float totalPrice, int cityId, String shippingAddress, int shippingPrice, int paymentId, String note, Date createdDate) {
+    public Order(int id, int userId, Date orderDate, int bookNumber, int bookId, float totalPrice, int cityId, String shippingAddress, int shippingPrice, int paymentId, String note, Date createdDate) {
         this.id = id;
         this.userId = userId;
         this.orderDate = orderDate;
-        this.promoCodeId = promoCodeId;
+        this.bookNumber = bookNumber;
+        this.bookId = bookId;
         this.totalPrice = totalPrice;
         this.cityId = cityId;
         this.shippingAddress = shippingAddress;
@@ -33,22 +35,11 @@ public class Order implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public Order(int userId, Date orderDate, int promoCodeId, float totalPrice, int cityId, String shippingAddress, int shippingPrice, int paymentId, String note, Date createdDate) {
+    public Order(int userId, Date orderDate, int bookNumber, int bookId, float totalPrice, int cityId, String shippingAddress, int shippingPrice, int paymentId, String note, Date createdDate) {
         this.userId = userId;
         this.orderDate = orderDate;
-        this.promoCodeId = promoCodeId;
-        this.totalPrice = totalPrice;
-        this.cityId = cityId;
-        this.shippingAddress = shippingAddress;
-        this.shippingPrice = shippingPrice;
-        this.paymentId = paymentId;
-        this.note = note;
-        this.createdDate = createdDate;
-    }
-
-    public Order(int userId, Date orderDate, float totalPrice, int cityId, String shippingAddress, int shippingPrice, int paymentId, String note, Date createdDate) {
-        this.userId = userId;
-        this.orderDate = orderDate;
+        this.bookNumber = bookNumber;
+        this.bookId = bookId;
         this.totalPrice = totalPrice;
         this.cityId = cityId;
         this.shippingAddress = shippingAddress;
@@ -82,12 +73,20 @@ public class Order implements Serializable {
         this.orderDate = orderDate;
     }
 
-    public int getPromoCodeId() {
-        return promoCodeId;
+    public int getBookNumber() {
+        return bookNumber;
     }
 
-    public void setPromoCodeId(int promoCodeId) {
-        this.promoCodeId = promoCodeId;
+    public void setBookNumber(int bookNumber) {
+        this.bookNumber = bookNumber;
+    }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 
     public float getTotalPrice() {

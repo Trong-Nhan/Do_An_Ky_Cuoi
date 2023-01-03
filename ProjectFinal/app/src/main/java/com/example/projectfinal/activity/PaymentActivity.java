@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,6 +32,7 @@ import com.example.projectfinal.entity.Order;
 import com.example.projectfinal.entity.OrderDetail;
 import com.example.projectfinal.entity.User;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,15 +49,19 @@ public class PaymentActivity extends AppCompatActivity {
     private RecyclerView mRcvBook;
     private BookPaymentAdapter mAdapter;
     private User mUser;
-    private List<Book> mLstBook;
-    private List<Cart> mLstCart;
+    private Book mBook;
     private List<City> mLstCity;
     private float mBookTotalPrice;
     private float mTotalPrice;
+    private int mBookNumber;
     private EditText userName, userPhone, userEmail, userAddress, paymentNote;
     private TextView bookTotalPrice;
     private TextView shippingPrice;
     private TextView totalPrice;
+    private TextView bookName;
+    private TextView bookPrice;
+    private TextView bookNumber;
+    private ImageView bookImg;
     private RadioButton rdoCOD, rdoBanking;
     private Spinner city;
     private int shipping;
@@ -67,14 +75,20 @@ public class PaymentActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         mUser = (User) bundle.get("object_user");
-        mBookTotalPrice = (float) getIntent().getExtras().get("totalPrice");
-        mLstBook = (List<Book>) getIntent().getSerializableExtra("listBook");
-        mLstCart = (List<Cart>) getIntent().getSerializableExtra("listCart");
+        mBook = (Book) bundle.get("object_book");
+        mBookTotalPrice = (float) getIntent().getExtras().get("TotalPrice");
+        mBookNumber = (int) getIntent().getExtras().get("BookNumber");
 
-        mRcvBook = findViewById(R.id.rcvPaymentBook);
-        mAdapter = new BookPaymentAdapter(mLstCart, this);
-        mRcvBook.setLayoutManager(new LinearLayoutManager(this));
-        mRcvBook.setAdapter(mAdapter);
+        bookName.setText(mBook.getName());
+        if(mBook.getSalePrice() != 0){
+            bookPrice.setText(mBook.getSalePrice() + " đ");
+        }else{
+            bookPrice.setText(mBook.getPrice() + " đ");
+        }
+        bookNumber.setText("Số lượng: " + mBookNumber);
+        File imgFile = new File(mBook.getPicture());
+        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        bookImg.setImageBitmap(myBitmap);
 
         userName.setText(mUser.getName());
         userPhone.setText(mUser.getPhone());
@@ -117,6 +131,10 @@ public class PaymentActivity extends AppCompatActivity {
         city = findViewById(R.id.spnPaymentCity);
         rdoCOD = findViewById(R.id.rdoPaymentCOD);
         rdoBanking = findViewById(R.id.rdoPaymentBanking);
+        bookName = findViewById(R.id.book_name);
+        bookPrice = findViewById(R.id.book_price);
+        bookNumber = findViewById(R.id.book_number);
+        bookImg = findViewById(R.id.book_image);
     }
 
     private void loadCities() {
@@ -159,31 +177,7 @@ public class PaymentActivity extends AppCompatActivity {
                     paymentId = 2;
                 }
                 String note = paymentNote.getText().toString();
-                Order o = new Order(mUser.getId(), date, price, cityId, shippingAddress, shipPrice, paymentId, note, date);
-                OrderAPI.orderApi.insertOrder(o).enqueue(new Callback<Order>() {
-                    @Override
-                    public void onResponse(Call<Order> call, Response<Order> response) {
-                        for (Cart c: mLstCart) {
-                            OrderDetail od = new OrderDetail(o.getId(), c.getBookId(), c.getBookCount());
-                            OrderDetailAPI.orderDetailApi.insert(od).enqueue(new Callback<OrderDetail>() {
-                                @Override
-                                public void onResponse(Call<OrderDetail> call, Response<OrderDetail> response) {
-                                    Toast.makeText(PaymentActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
-                                }
 
-                                @Override
-                                public void onFailure(Call<OrderDetail> call, Throwable t) {
-                                    Toast.makeText(PaymentActivity.this, "Lỗi khi gọi API thêm OrderDetail", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Order> call, Throwable t) {
-                        Toast.makeText(PaymentActivity.this, "Lỗi khi gọi API thêm Order", Toast.LENGTH_SHORT).show();
-                    }
-                });
             } catch (ParseException e) {
                 e.printStackTrace();
             }

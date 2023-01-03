@@ -15,10 +15,8 @@
             <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplNewsDAO.java</file>
         </group>
         <group>
-            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/hibernate.cfg.xml</file>
-            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplBookDAO.java</file>
-            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplCategoryDAO.java</file>
-            <file>file:/D:/GITHUB/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplNewsDAO.java</file>
+            <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/entity/BookOrder.java</file>
+            <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/hibernate.cfg.xml</file>
         </group>
     </open-files>
 </project-private>

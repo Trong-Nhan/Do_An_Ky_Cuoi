@@ -14,9 +14,7 @@
     <mapping class="entity.City"/>
     <mapping class="entity.News"/>
     <mapping class="entity.Cart"/>
-    <mapping class="entity.OrderDetail"/>
     <mapping class="entity.Payment"/>
     <mapping class="entity.BookOrder"/>
-    <mapping class="entity.PromoCode"/>
   </session-factory>
 </hibernate-configuration>

@@ -7,89 +7,67 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author MY PC
+ * @author TaiyoNg
  */
 @Entity
 @Table(name = "tblOrder")
-public class BookOrder implements Serializable{
+@XmlRootElement
+public class BookOrder implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private int id;
-    @Column(name = "UserId")
-    private int userId;
+    private Integer id;
     @Column(name = "OrderDate")
+    @Temporal(TemporalType.DATE)
     private Date orderDate;
-    @Column(name = "PromoCodeId")
-    private int promoCodeId;
+    @Column(name = "BookNumber")
+    private Integer bookNumber;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "TotalPrice")
-    private float totalPrice;
-    @Column(name = "CityId")
-    private int cityId;
+    private Double totalPrice;
+    @Size(max = 1073741823)
     @Column(name = "ShippingAddress")
     private String shippingAddress;
     @Column(name = "ShippingPrice")
-    private int shippingPrice;
-    @Column(name = "PaymentId")
-    private int paymentId;
+    private Integer shippingPrice;
+    @Size(max = 255)
     @Column(name = "Note")
     private String note;
     @Column(name = "CreatedDate")
+    @Temporal(TemporalType.DATE)
     private Date createdDate;
 
     public BookOrder() {
     }
 
-    public BookOrder(int id, int userId, Date orderDate, int promoCodeId, float totalPrice, int cityId, String shippingAddress, int shippingPrice, int paymentId, String note, Date createdDate) {
+    public BookOrder(Integer id) {
         this.id = id;
-        this.userId = userId;
-        this.orderDate = orderDate;
-        this.promoCodeId = promoCodeId;
-        this.totalPrice = totalPrice;
-        this.cityId = cityId;
-        this.shippingAddress = shippingAddress;
-        this.shippingPrice = shippingPrice;
-        this.paymentId = paymentId;
-        this.note = note;
-        this.createdDate = createdDate;
     }
 
-    public BookOrder(int userId, Date orderDate, int promoCodeId, float totalPrice, int cityId, String shippingAddress, int shippingPrice, int paymentId, String note, Date createdDate) {
-        this.userId = userId;
-        this.orderDate = orderDate;
-        this.promoCodeId = promoCodeId;
-        this.totalPrice = totalPrice;
-        this.cityId = cityId;
-        this.shippingAddress = shippingAddress;
-        this.shippingPrice = shippingPrice;
-        this.paymentId = paymentId;
-        this.note = note;
-        this.createdDate = createdDate;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public Date getOrderDate() {
@@ -100,28 +78,20 @@ public class BookOrder implements Serializable{
         this.orderDate = orderDate;
     }
 
-    public int getPromoCodeId() {
-        return promoCodeId;
+    public Integer getBookNumber() {
+        return bookNumber;
     }
 
-    public void setPromoCodeId(int promoCodeId) {
-        this.promoCodeId = promoCodeId;
+    public void setBookNumber(Integer bookNumber) {
+        this.bookNumber = bookNumber;
     }
 
-    public float getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(float totalPrice) {
+    public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
-    }
-
-    public int getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
     }
 
     public String getShippingAddress() {
@@ -132,20 +102,12 @@ public class BookOrder implements Serializable{
         this.shippingAddress = shippingAddress;
     }
 
-    public int getShippingPrice() {
+    public Integer getShippingPrice() {
         return shippingPrice;
     }
 
-    public void setShippingPrice(int shippingPrice) {
+    public void setShippingPrice(Integer shippingPrice) {
         this.shippingPrice = shippingPrice;
-    }
-
-    public int getPaymentId() {
-        return paymentId;
-    }
-
-    public void setPaymentId(int paymentId) {
-        this.paymentId = paymentId;
     }
 
     public String getNote() {
@@ -164,7 +126,29 @@ public class BookOrder implements Serializable{
         this.createdDate = createdDate;
     }
 
-   
-    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof BookOrder)) {
+            return false;
+        }
+        BookOrder other = (BookOrder) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "entity.BookOrder[ id=" + id + " ]";
+    }
     
 }
