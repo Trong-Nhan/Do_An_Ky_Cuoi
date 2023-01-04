@@ -17,6 +17,7 @@ import com.example.projectfinal.R;
 import com.example.projectfinal.adapter.admin.AdminBookAdapter;
 import com.example.projectfinal.api.BookAPI;
 import com.example.projectfinal.entity.Book;
+import com.example.projectfinal.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +29,20 @@ import retrofit2.Response;
 public class AdminBookActivity extends AppCompatActivity {
     private List<Book> mLstBook = new ArrayList<>();
     private AdminBookAdapter mAdminBookAdapter;
+    private User mUser;
     ListView listViewBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_book);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle == null){
+            return;
+        }
+
+        mUser = (User) bundle.get("adInfo");
 
         getList();
         listViewBook = findViewById(R.id.list_view_book);
@@ -111,6 +120,9 @@ public class AdminBookActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(AdminBookActivity.this, AdminActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("adInfo", mUser);
+        intent.putExtras(bundle);
         startActivity(intent);
         super.onBackPressed();
     }

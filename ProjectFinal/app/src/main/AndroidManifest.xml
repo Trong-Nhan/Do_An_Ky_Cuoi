@@ -83,7 +83,7 @@
             android:name=".activity.admin.AdminAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.NewsDetailActivity"
+            android:name=".activity.UserOrderActivity"
             android:exported="false" />
         <activity
             android:name=".activity.RegisterActivity"

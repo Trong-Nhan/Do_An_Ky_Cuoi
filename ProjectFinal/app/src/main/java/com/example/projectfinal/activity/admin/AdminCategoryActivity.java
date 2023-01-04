@@ -17,6 +17,7 @@ import com.example.projectfinal.R;
 import com.example.projectfinal.adapter.admin.AdminCategoryAdapter;
 import com.example.projectfinal.api.CategoryAPI;
 import com.example.projectfinal.entity.Category;
+import com.example.projectfinal.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ import retrofit2.Response;
 public class AdminCategoryActivity extends AppCompatActivity {
     private List<Category> mLstCategory = new ArrayList<>();
     private AdminCategoryAdapter mAdminCategoryAdapter;
+    private User mUser;
     ListView listViewCategory;
 
     @Override
@@ -35,6 +37,12 @@ public class AdminCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_category);
 
+        Bundle bundle = getIntent().getExtras();
+        if(bundle == null){
+            return;
+        }
+
+        mUser = (User) bundle.get("adInfo");
         getList();
         listViewCategory = findViewById(R.id.list_view_category);
         // Cài đặt context menu cho ListView
@@ -113,6 +121,9 @@ public class AdminCategoryActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(AdminCategoryActivity.this, AdminActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("adInfo", mUser);
+        intent.putExtras(bundle);
         startActivity(intent);
         super.onBackPressed();
     }
