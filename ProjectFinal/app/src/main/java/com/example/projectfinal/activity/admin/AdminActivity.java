@@ -95,6 +95,9 @@ public class AdminActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(AdminActivity.this, AdminAccountActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("adInfo", mUser);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     };
@@ -104,6 +107,9 @@ public class AdminActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(AdminActivity.this, AdminBookActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("adInfo", mUser);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     };
@@ -113,6 +119,9 @@ public class AdminActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(AdminActivity.this, AdminPublisherActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("adInfo", mUser);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     };
@@ -122,6 +131,9 @@ public class AdminActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(AdminActivity.this, AdminCategoryActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("adInfo", mUser);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     };
@@ -131,6 +143,9 @@ public class AdminActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(AdminActivity.this, AdminNewsActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("adInfo", mUser);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     };

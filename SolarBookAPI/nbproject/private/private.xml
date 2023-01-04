@@ -7,15 +7,18 @@
             <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/entity/BookOrder.java</file>
             <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/OrderService.java</file>
             <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/entity/User.java</file>
+            <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/PaymentService.java</file>
             <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/entity/Publisher.java</file>
             <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplOrderDAO.java</file>
             <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/hibernate.cfg.xml</file>
         </group>
         <group>
             <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/entity/Book.java</file>
+            <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/BookService.java</file>
             <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/entity/BookOrder.java</file>
             <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/OrderService.java</file>
             <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/entity/User.java</file>
+            <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplBookDAO.java</file>
             <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/service/PaymentService.java</file>
             <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/entity/Publisher.java</file>
             <file>file:/D:/Android/Do_An_Ky_Cuoi/SolarBookAPI/src/java/dao/ImplOrderDAO.java</file>

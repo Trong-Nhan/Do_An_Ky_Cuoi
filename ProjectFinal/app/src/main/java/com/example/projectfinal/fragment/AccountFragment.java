@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.example.projectfinal.activity.LoginActivity;
 import com.example.projectfinal.activity.MainActivity;
 import com.example.projectfinal.R;
+import com.example.projectfinal.activity.UserOrderActivity;
 import com.example.projectfinal.activity.admin.AdminActivity;
 import com.example.projectfinal.entity.User;
 
@@ -59,6 +60,7 @@ public class AccountFragment extends Fragment {
         btnLogout.setOnClickListener(listenerLogout);
         btnUserDetail.setOnClickListener(listenerUserDetail);
         btnToAdmin.setOnClickListener(listenerToAdmin);
+        btnHistoryOder.setOnClickListener(listenerHistoryOrder);
         return view;
     }
 
@@ -79,6 +81,17 @@ public class AccountFragment extends Fragment {
         @Override
         public void onClick(View v) {
 
+        }
+    };
+
+    private View.OnClickListener listenerHistoryOrder = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), UserOrderActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("userInfo", mUser);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     };
 
