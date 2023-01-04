@@ -87,14 +87,14 @@ public class BookDetailActivity extends AppCompatActivity {
         //xử lý nút thêm giỏ hàng
         mBtnAddToCart = findViewById(R.id.btnAddtoCart);
         mBtnAddToCart.setEnabled(false);
-        mBtnAddToCart.setOnClickListener(listenerAddToCart);
+        mBtnAddToCart.setOnClickListener(listenerToPayment);
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.cart_menu, menu);
-
+    /*
         CartAPI.cartApi.getBookCartByUserId(mUser.getId()).enqueue(new Callback<List<Cart>>() {
             @Override
             public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
@@ -126,7 +126,7 @@ public class BookDetailActivity extends AppCompatActivity {
             }
         });
 
-
+    */
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -145,30 +145,23 @@ public class BookDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private View.OnClickListener listenerAddToCart = new View.OnClickListener() {
+    private View.OnClickListener listenerToPayment = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(mBookNumber == 0){
-                Toast.makeText(BookDetailActivity.this, "Vui lòng chọn số lượng sách bạn muốn mua", Toast.LENGTH_SHORT).show();
+            float totalPrice = 0;
+            if(mBook.getSalePrice() != 0){
+                totalPrice = mBook.getSalePrice() * mBookNumber;
+            }else{
+                totalPrice = mBook.getPrice() * mBookNumber;
             }
-            //set số lượng sách chọn vào Cart
-            mCartQuantity = mCartQuantity + mBookNumber;
-            View actionView = mMenuItem.getActionView();
-            mCartNumber = actionView.findViewById(R.id.cart_number);
-            mCartNumber.setText(String.valueOf(mCartQuantity));
-
-            Cart c = new Cart(mBookNumber, mBook.getId(), mUser.getId());
-            CartAPI.cartApi.insertCart(c).enqueue(new Callback<Cart>() {
-                @Override
-                public void onResponse(Call<Cart> call, Response<Cart> response) {
-                    Toast.makeText(BookDetailActivity.this, "Bạn đã thêm " + mBookNumber + " sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onFailure(Call<Cart> call, Throwable t) {
-                    Toast.makeText(BookDetailActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
-                }
-            });
+            Intent intent = new Intent(BookDetailActivity.this, PaymentActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("object_book", mBook);
+            bundle.putSerializable("object_user", mUser);
+            intent.putExtras(bundle);
+            intent.putExtra("BookNumber", mBookNumber);
+            intent.putExtra("TotalPrice", totalPrice);
+            startActivity(intent);
         }
     };
 

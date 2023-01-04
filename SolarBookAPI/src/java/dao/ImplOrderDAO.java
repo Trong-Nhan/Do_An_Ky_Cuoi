@@ -49,4 +49,12 @@ public class ImplOrderDAO implements IOrderDAO{
         session.close();
     }
     
+    public List<BookOrder> getByUserId(int userId){
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query q = session.createQuery("select o from BookOrder o where userId like :userId");
+        q.setInteger("userId", userId);
+        List<BookOrder> data = q.list();
+        return data;
+    }
+    
 }

@@ -7,120 +7,145 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author MY PC
+ * @author TaiyoNg
  */
 @Entity
 @Table(name = "tblOrder")
-public class BookOrder implements Serializable{
+public class BookOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private int id;
+    private Integer id;
     @Column(name = "UserId")
-    private int userId;
+    @NotNull
+    private Integer userId;
     @Column(name = "OrderDate")
-    private Date orderDate;
-    @Column(name = "PromoCodeId")
-    private int promoCodeId;
+    private String orderDate;
+    @Column(name = "BookId")
+    @NotNull
+    private Integer bookId;
+    @Column(name = "BookNumber")
+    private Integer bookNumber;
     @Column(name = "TotalPrice")
-    private float totalPrice;
+    private Double totalPrice;
     @Column(name = "CityId")
-    private int cityId;
+    @NotNull
+    private Integer cityId;
     @Column(name = "ShippingAddress")
     private String shippingAddress;
     @Column(name = "ShippingPrice")
-    private int shippingPrice;
+    private Integer shippingPrice;
     @Column(name = "PaymentId")
-    private int paymentId;
+    @NotNull
+    private Integer paymentId;
     @Column(name = "Note")
     private String note;
-    @Column(name = "CreatedDate")
-    private Date createdDate;
+    @Column(name = "Status")
+    private String status;
 
     public BookOrder() {
     }
 
-    public BookOrder(int id, int userId, Date orderDate, int promoCodeId, float totalPrice, int cityId, String shippingAddress, int shippingPrice, int paymentId, String note, Date createdDate) {
+    public BookOrder(Integer id, Integer userId, String orderDate, Integer bookId, Integer bookNumber, Double totalPrice, Integer cityId, String shippingAddress, Integer shippingPrice, Integer paymentId, String note, String status) {
         this.id = id;
         this.userId = userId;
         this.orderDate = orderDate;
-        this.promoCodeId = promoCodeId;
+        this.bookId = bookId;
+        this.bookNumber = bookNumber;
         this.totalPrice = totalPrice;
         this.cityId = cityId;
         this.shippingAddress = shippingAddress;
         this.shippingPrice = shippingPrice;
         this.paymentId = paymentId;
         this.note = note;
-        this.createdDate = createdDate;
+        this.status = status;
     }
 
-    public BookOrder(int userId, Date orderDate, int promoCodeId, float totalPrice, int cityId, String shippingAddress, int shippingPrice, int paymentId, String note, Date createdDate) {
+    public BookOrder(Integer userId, String orderDate, Integer bookId, Integer bookNumber, Double totalPrice, Integer cityId, String shippingAddress, Integer shippingPrice, Integer paymentId, String note, String status) {
         this.userId = userId;
         this.orderDate = orderDate;
-        this.promoCodeId = promoCodeId;
+        this.bookId = bookId;
+        this.bookNumber = bookNumber;
         this.totalPrice = totalPrice;
         this.cityId = cityId;
         this.shippingAddress = shippingAddress;
         this.shippingPrice = shippingPrice;
         this.paymentId = paymentId;
         this.note = note;
-        this.createdDate = createdDate;
+        this.status = status;
     }
 
-    public int getId() {
+    public Integer getBookNumber() {
+        return bookNumber;
+    }
+
+    public void setBookNumber(Integer bookNumber) {
+        this.bookNumber = bookNumber;
+    }
+
+    
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public Date getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
 
-    public int getPromoCodeId() {
-        return promoCodeId;
+    public Integer getBookId() {
+        return bookId;
     }
 
-    public void setPromoCodeId(int promoCodeId) {
-        this.promoCodeId = promoCodeId;
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
     }
 
-    public float getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(float totalPrice) {
+    public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
-    public int getCityId() {
+    public Integer getCityId() {
         return cityId;
     }
 
-    public void setCityId(int cityId) {
+    public void setCityId(Integer cityId) {
         this.cityId = cityId;
     }
 
@@ -132,19 +157,19 @@ public class BookOrder implements Serializable{
         this.shippingAddress = shippingAddress;
     }
 
-    public int getShippingPrice() {
+    public Integer getShippingPrice() {
         return shippingPrice;
     }
 
-    public void setShippingPrice(int shippingPrice) {
+    public void setShippingPrice(Integer shippingPrice) {
         this.shippingPrice = shippingPrice;
     }
 
-    public int getPaymentId() {
+    public Integer getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(int paymentId) {
+    public void setPaymentId(Integer paymentId) {
         this.paymentId = paymentId;
     }
 
@@ -156,15 +181,13 @@ public class BookOrder implements Serializable{
         this.note = note;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-   
-    
     
 }

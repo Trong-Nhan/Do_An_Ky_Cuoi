@@ -178,7 +178,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_marginLeft="20dp"
-                    android:text="Thêm vào giỏ hàng" />
+                    android:text="Mua Ngay" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

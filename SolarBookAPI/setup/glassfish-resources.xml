@@ -12,4 +12,5 @@
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="JNDI_SolarBook" object-type="user" pool-name="microsoft_sql_SolarBook_saPool"/>
     <jdbc-resource enabled="true" jndi-name="Solar" object-type="user" pool-name="microsoft_sql_SolarBook_saPool"/>
+    <jdbc-resource enabled="true" jndi-name="JNDI" object-type="user" pool-name="microsoft_sql_SolarBook_saPool"/>
 </resources>

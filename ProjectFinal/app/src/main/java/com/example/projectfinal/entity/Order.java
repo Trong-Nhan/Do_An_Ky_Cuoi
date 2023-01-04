@@ -6,56 +6,47 @@ import java.util.Date;
 public class Order implements Serializable {
     private int id;
     private int userId;
-    private Date orderDate;
-    private int promoCodeId;
+    private String orderDate;
+    private int bookId;
+    private int bookNumber;
     private float totalPrice;
     private int cityId;
     private String shippingAddress;
     private int shippingPrice;
     private int paymentId;
     private String note;
-    private Date createdDate;
+    private String status;
 
     public Order() {
     }
 
-    public Order(int id, int userId, Date orderDate, int promoCodeId, float totalPrice, int cityId, String shippingAddress, int shippingPrice, int paymentId, String note, Date createdDate) {
+    public Order(int id, int userId, String orderDate, int bookId, int bookNumber, float totalPrice, int cityId, String shippingAddress, int shippingPrice, int paymentId, String note, String status) {
         this.id = id;
         this.userId = userId;
         this.orderDate = orderDate;
-        this.promoCodeId = promoCodeId;
+        this.bookId = bookId;
+        this.bookNumber = bookNumber;
         this.totalPrice = totalPrice;
         this.cityId = cityId;
         this.shippingAddress = shippingAddress;
         this.shippingPrice = shippingPrice;
         this.paymentId = paymentId;
         this.note = note;
-        this.createdDate = createdDate;
+        this.status = status;
     }
 
-    public Order(int userId, Date orderDate, int promoCodeId, float totalPrice, int cityId, String shippingAddress, int shippingPrice, int paymentId, String note, Date createdDate) {
+    public Order(int userId, String orderDate, int bookId, int bookNumber, float totalPrice, int cityId, String shippingAddress, int shippingPrice, int paymentId, String note, String status) {
         this.userId = userId;
         this.orderDate = orderDate;
-        this.promoCodeId = promoCodeId;
+        this.bookId = bookId;
+        this.bookNumber = bookNumber;
         this.totalPrice = totalPrice;
         this.cityId = cityId;
         this.shippingAddress = shippingAddress;
         this.shippingPrice = shippingPrice;
         this.paymentId = paymentId;
         this.note = note;
-        this.createdDate = createdDate;
-    }
-
-    public Order(int userId, Date orderDate, float totalPrice, int cityId, String shippingAddress, int shippingPrice, int paymentId, String note, Date createdDate) {
-        this.userId = userId;
-        this.orderDate = orderDate;
-        this.totalPrice = totalPrice;
-        this.cityId = cityId;
-        this.shippingAddress = shippingAddress;
-        this.shippingPrice = shippingPrice;
-        this.paymentId = paymentId;
-        this.note = note;
-        this.createdDate = createdDate;
+        this.status = status;
     }
 
     public int getId() {
@@ -74,20 +65,28 @@ public class Order implements Serializable {
         this.userId = userId;
     }
 
-    public Date getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
 
-    public int getPromoCodeId() {
-        return promoCodeId;
+    public int getBookNumber() {
+        return bookNumber;
     }
 
-    public void setPromoCodeId(int promoCodeId) {
-        this.promoCodeId = promoCodeId;
+    public void setBookNumber(int bookNumber) {
+        this.bookNumber = bookNumber;
+    }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 
     public float getTotalPrice() {
@@ -138,11 +137,11 @@ public class Order implements Serializable {
         this.note = note;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

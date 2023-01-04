@@ -64,45 +64,28 @@ Create Table tblPayment(
 )
 GO
 
-Create Table tblPromoCode(
-	Id int primary key identity,
-	[Name] varchar(20),
-	[Description] nvarchar(255),
-	[Type] bit,
-	[Value] int
-)
-GO
 
 Create Table tblOrder(
 	Id int primary key identity,
 	UserId int,
-	OrderDate Date,
-	PromoCodeId int,
+	OrderDate varchar(10),
+	BookId int,
+	BookNumber int,
 	TotalPrice float,
 	CityId int,
 	ShippingAddress ntext,
 	ShippingPrice int,
 	PaymentId int,
 	Note nvarchar(255),
-	CreatedDate Date
+	Status nvarchar(100)
 
 	Foreign Key (UserId) References tblUser(Id),
-	Foreign Key (PromoCodeId) References tblPromoCode(Id),
 	Foreign Key (CityId) References tblCity(Id),
-	Foreign Key (PaymentId) References tblPayment(Id)
-)
-GO
-
-Create Table tblOrderDetail(
-	Id int primary key identity,
-	OrderId int,
-	BookId int,
-	BookCount int
-
-	Foreign Key (OrderId) References tblOrder(Id),
+	Foreign Key (PaymentId) References tblPayment(Id),
 	Foreign Key (BookId) References tblBook(Id)
 )
 GO
+
 
 Create Table tblCart(
 	Id int primary key identity,
@@ -123,20 +106,6 @@ Create Table tblNews(
 	Detail ntext,
 	[Picture] nvarchar(255),
 	CreatedDate Date
-)
-
-GO
-
-Create Table tblRating(
-	Id int primary key identity,
-	UserId int,
-	BookId int, 
-	Rating int,
-	Comment text,
-	CreatedDate Date
-
-	Foreign Key (UserId) References tblUser(Id),
-	Foreign Key (BookId) References tblBook(Id)
 )
 
 GO
@@ -251,3 +220,8 @@ go
 
 Insert Into tblCart(UserId, BookId, BookCount) Values (2, 1, 2), (2, 2, 1)
 go
+
+Insert Into tblPayment(Name) Values (N'Thanh toán khi nhận hàng'), (N'Chuyển khoản ngân hàng')
+go 
+
+select * from tblOrder
