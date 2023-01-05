@@ -122,7 +122,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(AdminCategoryActivity.this, AdminActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("adInfo", mUser);
+        bundle.putSerializable("userInfo", mUser);
         intent.putExtras(bundle);
         startActivity(intent);
         super.onBackPressed();
