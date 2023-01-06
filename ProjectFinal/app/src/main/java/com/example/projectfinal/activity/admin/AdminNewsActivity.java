@@ -17,7 +17,6 @@ import com.example.projectfinal.R;
 import com.example.projectfinal.adapter.admin.AdminNewsAdapter;
 import com.example.projectfinal.api.NewsAPI;
 import com.example.projectfinal.entity.News;
-import com.example.projectfinal.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,7 @@ import retrofit2.Response;
 public class AdminNewsActivity extends AppCompatActivity {
     private List<News> mLstNews = new ArrayList<>();
     private AdminNewsAdapter mAdminNewsAdapter;
-    private User mUser;
+//    private User mUser;
     RecyclerView rcvNewsList;
 
     @Override
@@ -37,12 +36,12 @@ public class AdminNewsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_news);
 
-        Bundle bundle = getIntent().getExtras();
-        if(bundle == null){
-            return;
-        }
-
-        mUser = (User) bundle.get("adInfo");
+//        Bundle bundle = getIntent().getExtras();
+//        if(bundle == null){
+//            return;
+//        }
+//
+//        mUser = (User) bundle.get("adInfo");
         getList();
         rcvNewsList = findViewById(R.id.rcvAdminNews);
         //set dữ liệu lên recycler view
@@ -116,9 +115,9 @@ public class AdminNewsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(AdminNewsActivity.this, AdminActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("userInfo", mUser);
-        intent.putExtras(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable("userInfo", mUser);
+//        intent.putExtras(bundle);
         startActivity(intent);
         super.onBackPressed();
     }

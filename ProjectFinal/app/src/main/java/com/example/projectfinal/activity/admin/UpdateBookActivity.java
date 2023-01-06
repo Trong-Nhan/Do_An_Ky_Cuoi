@@ -1,12 +1,5 @@
 package com.example.projectfinal.activity.admin;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -27,6 +20,13 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectfinal.R;
 import com.example.projectfinal.RealPathUtil;
@@ -135,6 +135,15 @@ public class UpdateBookActivity extends AppCompatActivity {
                     mLstCategory = response.body();
                     ArrayAdapter<Category> adapter = new ArrayAdapter<>(UpdateBookActivity.this, android.R.layout.simple_list_item_1, mLstCategory);
                     spinCategory.setAdapter(adapter);
+                    //set dữ liệu Category của Book lên Spinner
+                    int posCat = 0;
+                    for (int i = 0; i < mLstCategory.size(); i++) {
+                        if (mLstCategory.get(i).getId() == book.getCategoryId()) {
+                            posCat = i;
+                            break;
+                        }
+                    }
+                    spinCategory.setSelection(posCat);
                 }
             }
 
@@ -154,6 +163,15 @@ public class UpdateBookActivity extends AppCompatActivity {
                     mLstPublisher = response.body();
                     ArrayAdapter<Publisher> adapter = new ArrayAdapter<>(UpdateBookActivity.this, android.R.layout.simple_list_item_1, mLstPublisher);
                     spinPublisher.setAdapter(adapter);
+                    //set dữ liệu Publisher của Book lên Spinner
+                    int posPub = 0;
+                    for (int i = 0; i < mLstPublisher.size(); i++) {
+                        if (mLstPublisher.get(i).getId() == book.getPublisherId()) {
+                            posPub = i;
+                            break;
+                        }
+                    }
+                    spinPublisher.setSelection(posPub);
                 }
             }
 

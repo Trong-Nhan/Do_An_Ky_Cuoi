@@ -27,18 +27,18 @@ public class AdminAccountActivity extends AppCompatActivity {
     private RecyclerView mRcvAccount;
     private AdminAccountAdapter mAdapter;
     private List<User> mLst;
-    private User mUser;
+//    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_account);
 
-        Bundle bundle = getIntent().getExtras();
-        if(bundle == null){
-            return;
-        }
-        mUser = (User) bundle.get("adInfo");
+//        Bundle bundle = getIntent().getExtras();
+//        if(bundle == null){
+//            return;
+//        }
+//        mUser = (User) bundle.get("adInfo");
 
         mRcvAccount = findViewById(R.id.rcvAdminAccount);
         mLst = new ArrayList<>();
@@ -119,9 +119,9 @@ public class AdminAccountActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(AdminAccountActivity.this, AdminActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("userInfo", mUser);
-        intent.putExtras(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable("userInfo", mUser);
+//        intent.putExtras(bundle);
         startActivity(intent);
         super.onBackPressed();
     }
