@@ -43,4 +43,7 @@ public interface UserAPI {
 
     @GET("user/getuser")
     Call<List<User>> getUser();
+
+    @GET("user/getuser/{id}")
+    Call<User> getUserById(@Path("id") int id);
 }

@@ -17,6 +17,12 @@
         android:theme="@style/Theme.SolarBook"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.admin.AdminOrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.AdminOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.PaymentActivity"
             android:exported="false" />
         <activity

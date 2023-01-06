@@ -54,6 +54,7 @@ public class AdminActivity extends AppCompatActivity {
         Button btnAdminPublisher = findViewById(R.id.btnAdminPublisher);
         Button btnAdminBook = findViewById(R.id.btnAdminBook);
         Button btnAdminNews = findViewById(R.id.btnAdminNews);
+        Button btnAdminOrder = findViewById(R.id.btnAdminOrder);
 
         btnLogout.setOnClickListener(listenerLogout);
         btnToMain.setOnClickListener(listenerToMain);
@@ -62,6 +63,7 @@ public class AdminActivity extends AppCompatActivity {
         btnAdminPublisher.setOnClickListener(listenerToPublisher);
         btnAdminBook.setOnClickListener(listenerToBook);
         btnAdminNews.setOnClickListener(listenerToNews);
+        btnAdminOrder.setOnClickListener(listenerToOrder);
     }
 
     //Hành động nút đăng xuất
@@ -146,6 +148,18 @@ public class AdminActivity extends AppCompatActivity {
 //            Bundle bundle = new Bundle();
 //            bundle.putSerializable("adInfo", mUser);
 //            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+    };
+
+    //Hành động vào trang quản lý đơn hàng
+    private View.OnClickListener listenerToOrder = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(AdminActivity.this, AdminOrderActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("userInfo", mUser);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     };
