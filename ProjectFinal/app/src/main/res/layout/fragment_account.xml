@@ -39,6 +39,15 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnUserDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="left|center_horizontal"
+        android:text="Trang của tôi"
+        android:textColor="@color/black" />
+
+    <Button
         android:id="@+id/btnUserHistoryOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

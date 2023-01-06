@@ -43,12 +43,14 @@ public class AccountFragment extends Fragment {
         mTxtUserName.setText(mUser.getName());
 
 
+        Button btnUserDetail = view.findViewById(R.id.btnUserDetail);
         Button btnHistoryOder = view.findViewById(R.id.btnUserHistoryOrder);
         Button btnToAdmin = view.findViewById(R.id.btnToAdminPage);
         Button btnLogout = view.findViewById(R.id.btnLogout);
 
         //nếu được chuyển từ AdminActivity qua
         if(mUser.getRole().equals("admin")){
+            btnUserDetail.setVisibility(View.GONE);
             btnHistoryOder.setVisibility(View.GONE);
             btnToAdmin.setVisibility(View.VISIBLE);
         }
@@ -56,6 +58,7 @@ public class AccountFragment extends Fragment {
 
 
         btnLogout.setOnClickListener(listenerLogout);
+        btnUserDetail.setOnClickListener(listenerUserDetail);
         btnToAdmin.setOnClickListener(listenerToAdmin);
         btnHistoryOder.setOnClickListener(listenerHistoryOrder);
         return view;
@@ -74,6 +77,12 @@ public class AccountFragment extends Fragment {
         }
     };
 
+    private View.OnClickListener listenerUserDetail = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
 
     private View.OnClickListener listenerHistoryOrder = new View.OnClickListener() {
         @Override

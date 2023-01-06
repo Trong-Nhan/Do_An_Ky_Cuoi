@@ -93,7 +93,7 @@ public class BookDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.cart_menu, menu);
+        getMenuInflater().inflate(R.menu.cart_menu, menu);
     /*
         CartAPI.cartApi.getBookCartByUserId(mUser.getId()).enqueue(new Callback<List<Cart>>() {
             @Override
