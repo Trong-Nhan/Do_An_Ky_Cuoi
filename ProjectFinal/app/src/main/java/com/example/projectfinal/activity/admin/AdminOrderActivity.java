@@ -1,6 +1,8 @@
 package com.example.projectfinal.activity.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +27,7 @@ public class AdminOrderActivity extends AppCompatActivity {
     private User mUser;
     private List<Order> mLstOrder;
     private AdminOrderAdapter mAdminOrderAdapter;
-    private ListView lstOrder;
+    private RecyclerView rcvOrder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,31 +39,17 @@ public class AdminOrderActivity extends AppCompatActivity {
             return;
         }
 
-        mUser = (User) bundle.get("adInfo");
-        lstOrder = findViewById(R.id.lstAdminOrder);
-        getOrderList();
+        mUser = (User) bundle.get("userInfo");
+        rcvOrder = findViewById(R.id.rcvAdminOrder);
 
-        lstOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Order o = mLstOrder.get(position);
-                Intent intent = new Intent(AdminOrderActivity.this, AdminOrderDetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("orderInfo", o);
-                bundle.putSerializable("adInfo", mUser);
-
-            }
-        });
-    }
-
-    public void getOrderList(){
         OrderAPI.orderApi.getOrders().enqueue(new Callback<List<Order>>() {
             @Override
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
                 if(response.isSuccessful()){
                     mLstOrder = response.body();
-                    mAdminOrderAdapter = new AdminOrderAdapter(AdminOrderActivity.this, mLstOrder);
-                    lstOrder.setAdapter(mAdminOrderAdapter);
+                    mAdminOrderAdapter = new AdminOrderAdapter(AdminOrderActivity.this, mLstOrder, mUser);
+                    rcvOrder.setLayoutManager(new LinearLayoutManager(AdminOrderActivity.this));
+                    rcvOrder.setAdapter(mAdminOrderAdapter);
                 }
             }
 
@@ -70,11 +58,17 @@ public class AdminOrderActivity extends AppCompatActivity {
                 Toast.makeText(AdminOrderActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
+
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
+        Intent intent = new Intent(AdminOrderActivity.this, AdminActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("userInfo", mUser);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

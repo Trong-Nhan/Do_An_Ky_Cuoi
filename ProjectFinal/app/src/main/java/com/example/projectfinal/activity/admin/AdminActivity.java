@@ -158,7 +158,7 @@ public class AdminActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(AdminActivity.this, AdminOrderActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("adInfo", mUser);
+            bundle.putSerializable("userInfo", mUser);
             intent.putExtras(bundle);
             startActivity(intent);
         }

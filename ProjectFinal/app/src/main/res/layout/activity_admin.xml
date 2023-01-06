@@ -124,31 +124,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="15dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnAdminPromoCode"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:text="Quản lý Mã Khuyến Mại" />
-
-            <Button
-                android:id="@+id/btnAdminRating"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:text="Quản lý Đánh Giá - Bình Luận" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:orientation="horizontal">
 

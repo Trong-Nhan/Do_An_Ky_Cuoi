@@ -46,6 +46,14 @@ public class UserService {
         return uDAO.findByEmail(email);
     }
     
+    @GET
+    @Path("getuser/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.TEXT_PLAIN)
+    public User getUserById(@PathParam("id") int id){
+        return uDAO.findById(id);
+    }
+    
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)

@@ -17,8 +17,8 @@
         android:textStyle="bold"
         android:layout_marginBottom="20dp"/>
 
-    <ListView
-        android:id="@+id/lstAdminOrder"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvAdminOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </LinearLayout>
