@@ -1,8 +1,5 @@
 package com.example.projectfinal.activity.admin;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -13,11 +10,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.projectfinal.R;
 import com.example.projectfinal.adapter.admin.AdminPublisherAdapter;
 import com.example.projectfinal.api.PublisherAPI;
 import com.example.projectfinal.entity.Publisher;
-import com.example.projectfinal.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,7 @@ import retrofit2.Response;
 public class AdminPublisherActivity extends AppCompatActivity {
     private List<Publisher> mLstPublisher = new ArrayList<>();
     private AdminPublisherAdapter mAdminPublisherAdapter;
-    private User mUser;
+//    private User mUser;
     ListView listViewPublisher;
 
     @Override
@@ -37,12 +36,12 @@ public class AdminPublisherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_publisher);
 
-        Bundle bundle = getIntent().getExtras();
-        if(bundle == null){
-            return;
-        }
-
-        mUser = (User) bundle.get("adInfo");
+//        Bundle bundle = getIntent().getExtras();
+//        if(bundle == null){
+//            return;
+//        }
+//
+//        mUser = (User) bundle.get("adInfo");
         getList();
         listViewPublisher = findViewById(R.id.list_view_publisher);
         // Cài đặt context menu cho ListView
@@ -121,9 +120,9 @@ public class AdminPublisherActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(AdminPublisherActivity.this, AdminActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("userInfo", mUser);
-        intent.putExtras(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable("userInfo", mUser);
+//        intent.putExtras(bundle);
         startActivity(intent);
         super.onBackPressed();
     }
