@@ -25,7 +25,7 @@ public class ImplOrderDAO implements IOrderDAO{
     @Override
     public List<BookOrder> getOrders() {
         session = HibernateUtil.getSessionFactory().openSession();
-        Query q = session.createQuery("from BookOrder");
+        Query q = session.createQuery("select o from BookOrder o Order By Id DESC");
         List<BookOrder> data = q.list();
         session.close();
         return data;
@@ -51,7 +51,7 @@ public class ImplOrderDAO implements IOrderDAO{
     
     public List<BookOrder> getByUserId(int userId){
         session = HibernateUtil.getSessionFactory().openSession();
-        Query q = session.createQuery("select o from BookOrder o where userId like :userId");
+        Query q = session.createQuery("select o from BookOrder o where userId like :userId Order By Id DESC");
         q.setInteger("userId", userId);
         List<BookOrder> data = q.list();
         return data;

@@ -44,6 +44,7 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Or
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         Order o = mLst.get(position);
+
         DecimalFormat formatter = new DecimalFormat("###,###,###");
         holder.txtOrderId.setText(String.valueOf(o.getId()));
         holder.txtOrderPrice.setText(formatter.format(o.getTotalPrice()) + " đ");

@@ -24,7 +24,7 @@ public class ImplBookDAO implements IBookDAO {
     @Override
     public List<Book> getAll() {
         s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("from Book");
+        Query q = s.createQuery("Select b from Book b Order By Id Desc");
         List<Book> data = q.list();
         s.close();
         return data;
@@ -85,7 +85,7 @@ public class ImplBookDAO implements IBookDAO {
     @Override
     public List<Book> findByName(String name) {
         s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("select b from Book b where name like :name");
+        Query q = s.createQuery("select b from Book b where name like :name Order by Id Desc");
         q.setString("name", "%" + name + "%");
         List<Book> b = q.list();
         s.close();

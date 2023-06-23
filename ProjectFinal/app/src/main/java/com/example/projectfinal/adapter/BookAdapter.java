@@ -24,6 +24,8 @@ import com.example.projectfinal.entity.User;
 
 
 import java.io.File;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
@@ -55,6 +57,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         final Book b = mLst.get(position);
+        NumberFormat formatter = new DecimalFormat("#,###");
         //Hien thi anh
         File imgFile = new File(b.getPicture());
         Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
@@ -62,8 +65,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         holder.bookName.setText(b.getName());
         holder.bookAuthor.setText(b.getAuthor());
-        holder.price.setText(String.format("%.0f",b.getPrice()));
-        holder.salePrice.setText(String.format("%.0f",b.getSalePrice()));
+        holder.price.setText(formatter.format(b.getPrice()) + "đ");
+        holder.salePrice.setText(formatter.format(b.getSalePrice()) + "đ");
         holder.ratingBar.setRating(b.getRating());
         //khi ấn vào hình quyển sách
         holder.layoutDetailBook.setOnClickListener(new View.OnClickListener() {

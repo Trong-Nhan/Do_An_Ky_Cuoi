@@ -130,10 +130,11 @@ public class BookDetailActivity extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
-
+    /*
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+
             case R.id.menuCart:
                 Intent intent = new Intent(BookDetailActivity.this, CartActivity.class);
                 Bundle bundle = new Bundle();
@@ -144,6 +145,8 @@ public class BookDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+     */
 
     private View.OnClickListener listenerToPayment = new View.OnClickListener() {
         @Override

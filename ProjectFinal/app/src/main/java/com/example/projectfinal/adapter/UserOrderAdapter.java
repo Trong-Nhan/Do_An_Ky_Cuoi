@@ -20,6 +20,8 @@ import com.example.projectfinal.entity.Book;
 import com.example.projectfinal.entity.Order;
 
 import java.io.File;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 import retrofit2.Call;
@@ -40,6 +42,7 @@ public class UserOrderAdapter extends ArrayAdapter<Order> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Order o = mLstOrder.get(position);
+        NumberFormat formatter = new DecimalFormat("#,###");
 
         View item = convertView;
         if (item == null) {
@@ -54,7 +57,7 @@ public class UserOrderAdapter extends ArrayAdapter<Order> {
         TextView txtOrderStatus = item.findViewById(R.id.item_order_status);
         
         txtOrderId.setText("Mã đơn hàng: " + o.getId());
-        txtOrderTotalPrice.setText("Tổng tiền: " + o.getTotalPrice());
+        txtOrderTotalPrice.setText("Tổng tiền: " + formatter.format(o.getTotalPrice()) + "đ");
         txtOrderStatus.setText("Trạng thái: " + o.getStatus());
         txtBookNumber.setText("Số lượng: " + o.getBookNumber());
         BookAPI.bookAPI.detailBook(o.getBookId()).enqueue(new Callback<Book>() {
@@ -68,9 +71,9 @@ public class UserOrderAdapter extends ArrayAdapter<Order> {
                     imgBookImg.setImageBitmap(myBitmap);
                     txtBookName.setText(b.getName());
                     if(b.getSalePrice() != 0){
-                        txtBookPrice.setText("Giá tiền: " + b.getSalePrice() + "đ");
+                        txtBookPrice.setText("Giá tiền: " + formatter.format(b.getSalePrice()) + "đ");
                     }else{
-                        txtBookPrice.setText("Giá tiền: " + b.getPrice() + "đ");
+                        txtBookPrice.setText("Giá tiền: " + formatter.format(b.getPrice()) + "đ");
                     }
                 }
             }
